@@ -30,7 +30,7 @@ class Loader {
         Object.keys(urlOptions).forEach((key) => {
             url += `${key}=${urlOptions[key]}&`;
         });
-
+console.log(url)
         return url.slice(0, -1);
     }
 
