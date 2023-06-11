@@ -30,5 +30,20 @@ export interface sourceAPI {
 
 export interface allSources {
     status: string;
-    sources: sourceAPI[];
+    sources?: sourceAPI[];
 }
+
+type RequestOptionsBase = {
+    apiKey: string;
+};
+
+type RequestOptions = object;
+
+type Request = {
+    endpoint: string;
+    options?: RequestOptions;
+};
+
+type RequestMethod = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH';
+
+export { Request, RequestOptions, RequestOptionsBase, RequestMethod };
