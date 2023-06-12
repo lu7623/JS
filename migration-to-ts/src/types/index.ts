@@ -33,17 +33,21 @@ export interface allSources {
     sources?: sourceAPI[];
 }
 
-type RequestOptionsBase = {
+export type RequestOptionsAPI = {
     apiKey: string;
 };
 
-type RequestOptions = object;
+export type RequestOptions = object;
 
-type Request = {
+export type Request = {
     endpoint: string;
     options?: RequestOptions;
 };
 
-type RequestMethod = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH';
-
-export { Request, RequestOptions, RequestOptionsBase, RequestMethod };
+export enum Method {
+    get = 'GET',
+    post = 'POST',
+    delete = 'DELETE',
+    put = 'PUT',
+    patch = 'PATCH',
+}

@@ -1,12 +1,12 @@
-import { Request, RequestOptions, RequestOptionsBase, RequestMethod } from '../../types';
+import { Request, RequestOptions, Method, RequestOptionsAPI } from '../../types';
 
-type Options = RequestOptions & RequestOptionsBase;
+type Options = RequestOptions & RequestOptionsAPI;
 
 class Loader {
-    constructor(private baseLink: string, private options: RequestOptionsBase) {}
+    constructor(private baseLink: string, private options: RequestOptionsAPI) {}
 
     protected getResp<T>({ endpoint, options }: Request, callback: (data: T) => void) {
-        this.load<T>('GET', endpoint, callback, options);
+        this.load<T>(Method.get, endpoint, callback, options);
     }
 
     private errorHandler(res: Response) {
@@ -29,12 +29,7 @@ class Loader {
 
         return url.slice(0, -1);
     }
-    protected load<T>(
-        method: RequestMethod,
-        endpoint: string,
-        callback: (data: T) => void,
-        options: RequestOptions = {}
-    ) {
+    protected load<T>(method: Method, endpoint: string, callback: (data: T) => void, options: RequestOptions = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
@@ -46,49 +41,3 @@ class Loader {
 }
 
 export default Loader;
-// import { options } from '../../types';
-// import { allSources } from '../../types';
-// import { Responce } from '../../types';
-
-// class Loader {
-//     constructor(private baseLink: string, private options: options) {}
-
-//     getResp(
-//         { endpoint, options = {} },
-//         callback = () => {
-//             console.error('No callback for GET response');
-//         }
-//     ) {
-//         this.load('GET', endpoint, callback, options);
-//     }
-
-//     errorHandler(res) {
-//         if (!res.ok) {
-//             if (res.status === 401 || res.status === 404)
-//                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
-//             throw Error(res.statusText);
-//         }
-// console.log(res);
-//         return res;
-//     }
-
-//     makeUrl(options: options, endpoint: string) : string {
-//         const urlOptions = { ...this.options, ...options };
-//         let url:string = `${this.baseLink}${endpoint}?`;
-
-//         Object.keys(urlOptions).forEach((key) => {
-//             url += `${key}=${urlOptions[key]}&`;
-//         });
-//         return url.slice(0, -1);
-//     }
-
-//     load(method: string, endpoint: string, callback: (data: allSources | Responce) => void, options = {}) {
-//         fetch(this.makeUrl(options, endpoint), { method })
-//             .then(this.errorHandler)
-//             .then((res) => res.json())
-//             .then((data) => callback(data))
-//             .catch((err) => console.error(err));
-//     }
-// }
-
-// export default Loader;
