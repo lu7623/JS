@@ -29,7 +29,12 @@ class Loader {
 
         return url.slice(0, -1);
     }
-    load<T>(method: RequestMethod, endpoint: string, callback: (data: T) => void, options: RequestOptions = {}) {
+    protected load<T>(
+        method: RequestMethod,
+        endpoint: string,
+        callback: (data: T) => void,
+        options: RequestOptions = {}
+    ) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
