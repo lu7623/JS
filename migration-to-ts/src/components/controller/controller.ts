@@ -11,29 +11,31 @@ class AppController extends AppLoader {
     }
 
     public getNews<T>(e: Event, callback: (data: T) => void) {
-        let target = e.target as HTMLElement;
-        const newsContainer = e.currentTarget as HTMLElement;
+        if (e.target instanceof HTMLElement) {
+            let target = e.target;
+            const newsContainer = e.currentTarget as HTMLElement;
 
-        while (target !== newsContainer) {
-            if (target.classList.contains('source__item')) {
-                const sourceId = target.getAttribute('data-source-id');
-                if (sourceId) {
-                    if (newsContainer.getAttribute('data-source') !== sourceId) {
-                        newsContainer.setAttribute('data-source', sourceId);
-                        super.getResp(
-                            {
-                                endpoint: 'everything',
-                                options: {
-                                    sources: sourceId,
+            while (target !== newsContainer) {
+                if (target.classList.contains('source__item')) {
+                    const sourceId = target.getAttribute('data-source-id');
+                    if (sourceId) {
+                        if (newsContainer.getAttribute('data-source') !== sourceId) {
+                            newsContainer.setAttribute('data-source', sourceId);
+                            super.getResp(
+                                {
+                                    endpoint: 'everything',
+                                    options: {
+                                        sources: sourceId,
+                                    },
                                 },
-                            },
-                            callback
-                        );
+                                callback
+                            );
+                        }
                     }
+                    return;
                 }
-                return;
+                if (target.parentElement) target = target.parentElement;
             }
-            if (target.parentElement) target = target.parentElement;
         }
     }
 }

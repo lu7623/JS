@@ -8,7 +8,7 @@ class News {
         const newsItemTemp: HTMLTemplateElement | null = document.querySelector('#newsItemTemp');
         if (newsItemTemp !== null) {
             news.forEach((item, idx) => {
-                const newsClone = newsItemTemp.content.cloneNode(true) as HTMLElement;
+                const newsClone = newsItemTemp.content.cloneNode(true) as ParentNode;
                 if (idx % 2) {
                     const newsItemElement: HTMLElement | null = newsClone.querySelector('.news__item');
                     if (newsItemElement) {
