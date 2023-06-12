@@ -21,11 +21,11 @@ footer {
 }
 footer .copyright {
     font-size: 14px;
-    color: #333;
+    color: #848282;
     text-align: center;
 }
 footer .copyright a {
-    color: #444;
+    color: #e8e6e6;
 }
 footer .copyright a:hover {
     color: #555;
@@ -35,15 +35,15 @@ footer .copyright:before {
 }
 
 .logo {
-    width: 100px;
+    width: 105px;
     height: 50px;
-    background-image: url("./components/img/rs-logo.jpg");
+    background-image: url("./img/rs-logo.jpg");
     background-size: cover;
 }
 
 .github {
     height: 50px;
     width: 53px;
-    background-image: url("./components/img/github-mark-white.png");
+    background-image: url("./img/github-mark-white.png");
     background-size: cover;
 }

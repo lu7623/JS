@@ -18,7 +18,8 @@ class News {
                 const newsMetaPhotoElement: HTMLElement | null = newsClone.querySelector('.news__meta-photo');
                 if (newsMetaPhotoElement) {
                     newsMetaPhotoElement.style.backgroundImage = `url(${
-                        item.urlToImage || '../img/news_placeholder.jpg'
+                        item.urlToImage ||
+                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQJQhCLJBCx1pPEAZmzHOap-hR6E595Iqmr6MZm1SsrO99JrMziYxNkaDSiaf1chQLr1A&usqp=CAU'
                     })`;
                 }
                 const newsAuthorElement: HTMLElement | null = newsClone.querySelector('.news__meta-author');
