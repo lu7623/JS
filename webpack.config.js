@@ -6,7 +6,7 @@ const EslingPlugin = require('eslint-webpack-plugin');
 
 
 module.exports = {
-  entry: path.join(__dirname, 'RSS-CSS-Selectors/src/index'),
+  entry: [ path.join(__dirname, 'RSS-CSS-Selectors/src/index'), path.join(__dirname, 'RSS-CSS-Selectors/src/sass/main.scss')],
   output: {
     path: path.join(__dirname, 'RSS-CSS-Selectors/dist'),
     filename: 'index.[contenthash].js',

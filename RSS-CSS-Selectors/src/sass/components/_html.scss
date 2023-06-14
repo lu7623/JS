@@ -1,0 +1,7 @@
+.html {
+    height: 100%;
+    width: 50%;
+    border: 1px solid orange;
+    @extend %font-code;
+    @include font($size: 2rem, $color: $color-dark-2xl);
+}
