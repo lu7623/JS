@@ -1,7 +1,8 @@
 .levels {
   height: 100%;
   width: 25%;
-  border: 1px solid blue;
   @extend %font-prim;
     @include font($size: 2rem, $color: $color-dark-2xl);
+    @extend %flex;
 }
+
