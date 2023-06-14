@@ -1,8 +1,8 @@
-.html {
+.html-container {
     height: 100%;
     width: 50%;
     @extend %font-code;
-    @include font($size: 2rem, $color: $color-dark-2xl);
+    @include font($size: 1.6rem, $color: $color-dark-2xl);
     @extend %flex
 }
 

@@ -1,7 +1,33 @@
-.css {
+.css-container {
     width: 50%;
     height: 100%;
     @extend %font-code;
-    @include font($size: 2rem, $color: $color-dark-2xl);
+    @include font($size: 1.6rem, $color: $color-dark-2xl);
     @extend %flex;
+}
+
+.css-content {
+    width: 97%;
+    height: 97%;
+    background-color: #fafafada;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+#answer-field {
+    @extend %flex;
+    justify-content: space-between; 
+    background-color: transparent;
+    height: 26px;
+}
+
+#answer {
+    border: none;
+    width: 30rem;
+    @extend %font-code;
+    @include font($size: 1.6rem, $color: $color-dark-2xl);
+}
+
+#answer:active {
+    border: none; 
 }

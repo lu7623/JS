@@ -1,31 +1,226 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Source+Code+Pro:wght@300&display=swap" rel="stylesheet">
-    <title>RSS-CSS-Selectors</title>
-  </head>
-  <body>
-    <header>
-<h1 class="heading">RSS-CSS-Selectors</h1>
-    </header>
-<main>
-  <section class="game-container">
-    <section class="table"><div class="wrapper table-wrapper">table</div></section>
-  <section class="code-container">
-    <div class="css"><div class="wrapper">css</div> </div>
-    <div class="html"><div class="wrapper">html</div> </div>
-  </section>
-  </section>
-  <aside class="levels"><div class="wrapper">Levels</div> </aside>
-</main>
-<footer class="footer"> 
-<a href="https://github.com/lu7623" class="gh-link" target="_blank" ></a>
-<span>2023</span>
-<a href="https://rs.school/js/" class="rs-link" target="_blank">
- </a>
-</footer>
-  </body>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins&family=Source+Code+Pro:wght@300&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/default.min.css" />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <title>RSS-CSS-Selectors</title>
+    </head>
+    <body>
+        <header>
+            <h1 class="heading">RSS-CSS-Selectors</h1>
+        </header>
+        <main>
+            <section class="game-container">
+                <section class="table">
+                  <div class="wrapper table-wrapper">
+                    <img class="cat" src="assets/cat1.gif" alt="">
+                    <img class="cat" src="assets/cat2.gif" alt="">
+                  </div>
+                  </section>
+                <section class="code-container">
+                    <div class="css-container">
+                        <div class="wrapper">
+                            <div class="css-content">
+                                <div class="elem-heading">
+                                    <span>CSS Editor</span>
+                                    <span>style.css</span>
+                                </div>
+                                <table id="code-html">
+                                    <tr class="first-row">
+                                        <td class="row-number">1</td>
+                                        <td id="answer-field"><input type="text" id="answer" placeholder="Type in a CSS selctor"/> <button>Enter</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">2</td>
+                                        <td>&#123;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">3</td>
+                                        <td>/* Styles would go here. */</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">4</td>
+                                        <td>&#125;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">5</td>
+                                        <td>/* Type a number to skip to a level. */</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="row-number">6</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">7</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">8</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">9</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">10</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">11</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">12</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">13</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">14</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">15</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">16</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">17</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">18</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">19</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">20</td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="html-container">
+                        <div class="wrapper">
+                            <div class="css-content">
+                                <div class="elem-heading">
+                                    <span>HTML Viewer</span>
+                                    <span>index.html</span>
+                                </div>
+                                <table id="code-html">
+                                    <tr class="first-row">
+                                        <td class="row-number">1</td>
+                                        <td>&lt;table&gt;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">2</td>
+                                        <td>&nbsp; &nbsp; &lt;plate /&gt;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">3</td>
+                                        <td>&lt;table&gt;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">4</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">5</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">6</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">7</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">8</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">9</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">10</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">11</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">12</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">13</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">14</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">15</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">16</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">17</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">18</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">19</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-number">20</td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            <aside class="levels"><div class="wrapper">Levels</div></aside>
+        </main>
+        <footer class="footer">
+            <a href="https://github.com/lu7623" class="gh-link" target="_blank"></a>
+            <span>2023</span>
+            <a href="https://rs.school/js/" class="rs-link" target="_blank"> </a>
+        </footer>
+    </body>
 </html>

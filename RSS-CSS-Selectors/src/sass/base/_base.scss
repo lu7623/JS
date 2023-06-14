@@ -35,6 +35,8 @@ main {
 .wrapper {
     height: 98%;
     width: 98%;
-    background-color: rgb(187, 237, 244);
+    background-color: $color-primary-medium;
     border-radius: 1rem;
+    @extend %flex;
 }
+
