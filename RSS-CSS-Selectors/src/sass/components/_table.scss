@@ -7,9 +7,28 @@
 
 .table-wrapper {
     width: 99%;
+    justify-content: space-between;
 }
 
 .cat {
-  
+  margin: 0 20px;
     height: 100px;
+}
+
+.table-elem {
+    width: 500px;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('../assets/table.svg'); 
+    @extend %flex;
+    justify-content: space-evenly;
+}
+
+.sushi {
+    display: block;
+    width: 150px;
+    height: 100px;
+    background-image: url('../assets/sushi1.svg');
+    background-repeat: no-repeat;
 }

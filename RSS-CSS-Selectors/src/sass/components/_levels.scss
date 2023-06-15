@@ -1,8 +1,56 @@
 .levels {
-  height: 100%;
-  width: 25%;
-  @extend %font-prim;
+    height: 100%;
+    width: 25%;
+    @extend %font-prim;
     @include font($size: 2rem, $color: $color-dark-2xl);
     @extend %flex;
 }
 
+#levels-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 15px 0 35px;
+    overflow: hidden;
+}
+
+.levels-heading {
+    height: 3rem;
+    width: 100%;
+    @include font($size: 2.5rem, $color: $color-dark-2xl);
+    margin: 1rem 0  1rem 2rem; 
+    font-weight: 800;
+}
+
+.level-list, 
+.level-name {
+    @include font($size: 1.8rem, $color: $color-dark-xl);
+}
+
+.level-list {
+    line-height: 2.2rem;
+    width: 100%;
+}
+
+.level-description {
+    @include font($size: 1.3rem, $color: $color-dark-xl);
+    background-color: rgba(240, 255, 255, 0.4);
+    padding: 3px;
+}
+
+.marked {
+    background-color: azure;
+}
+
+.level-checked {
+    text-decoration: underline;
+}
+
+.level-description-hidden {
+    visibility: hidden;
+    height: 0;
+}
+
+.level-description-open {
+ margin: 5px 0;
+}
