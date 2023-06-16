@@ -23,12 +23,23 @@
             <section class="game-container">
                 <section class="table">
                   <div class="wrapper table-wrapper">
-                    <img class="cat" src="assets/cat2.gif" alt="">
+                    <div class="table-left"> 
+                        <img class="cat" src="assets/cat2.gif" alt="">
+                        <p class="task">Select the 1st roll on plate</p>
+                    </div>
+                   
                     <div class="table-elem"> 
-                      <sushi class="sushi"></sushi>
+                        <plate class="plate">
+                            <sushi class="target sushi"></sushi>
+                            <sushi class="sushi"></sushi>
+                            <sushi class="sushi"></sushi>
+                        </plate>
+                      <roll class="roll"></roll>
                       <sushi class="sushi"></sushi>
                     </div>
-                    <img class="cat" src="assets/cat1.gif" alt="">
+                    <div class="table-right"><img class="cat" src="assets/cat1.gif" alt="">
+                    <button class="help">Help</button></div>
+                    
                   </div>
                   </section>
                 <section class="code-container">
@@ -139,35 +150,35 @@
                                     </tr>
                                     <tr>
                                         <td class="row-number">2</td>
-                                        <td>&nbsp; &nbsp; &lt;sushi /&gt;</td>
+                                        <td> &nbsp;&lt;plate&gt;</td>
                                     </tr>
                                     <tr>
                                         <td class="row-number">3</td>
-                                        <td>&lt;table&gt;</td>
+                                        <td>&nbsp; &nbsp;&lt;roll class="salmon" /&gt;</td>
                                     </tr>
                                     <tr>
                                         <td class="row-number">4</td>
-                                        <td></td>
+                                        <td>&nbsp; &nbsp;&lt;roll class="salmon" /&gt;</td>
                                     </tr>
                                     <tr>
                                         <td class="row-number">5</td>
-                                        <td></td>
+                                        <td>&nbsp; &nbsp;&lt;roll class="salmon" /&gt;</td>
                                     </tr>
                                     <tr>
                                         <td class="row-number">6</td>
-                                        <td></td>
+                                        <td> &nbsp;&lt;/plate &gt;</td>
                                     </tr>
                                     <tr>
                                         <td class="row-number">7</td>
-                                        <td></td>
+                                        <td>&nbsp;&lt;sushi/&gt;</td>
                                     </tr>
                                     <tr>
                                         <td class="row-number">8</td>
-                                        <td></td>
+                                        <td> &nbsp;&lt;roll class="salmon" /&gt;</td>
                                     </tr>
                                     <tr>
                                         <td class="row-number">9</td>
-                                        <td></td>
+                                        <td>&lt;/table&gt;</td>
                                     </tr>
                                     <tr>
                                         <td class="row-number">10</td>
@@ -241,7 +252,7 @@
                     </li>
                     <li>
                       <h3 class="level-name  level-checked">Level 3</h3>
-                      <p class="level-description level-description-open">
+                      <p class="level-description level-description-hidden">
                         <b>Descendant Selector</b> <br>
                         Select an element inside another element <br>
                        <span class="marked">A  B</span> <br>
@@ -303,7 +314,7 @@
                     </li>
                     <li>
                       <h3 class="level-name">Level 10</h3>
-                      <p class="level-description level-description-hidden">
+                      <p class="level-description level-description-open">
                         <b>First Child Pseudo-selector</b> <br>
                         Select a first child element inside of another element <br>
                        <span class="marked">:first-child</span> <br>
