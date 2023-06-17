@@ -16,17 +16,24 @@
     height: 9rem;
 }
 
-.table-elem {
+#table-area {
+    @extend %flex;
     width: 56rem;
+    height: 100%;
+}
+
+.table-elem10 {
+    width: 100%;
     height: 80%;
     background-repeat: no-repeat;
     background-size: contain;
     background-image: url('../assets/table1.svg'); 
     @extend %flex;
     justify-content: center;
+ 
 }
 
-.sushi {
+.roll10 {
     display: block;
     width: 7rem;
     height: 10rem;
@@ -34,7 +41,7 @@
     background-repeat: no-repeat;
 }
 
-.plate {
+.plate10 {
     @extend %flex;
     width: 24rem;
     height: 14rem;
@@ -42,7 +49,7 @@
     background-repeat: no-repeat;
 }
 
-.roll {
+.sushi10 {
     display: block;
     width: 9rem;
     height: 9rem;
