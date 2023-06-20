@@ -1,4 +1,4 @@
-.table {
+.table-section {
     width: 100%;
     height: 35%;
     @extend %flex; 
@@ -90,7 +90,7 @@
 }
 
 
-.rice1 {
+rice {
     display: block;
     width: 11rem;
     height: 15rem;
@@ -98,7 +98,7 @@
     background-repeat: no-repeat;
 }
 
-.ramen2 {
+ramen {
     display: block;
     width: 11rem;
     height: 15rem;
@@ -114,7 +114,7 @@
     background-repeat: no-repeat;
 }
 
-.plate3 {
+plate {
     @extend %flex;
     width: 20rem;
     height: 12rem;
@@ -148,7 +148,7 @@
     background-repeat: no-repeat;
 }
 
-.wasabi {
+wasabi {
     display: block;
     width: 8rem;
     height: 9rem;
@@ -156,7 +156,7 @@
     background-repeat: no-repeat;
 }
 
-.ginger {
+ginger {
     display: block;
     width: 8rem;
     height: 9rem;
@@ -164,7 +164,7 @@
     background-repeat: no-repeat;
 }
 
-.table-elem5 {
+.table {
     width: 100%;
     height: 80%;
     background-repeat: no-repeat;
@@ -182,7 +182,7 @@
     background-repeat: no-repeat;
 }
 
-.sause {
+sause {
     display: block;
     width: 6rem;
     height: 19rem;

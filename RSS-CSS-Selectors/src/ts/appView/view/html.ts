@@ -1,13 +1,15 @@
-import { levelParams } from "../../state/levels";
-import { TreeNode } from "../../state/tree";
+import { TreeNode } from "../../state/levels";
 
 
 export function node2Text (root: TreeNode, lvl:number = 0):string {
- let str = `<${root.tag}>\n`;
+let atr =  (root.attributes?.class ? ` class="${root.attributes?.class}"` : '') || (root.attributes?.id ? ` id="${root.attributes?.id}"` : '');
+ let str = `${' '.repeat(lvl)}<${root.tag}${atr}>\n`;
  if (root.children) {
     lvl +=1;
-  str += root.children.map(child => node2Text(child, lvl)).join('');
+  str +=  root.children.map(child => node2Text(child, lvl)).join('');
+  lvl -=1;
  };
- return  `${str}\n</${root.tag}>`
+ str += `${' '.repeat(lvl)}</${root.tag}>\n`
+ return str;
 }
 
