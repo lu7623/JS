@@ -1,4 +1,3 @@
- import { params } from "../../types/types";
 
 
 //abstract class Elements {
