@@ -3,3 +3,11 @@
     font-weight: $weight;
     color: $color;
 }
+
+@mixin element ($width, $height, $url, $display: block) {
+    width: $width;
+    height: $height;
+    display: $display;
+    background-repeat: no-repeat;
+    background-image: url($url);
+}

@@ -29,6 +29,11 @@
     @include font($size: 1.8rem, $color: $color-dark-xl);
 }
 
+.level-name:hover {
+    cursor: pointer;
+    color:bisque;
+}
+
 .level-list {
     line-height: 2.2rem;
     width: 100%;

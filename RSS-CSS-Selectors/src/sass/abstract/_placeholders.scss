@@ -15,3 +15,11 @@
     align-items: center;
     justify-content: center;
 }
+
+%shadow {
+    filter: drop-shadow(5px 5px 10px #484747);
+}
+
+%selection {
+    filter: drop-shadow(5px 5px 10px #FFFFFF);
+}
