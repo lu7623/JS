@@ -1,4 +1,5 @@
-import { TreeNode } from "../../state/levels";
+import { TreeNode } from "../../model/levels";
+import { levelParams, levels } from "../../model/levels";
 
 
 export function node2Text (root: TreeNode, lvl = 0):string {
@@ -13,14 +14,8 @@ const atr =  (root.attributes?.class ? ` class="${root.attributes?.class}"` : ''
  return str;
 }
 
-export function node2Elements (root:TreeNode, parentElem: HTMLElement):void {
-const treeRoot = document.createElement(root.tag);
-if (root.isTarget) treeRoot.classList.add('target');
-if (root.attributes?.class)  treeRoot.classList.add(`${root.attributes.class}`);
-if (root.attributes?.id) treeRoot.id = root.attributes.id;
-parentElem.append(treeRoot);
-if (root.children) root.children.forEach (child => node2Elements(child, treeRoot))
+export const htmlChange = (i: levels) => {
+  const htmlCode = document.querySelector('.html-code');
+  htmlCode?.replaceChildren();
+  if (htmlCode) htmlCode.textContent = `${node2Text(levelParams[i].node)}`;
 }
-
-
-
