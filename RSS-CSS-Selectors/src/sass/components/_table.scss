@@ -124,3 +124,28 @@ sushi.tuna{
 sushi.octopus {
     @include element ($width: 8rem, $height: 9rem, $url: '../assets/sushi17.svg');
 }
+
+.selected {
+    @extend %selection;
+    cursor: pointer;
+}
+
+.tooltip {
+display: none;
+background-color: bisque;
+@extend %font-prim;
+@include font($size: 1rem, $color: $color-dark-2xl);
+position: relative;
+width: max-content;
+height: fit-content;
+top: -40px;
+left: 30px;
+border-radius: 2px;
+padding: 2px;
+z-index: 100;
+}
+
+.visible {
+    display: block;
+}
+

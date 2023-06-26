@@ -7,4 +7,3 @@ viewOnLoad();
 levelsDirectChange();
 window.addEventListener("beforeunload", setLocalStorage);
 
-

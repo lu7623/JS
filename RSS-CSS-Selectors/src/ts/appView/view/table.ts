@@ -1,12 +1,18 @@
 import { levelParams, levels, TreeNode} from "../../model/levels";
+import { toolTipHandler } from "./html";
 
 function node2Elements (root:TreeNode, parentElem: HTMLElement):void {
     const treeRoot = document.createElement(root.tag);
     if (root.isTarget) treeRoot.classList.add('target');
     if (root.attributes?.class)  treeRoot.classList.add(`${root.attributes.class}`);
     if (root.attributes?.id) treeRoot.id = root.attributes.id;
+    if (root.attributes?.data) {
+       toolTipHandler(treeRoot, root);
+}
     parentElem.append(treeRoot);
-    if (root.children) root.children.forEach (child => node2Elements(child, treeRoot))
+    if (root.children) {root.children.forEach (child => node2Elements(child, treeRoot));
+    }
+
     }
 
 export const tableChange  = (i: levels) => {
