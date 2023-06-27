@@ -107,6 +107,10 @@ board {
     @extend %shadow;
 }
 
+board > * :hover {
+    @extend %selection;
+}
+
 sause {
     @include element ($width: 6rem, $height: 19rem, $url: '../assets/sause.svg');
     @extend %shadow;

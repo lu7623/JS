@@ -29,10 +29,15 @@
     @include font($size: 1.6rem, $color: $color-dark-2xl);
 }
 
-#answer:active {
-    border: none; 
-}
+#answer:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #bdbdbd;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+  }
 
 .css-code {
     width: 90%;
+    margin-left: 5px;
 }
