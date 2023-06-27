@@ -19,6 +19,7 @@
     justify-content: space-between; 
     background-color: transparent;
     height: 26px;
+    width: 100%;
 }
 
 #answer {
@@ -30,4 +31,8 @@
 
 #answer:active {
     border: none; 
+}
+
+.css-code {
+    width: 90%;
 }

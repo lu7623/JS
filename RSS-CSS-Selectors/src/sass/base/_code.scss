@@ -24,3 +24,8 @@ flex-direction: column;
 .elem-content {
     display: flex;
 }
+
+pre {
+    @extend %font-code;
+    @include font($size: 1.6rem, $color: $color-dark-2xl);
+}
