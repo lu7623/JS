@@ -61,3 +61,12 @@
 		transform: translateX(-8px);
 	}
 }
+
+.help {
+	animation: animated-text 2s steps(30,end) 1s 1 normal both;
+  }
+
+  @keyframes animated-text{
+	from{width: 0;}
+	to{width: 300px;}
+  }

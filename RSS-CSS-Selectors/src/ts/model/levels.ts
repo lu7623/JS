@@ -115,7 +115,7 @@ export const levelParams: Task[] = [
 
     {
         level: 4,
-        answer: 'wasabi , ginger',
+        answer: 'wasabi, ginger',
         description: 'Select wasabi and ginger',
         node: new TreeNode(Tags.board, false, [
             new TreeNode(Tags.wasabi, true, undefined, { data: '<wasabi />', unique: 'wasabi' }),
@@ -217,7 +217,7 @@ export const levelParams: Task[] = [
     },
     {
         level: 9,
-        answer: 'table:first-child',
+        answer: 'plate:first-child',
         description: 'Select the 1st roll on plate',
         node: new TreeNode(Tags.board, false, [
             new TreeNode(

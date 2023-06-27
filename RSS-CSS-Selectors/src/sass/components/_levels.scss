@@ -18,15 +18,22 @@
 
 .levels-heading {
     height: 3rem;
-    width: 100%;
+    width: 90%;
     @include font($size: 2.5rem, $color: $color-dark-2xl);
     margin: 1rem 0  1rem 2rem; 
     font-weight: 800;
+    display: flex;
+    justify-content: space-between;
 }
 
 .level-list, 
 .level-name {
     @include font($size: 1.8rem, $color: $color-dark-xl);
+}
+
+.level-name {
+    display: flex;
+    justify-content: space-between;
 }
 
 .level-name:hover {
@@ -51,6 +58,7 @@
 
 .level-checked {
     text-decoration: underline;
+    color:bisque;
 }
 
 .level-description-hidden {
@@ -60,4 +68,9 @@
 
 .level-description-open {
  margin: 5px 0;
+}
+
+.green-check {
+    @include element ($width: 4rem, $height: 2rem, $url: '../assets/green-check.png');
+    background-size: contain;
 }

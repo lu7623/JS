@@ -17,7 +17,6 @@
 #answer-field {
     @extend %flex;
     justify-content: space-between; 
-    background-color: transparent;
     height: 26px;
     width: 100%;
 }
@@ -29,13 +28,16 @@
     @include font($size: 1.6rem, $color: $color-dark-2xl);
 }
 
-#answer:focus {
+#answer:focus,
+.answer-background {
+    width: 30rem;
     color: #212529;
     background-color: #fff;
     border-color: #bdbdbd;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
   }
+
 
 .css-code {
     width: 90%;

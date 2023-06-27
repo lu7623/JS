@@ -31,7 +31,7 @@
 
                     </div>
                     <div class="table-right"><img class="cat" src="assets/cat1.gif" alt="">
-                        <button class="help">Help</button>
+                        <button class="help-btn">Help</button>
                     </div>
 
                 </div>
@@ -69,8 +69,8 @@
                                                     <span class="row-number">20</span>
                                                 </div>
                                                 <div class="css-code"> 
-                                                    <p id="answer-field"><input type="text" id="answer"
-                                                    placeholder="Type in a CSS selctor" /> <button>Enter</button></p>
+                                                    <div id="answer-field"><div class="answer-background"><input type="text" id="answer"
+                                                        placeholder="Type in a CSS selctor" /></div> <button>Enter</button></div>
                                                     <p>{
                                                         /* Styles would go here. */ <br>
                                                         } <br>
@@ -123,10 +123,10 @@
         </section>
         <aside class="levels">
             <div class="wrapper" id="levels-wrapper">
-                <h2 class="levels-heading">Levels</h3>
+                <h2 class="levels-heading">Levels<span class="user-levels"></span> <button class="reset">Reset</button></h3>
                     <ul class="level-list">
                         <li>
-                            <h3 class="level-name">Level 1</h3>
+                            <h3 class="level-name">Level 1 <span class="level1"></span></h3>
                             <p class="level-description level-description-hidden">
                                 <b>Type Selector</b> <br>
                                 Select elements by their type <br>
@@ -137,7 +137,7 @@
                             </p>
                         </li>
                         <li>
-                            <h3 class="level-name">Level 2</h3>
+                            <h3 class="level-name">Level 2 <span class="level2"></span></h3>
                             <p class="level-description level-description-hidden">
                                 <b>ID Selector</b> <br>
                                 Select elements with an ID <br>
@@ -147,7 +147,7 @@
                             </p>
                         </li>
                         <li>
-                            <h3 class="level-name">Level 3</h3>
+                            <h3 class="level-name">Level 3<span class="level3"></span></h3>
                             <p class="level-description level-description-hidden">
                                 <b>Descendant Selector</b> <br>
                                 Select an element inside another element <br>
@@ -158,7 +158,7 @@
                             </p>
                         </li>
                         <li>
-                            <h3 class="level-name">Level 4</h3>
+                            <h3 class="level-name">Level 4<span class="level4"></span></h3>
                             <p class="level-description level-description-hidden">
                                 <b>Class selector</b> <br>
                                 Select elements by their class <br>
@@ -168,7 +168,7 @@
                             </p>
                         </li>
                         <li>
-                            <h3 class="level-name">Level 5</h3>
+                            <h3 class="level-name">Level 5 <span class="level5"></span></h3>
                             <p class="level-description level-description-hidden">
                                 <b>Comma Combinator</b> <br>
                                 Combine selectors with commas <br>
@@ -179,7 +179,7 @@
                             </p>
                         </li>
                         <li>
-                            <h3 class="level-name">Level 6</h3>
+                            <h3 class="level-name">Level 6 <span class="level6"></span></h3>
                             <p class="level-description level-description-hidden">
                                 <b>The universal selector</b> <br>
                                 You can select everything! <br>
@@ -188,7 +188,7 @@
                             </p>
                         </li>
                         <li>
-                            <h3 class="level-name">Level 7</h3>
+                            <h3 class="level-name">Level 7 <span class="level7"></span></h3>
                             <p class="level-description level-description-hidden">
                                 <b>Adjacent Sibling Selector </b> <br>
                                 <span class="marked"> A + B</span> <br>
@@ -198,7 +198,7 @@
                             </p>
                         </li>
                         <li>
-                            <h3 class="level-name">Level 8</h3>
+                            <h3 class="level-name">Level 8 <span class="level8"></span></h3>
                             <p class="level-description level-description-hidden">
                                 <b>General Sibling Selector</b> <br>
                                 Select elements that follows another element <br>
@@ -208,7 +208,7 @@
                             </p>
                         </li>
                         <li>
-                            <h3 class="level-name">Level 9</h3>
+                            <h3 class="level-name">Level 9 <span class="level9"></span></h3>
                             <p class="level-description level-description-hidden">
                                 <b>Child selector</b> <br>
                                 Select direct children of an element <br>
@@ -218,7 +218,7 @@
                             </p>
                         </li>
                         <li>
-                            <h3 class="level-name">Level 10</h3>
+                            <h3 class="level-name">Level 10 <span class="level10"></span></h3>
                             <p class="level-description level-description-hidden">
                                 <b>First Child Pseudo-selector</b> <br>
                                 Select a first child element inside of another element <br>
@@ -228,7 +228,7 @@
                             </p>
                         </li>
                         <li>
-                            <h3 class="level-name">Level 11</h3>
+                            <h3 class="level-name">Level 11 <span class="level11"></span></h3>
                             <p class="level-description level-description-hidden">
                                 <b>Nth of Type Selector</b> <br>
                                 <span class="marked">:nth-of-type(A)</span> <br>
@@ -238,7 +238,7 @@
                             </p>
                         </li>
                         <li>
-                            <h3 class="level-name">Level 12</h3>
+                            <h3 class="level-name">Level 12 <span class="level12"></span></h3>
                             <p class="level-description level-description-hidden">
                                 <b>Empty Selector</b> <br>
                                 Select elements that don't have children <br>
