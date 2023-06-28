@@ -132,6 +132,7 @@ sushi.octopus {
 .selected {
     @extend %selection;
     cursor: pointer;
+    color: rgb(0, 0, 0);
 }
 
 .tooltip {
@@ -139,17 +140,18 @@ display: none;
 background-color: bisque;
 @extend %font-prim;
 @include font($size: 1rem, $color: $color-dark-2xl);
-position: relative;
-width: max-content;
+position: absolute;
 height: fit-content;
-top: -40px;
+top: -30px;
 left: 30px;
+width: max-content;
 border-radius: 2px;
 padding: 2px;
-z-index: 100;
+z-index: 1000;
 }
 
 .visible {
-    display: block;
+display: block;
+  
 }
 

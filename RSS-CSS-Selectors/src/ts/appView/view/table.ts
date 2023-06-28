@@ -1,7 +1,8 @@
-import { levelParams, levels, TreeNode} from "../../model/levels";
+import { levelParams, levels} from "../../model/levels";
 import { toolTipHandler } from "./html";
+import { node2Something } from "../../model/levels";
 
-function node2Elements (root:TreeNode, parentElem: HTMLElement):void {
+export const node2Elements: node2Something = function(root, parentElem) {
     const treeRoot = document.createElement(root.tag);
     if (root.isTarget) treeRoot.classList.add('target');
     if (root.attributes?.class)  treeRoot.classList.add(`${root.attributes.class}`);

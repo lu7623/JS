@@ -1,7 +1,8 @@
 import { TreeNode } from '../../model/levels';
 import { levelParams, levels } from '../../model/levels';
+import { node2Something } from '../../model/levels';
 
-export function node2Text(root: TreeNode, parentElem: HTMLElement, lvl = 0): void {
+export const node2Text: node2Something = function(root, parentElem, lvl = 0) {
     const treeRoot = document.createElement('pre');
     const atr =
         (root.attributes?.class ? ` class="${root.attributes?.class}"` : '') ||
@@ -12,10 +13,10 @@ export function node2Text(root: TreeNode, parentElem: HTMLElement, lvl = 0): voi
     } else {
         treeRoot.innerText = '  '.repeat(lvl) + `<${root.tag}${atr}>`;
     }
-    if (root.attributes?.data) {
-        toolTipHandler(treeRoot, root);
-    }
     parentElem.append(treeRoot);
+    if (root.attributes?.data) {
+      toolTipHandler(treeRoot, root);
+  }
     if (root.children) {
         lvl += 1;
         root.children.forEach((child) => node2Text(child, treeRoot, lvl));
@@ -33,14 +34,14 @@ export const htmlChange = (i: levels) => {
 
 export const toolTipHandler = (treeRoot: HTMLElement, root: TreeNode) => {
     const tooltip = document.createElement('span');
-    tooltip.classList.add('tooltip');
     tooltip.innerText = root.attributes?.data || '';
     treeRoot.append(tooltip);
+    tooltip.classList.add('tooltip');
     if (root.attributes?.unique) tooltip.setAttribute('data-unique', `${root.attributes.unique}`);
     treeRoot.addEventListener('mouseover', (event) => {
         event.stopPropagation();
         treeRoot.classList.add('selected');
-        document.querySelectorAll(`.tooltip[data-unique="${root.attributes?.unique}"`).forEach((tip) => {
+        document.querySelectorAll(`[data-unique="${root.attributes?.unique}"`).forEach((tip) => {
             tip.classList.add('visible');
         });
     });

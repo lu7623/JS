@@ -1,5 +1,7 @@
 import { levels } from "../../model/levels";
 import { currentState } from "../../model/state";
+import { getLocalStorage } from "../../controller/controller";
+import { viewNewLevel } from "../view";
 
 const levelsDescription = document.querySelectorAll('.level-description');
 const levelsName = document.querySelectorAll('.level-name');
@@ -28,3 +30,10 @@ export const levelChange = (i: levels) => {
   const userLevels =  document.querySelector('.user-levels');
   if (userLevels) userLevels.textContent = `${currentState.userLevels.length}/12`;
   }
+
+  export const viewOnLoad = () => {
+    window.addEventListener('load', function () {
+        getLocalStorage();
+        viewNewLevel(currentState.currentLevel);
+    });
+};

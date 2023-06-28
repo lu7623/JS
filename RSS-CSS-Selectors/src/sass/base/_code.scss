@@ -28,4 +28,5 @@ flex-direction: column;
 pre {
     @extend %font-code;
     @include font($size: 1.6rem, $color: $color-dark-2xl);
+    position: relative;
 }

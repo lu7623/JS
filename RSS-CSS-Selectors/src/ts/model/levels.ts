@@ -27,6 +27,8 @@ export class TreeNode {
 
 export type levels = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
+export type node2Something = (root: TreeNode, parentElem: HTMLElement, lvl?: number) => void;
+
 interface Task {
     level: levels;
     answer: string;
@@ -74,8 +76,8 @@ export const levelParams: Task[] = [
         node: new TreeNode(Tags.board, false, [
             new TreeNode(
                 Tags.plate,
-                false,
-                [new TreeNode(Tags.sushi, true, undefined, { data: '<sushi />', unique: 'sushi0' })],
+                true,
+                [new TreeNode(Tags.sushi, false, undefined, { data: '<sushi />', unique: 'sushi0' })],
                 { class: 'small', data: '<plate></plate>', unique: 'plate' }
             ),
             new TreeNode(Tags.sushi, false, undefined, { data: '<sushi />', unique: 'sushi1' }),
