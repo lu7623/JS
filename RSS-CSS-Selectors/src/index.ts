@@ -1,7 +1,5 @@
   
-import { levelsDirectChange } from "./ts/controller/controller";
-import { setLocalStorage } from "./ts/controller/controller";
-import { inputCheck } from "./ts/controller/controller";
+import { levelsDirectChange, setLocalStorage, inputCheck } from "./ts/controller/controller";
 import { currentState } from "./ts/model/state";
 import { viewOnLoad } from "./ts/appView/view/levels";
 

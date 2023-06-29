@@ -1,6 +1,7 @@
 import { levels, levelParams } from '../model/levels';
 import { currentState } from '../model/state';
 import { viewNewLevel } from '../appView/view';
+import { viewOnWin } from '../appView/view/levels';
 
 export function setLocalStorage<T>(item: string, param: T): void {
     if (typeof param === 'number') localStorage.setItem(item, param.toString());
@@ -91,12 +92,15 @@ else onWrongAnswer();
 
 const onRightAnswer = () => {
     document.querySelector(`.level${currentState.currentLevel + 1}`)?.classList.add('green-check');
-    if (currentState.currentLevel < 11) {
+    
         if (!currentState.userLevels.includes(currentState.currentLevel))
             currentState.userLevels.push(currentState.currentLevel);
-        currentState.currentLevel += 1;
+       if (currentState.currentLevel < 11) currentState.currentLevel += 1;
+       else currentState.currentLevel =0;
         const userLevels = document.querySelector('.user-levels');
         if (userLevels) userLevels.textContent = `${currentState.userLevels.length}/12`;
+        if (currentState.userLevels.length === 12) viewOnWin();
+        else {
         document.querySelector('board')?.classList.add('right');
         setTimeout(() => {
             document.querySelector('board')?.classList.remove('right');
@@ -121,6 +125,7 @@ export const resetUserProgress = () => {
             document.querySelectorAll('.yellow-check').forEach((el) => el.classList.remove('yellow-check'));
             currentState.currentLevel = 0;
             currentState.userLevels.length = 0;
+            currentState.helpUsed.length =0; 
             viewNewLevel(0);
         });
 };

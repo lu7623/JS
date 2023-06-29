@@ -81,3 +81,25 @@ li:hover {
 .yellow-check {
     filter: invert(70%);
 }
+
+.win {
+    width: 400px;
+    height: 300px;
+    background-color: aliceblue;
+    position: absolute;
+    left: calc(50vw - 200px);
+    top: calc(50vh - 150px);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.party {
+    @include element ($width: 40rem, $height: 25rem, $url: '../assets/party.gif');
+    background-size: cover;
+}
+
+.hidden {
+    display: none;
+}

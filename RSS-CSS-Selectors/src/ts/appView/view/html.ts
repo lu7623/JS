@@ -4,6 +4,7 @@ import { node2Something } from '../../model/levels';
 
 export const node2Text: node2Something = function(root, parentElem, lvl = 0) {
     const treeRoot = document.createElement('pre');
+    if (root.attributes?.unique) treeRoot.setAttribute('data-unique', `${root.attributes.unique}`);
     const atr =
         (root.attributes?.class ? ` class="${root.attributes?.class}"` : '') ||
         (root.attributes?.id ? ` id="${root.attributes?.id}"` : '');
@@ -40,15 +41,16 @@ export const toolTipHandler = (treeRoot: HTMLElement, root: TreeNode) => {
     if (root.attributes?.unique) tooltip.setAttribute('data-unique', `${root.attributes.unique}`);
     treeRoot.addEventListener('mouseover', (event) => {
         event.stopPropagation();
-        treeRoot.classList.add('selected');
+   
         document.querySelectorAll(`[data-unique="${root.attributes?.unique}"`).forEach((tip) => {
-            tip.classList.add('visible');
+          if (tip instanceof HTMLSpanElement)  tip.classList.add('visible');
+            tip.classList.add('selected');
         });
     });
     treeRoot.addEventListener('mouseout', () => {
-        document.querySelectorAll(`.tooltip[data-unique="${root.attributes?.unique}"`).forEach((tip) => {
-            tip.classList.remove('visible');
-            treeRoot.classList.remove('selected');
+        document.querySelectorAll(`[data-unique="${root.attributes?.unique}"]`).forEach((tip) => {
+          if (tip instanceof HTMLSpanElement) tip.classList.remove('visible');
+            tip.classList.remove('selected');
         });
     });
 };

@@ -5,6 +5,7 @@ import { node2Something } from "../../model/levels";
 export const node2Elements: node2Something = function(root, parentElem) {
     const treeRoot = document.createElement(root.tag);
     if (root.isTarget) treeRoot.classList.add('target');
+    if (root.attributes?.unique) treeRoot.setAttribute('data-unique', `${root.attributes.unique}`);
     if (root.attributes?.class)  treeRoot.classList.add(`${root.attributes.class}`);
     if (root.attributes?.id) treeRoot.id = root.attributes.id;
     if (root.attributes?.data) {

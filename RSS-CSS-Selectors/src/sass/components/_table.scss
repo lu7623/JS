@@ -63,6 +63,7 @@ plate {
     @include element ($width: 22rem, $height: 13rem, $url: '../assets/plate33.svg', $display: flex);
     @extend %shadow;
     justify-content: center;
+
 }
 
 plate.small {
@@ -143,8 +144,8 @@ background-color: bisque;
 @include font($size: 1rem, $color: $color-dark-2xl);
 position: absolute;
 height: fit-content;
-top: -30px;
-left: 30px;
+top: -40px;
+left: 20px;
 width: max-content;
 border-radius: 2px;
 padding: 2px;

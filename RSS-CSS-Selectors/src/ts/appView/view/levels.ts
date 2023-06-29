@@ -38,7 +38,17 @@ export const levelChange = (i: levels) => {
     });
 };
 
-// const viewOnWin = () => {
-//     const win = document.createElement('div');
-
-// }
+export const viewOnWin = () => {
+    const win = document.createElement('div');
+win.className = 'win';
+const winHeader = document.createElement('h3');
+winHeader.classList.add('heading');
+winHeader.innerText = "You win!";
+const winGif = document.createElement('div');
+winGif.classList.add('party');
+const winBtn = document.createElement('button');
+winBtn.innerText = "Ok";
+winBtn.addEventListener('click', () => win.classList.add('hidden'))
+win.append(winGif, winBtn, winHeader);
+document.querySelector('body')?.append(win);
+}
