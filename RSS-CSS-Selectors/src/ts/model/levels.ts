@@ -31,7 +31,7 @@ export type node2Something = (root: TreeNode, parentElem: HTMLElement, lvl?: num
 
 interface Task {
     level: levels;
-    answer: string;
+    answer: string[];
     description: string;
     node: TreeNode;
 }
@@ -39,7 +39,7 @@ interface Task {
 export const levelParams: Task[] = [
     {
         level: 0,
-        answer: 'rice',
+        answer: ['rice'],
         description: 'Select all rice bouls',
         node: new TreeNode(
             Tags.board,
@@ -53,7 +53,7 @@ export const levelParams: Task[] = [
     },
     {
         level: 1,
-        answer: '#spicy',
+        answer: ['#spicy'],
         description: 'Select spicy ramen',
         node: new TreeNode(
             Tags.board,
@@ -71,13 +71,13 @@ export const levelParams: Task[] = [
     },
     {
         level: 2,
-        answer: 'plate sushi',
+        answer: ['plate',  'sushi'],
         description: 'Select sushi on the plate',
         node: new TreeNode(Tags.board, false, [
             new TreeNode(
                 Tags.plate,
-                true,
-                [new TreeNode(Tags.sushi, false, undefined, { data: '<sushi />', unique: 'sushi0' })],
+                false,
+                [new TreeNode(Tags.sushi, true, undefined, { data: '<sushi />', unique: 'sushi0' })],
                 { class: 'small', data: '<plate></plate>', unique: 'plate' }
             ),
             new TreeNode(Tags.sushi, false, undefined, { data: '<sushi />', unique: 'sushi1' }),
@@ -86,7 +86,7 @@ export const levelParams: Task[] = [
     },
     {
         level: 3,
-        answer: '.salmon',
+        answer: ['.salmon'],
         description: 'Select items with class "salmon"',
         node: new TreeNode(Tags.board, false, [
             new TreeNode(
@@ -117,7 +117,7 @@ export const levelParams: Task[] = [
 
     {
         level: 4,
-        answer: 'wasabi, ginger',
+        answer: ['wasabi', ',', 'ginger'],
         description: 'Select wasabi and ginger',
         node: new TreeNode(Tags.board, false, [
             new TreeNode(Tags.wasabi, true, undefined, { data: '<wasabi />', unique: 'wasabi' }),
@@ -138,7 +138,7 @@ export const levelParams: Task[] = [
     },
     {
         level: 5,
-        answer: '*',
+        answer: ['*'],
         description: 'Select all items on table',
         node: new TreeNode(Tags.board, false, [
             new TreeNode(Tags.ginger, true, undefined, { data: 'ginger />', unique: 'ginger' }),
@@ -150,7 +150,7 @@ export const levelParams: Task[] = [
     },
     {
         level: 6,
-        answer: 'rice + sushi',
+        answer: ['rice', '+', 'sushi'],
         description: 'Select all sushi next to rice',
         node: new TreeNode(Tags.board, false, [
             new TreeNode(Tags.sushi, false, undefined, {
@@ -175,7 +175,7 @@ export const levelParams: Task[] = [
 
     {
         level: 7,
-        answer: 'ramen ~ sushi',
+        answer: ['ramen',  '~',  'sushi'],
         description: 'Select sushi to the right of ramen',
         node: new TreeNode(Tags.board, false, [
             new TreeNode(Tags.sushi, false, undefined, {
@@ -195,7 +195,7 @@ export const levelParams: Task[] = [
     },
     {
         level: 8,
-        answer: 'plate > roll',
+        answer: ['plate', '>',  'roll'],
         description: 'Select all rolls on the plate',
         node: new TreeNode(Tags.board, false, [
             new TreeNode(Tags.wasabi, false, undefined, { data: '<wasabi />', unique: 'sushi2' }),
@@ -219,7 +219,7 @@ export const levelParams: Task[] = [
     },
     {
         level: 9,
-        answer: 'plate:first-child',
+        answer: ['plate:first-child'],
         description: 'Select the 1st roll on plate',
         node: new TreeNode(Tags.board, false, [
             new TreeNode(
@@ -254,7 +254,7 @@ export const levelParams: Task[] = [
     },
     {
         level: 10,
-        answer: 'roll:nth-of-type(even)',
+        answer: ['roll:nth-of-type(even)'],
         description: 'Select even rolls',
         node: new TreeNode(Tags.board, false, [
             new TreeNode(Tags.roll, false, undefined, { data: '<roll />', unique: 'roll1' }),
@@ -267,7 +267,7 @@ export const levelParams: Task[] = [
     },
     {
         level: 11,
-        answer: 'plate:empty',
+        answer: ['plate:empty'],
         description: 'Select an empty plate',
         node: new TreeNode(Tags.board, false, [
             new TreeNode(

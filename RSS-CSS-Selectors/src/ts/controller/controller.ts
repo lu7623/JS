@@ -1,7 +1,6 @@
-import { levels } from '../model/levels';
+import { levels, levelParams } from '../model/levels';
 import { currentState } from '../model/state';
 import { viewNewLevel } from '../appView/view';
-import { levelParams } from '../model/levels';
 
 export function setLocalStorage<T>(item: string, param: T): void {
     if (typeof param === 'number') localStorage.setItem(item, param.toString());
@@ -46,7 +45,8 @@ export const inputCheck = () => {
     const enter = document.querySelector('.enter');
     input?.addEventListener('keydown', (event) => {
         if (event.code === 'Enter') {
-            spellCheck(input.value);
+      if (Number(input.value) >=1 && Number(input.value) <= 12 ) return viewNewLevel(Number(input.value)-1 as levels); 
+        doubleCheck(spellCheck(input.value), targetCheck(input.value));
             input.value = '';
         }
     });
@@ -57,9 +57,27 @@ export const inputCheck = () => {
 };
 
 const spellCheck = (value: string) => {
-    if (value === levelParams[currentState.currentLevel].answer) onRightAnswer();
-    else onWrongAnswer();
+    const rightAnwer = levelParams[currentState.currentLevel].answer;
+     if (rightAnwer.every(ans => value.includes(ans))) return true;
+    else return false;
 };
+
+const targetCheck = (value: string) => {
+   if (levelParams[currentState.currentLevel].answer.length === 1) return true;
+const userAnswer = document.querySelectorAll(value);
+console.log(userAnswer);
+const res: boolean[] = [];
+userAnswer.forEach(el => {
+    if (el instanceof HTMLElement)  res.push(el.classList.contains('target'))});
+    console.log(res);
+   if ( res.every(x => x === true)) return true;
+   return false;
+}
+
+const doubleCheck = (res1:boolean, res2: boolean) => {
+if (res1 && res2) onRightAnswer();
+else onWrongAnswer();
+}
 
 const onRightAnswer = () => {
     document.querySelector(`.level${currentState.currentLevel + 1}`)?.classList.add('green-check');
@@ -95,7 +113,7 @@ export const getHelp = () => {
     const helpBtn = document.querySelector('.help-btn');
     helpBtn?.addEventListener('click', () => {
         const input = document.getElementById('answer') as HTMLInputElement;
-        input.value = levelParams[currentState.currentLevel].answer;
+        input.value = levelParams[currentState.currentLevel].answer.join('');
         input.classList.add('help');
         setTimeout(() => {
             input.classList.remove('help');
