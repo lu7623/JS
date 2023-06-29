@@ -34,6 +34,10 @@
   width: 20rem;
 }
 
+.table-right {
+   width: 17rem;
+}
+
 .task {
     @extend %font-prim;
     @include font($size: 1.5rem, $color: $color-dark-2xl);
@@ -71,7 +75,7 @@ plate.small {
 }
 
 board.small {
-    @include element ($width: 42rem, $height: 80%, $url: '../assets/table3.svg', $display: flex);
+    @include element ($width: 38rem, $height: 80%, $url: '../assets/table3.svg', $display: flex);
    gap: 40px;
 }
 

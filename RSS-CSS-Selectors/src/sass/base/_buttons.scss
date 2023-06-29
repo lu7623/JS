@@ -1,3 +1,21 @@
+button {
+    @extend %font-prim;
+    @include font($size: 1.5rem, $color: $color-dark-2xl);
+    border-radius: 0.5rem;
+    padding: 0 3px;
+    background-color: azure;
+    border-color: darkgrey;
+}
+
+button:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 3px 0px #848484;
+}
+
 .help {
     width: fit-content;
+}
+
+.reset {
+    height: fit-content;
 }

@@ -2,7 +2,7 @@ import { TreeNode } from '../../model/levels';
 import { levelParams, levels } from '../../model/levels';
 import { node2Something } from '../../model/levels';
 
-export const node2Text: node2Something = function(root, parentElem, lvl = 0) {
+export const node2Text: node2Something = function (root, parentElem, lvl = 0) {
     const treeRoot = document.createElement('pre');
     if (root.attributes?.unique) treeRoot.setAttribute('data-unique', `${root.attributes.unique}`);
     const atr =
@@ -16,8 +16,8 @@ export const node2Text: node2Something = function(root, parentElem, lvl = 0) {
     }
     parentElem.append(treeRoot);
     if (root.attributes?.data) {
-      toolTipHandler(treeRoot, root);
-  }
+        toolTipHandler(treeRoot, root);
+    }
     if (root.children) {
         lvl += 1;
         root.children.forEach((child) => node2Text(child, treeRoot, lvl));
@@ -25,7 +25,7 @@ export const node2Text: node2Something = function(root, parentElem, lvl = 0) {
         const newtext = document.createTextNode('  '.repeat(lvl) + `</${root.tag}>`);
         parentElem.appendChild(newtext);
     }
-}
+};
 
 export const htmlChange = (i: levels) => {
     const htmlCode = document.querySelector('.html-code') as HTMLElement;
@@ -41,15 +41,14 @@ export const toolTipHandler = (treeRoot: HTMLElement, root: TreeNode) => {
     if (root.attributes?.unique) tooltip.setAttribute('data-unique', `${root.attributes.unique}`);
     treeRoot.addEventListener('mouseover', (event) => {
         event.stopPropagation();
-   
         document.querySelectorAll(`[data-unique="${root.attributes?.unique}"`).forEach((tip) => {
-          if (tip instanceof HTMLSpanElement)  tip.classList.add('visible');
+            if (tip instanceof HTMLSpanElement) tip.classList.add('visible');
             tip.classList.add('selected');
         });
     });
     treeRoot.addEventListener('mouseout', () => {
         document.querySelectorAll(`[data-unique="${root.attributes?.unique}"]`).forEach((tip) => {
-          if (tip instanceof HTMLSpanElement) tip.classList.remove('visible');
+            if (tip instanceof HTMLSpanElement) tip.classList.remove('visible');
             tip.classList.remove('selected');
         });
     });
