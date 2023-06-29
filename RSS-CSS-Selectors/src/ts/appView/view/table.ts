@@ -20,6 +20,10 @@ export const tableChange  = (i: levels) => {
     const tableArea = document.getElementById('table-area');
     tableArea?.replaceChildren();
     if (tableArea) node2Elements(levelParams[i].node, tableArea);
+    tableArea?.classList.add('entrance');
+    setTimeout(() => {
+        tableArea?.classList.remove('entrance');
+    }, 1000);
 }
 
 export const taskChange = (i: levels) => {

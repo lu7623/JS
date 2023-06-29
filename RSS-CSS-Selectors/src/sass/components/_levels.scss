@@ -31,13 +31,16 @@
     @include font($size: 1.8rem, $color: $color-dark-xl);
 }
 
+li:hover {
+    cursor: pointer;
+}
+
 .level-name {
     display: flex;
     justify-content: space-between;
 }
 
-.level-name :hover {
-    cursor: pointer;
+.level-name:hover {
     color:bisque;
 }
 
@@ -73,4 +76,8 @@
 .green-check {
     @include element ($width: 4rem, $height: 2rem, $url: '../assets/green-check.png');
     background-size: contain;
+}
+
+.yellow-check {
+    filter: invert(70%);
 }

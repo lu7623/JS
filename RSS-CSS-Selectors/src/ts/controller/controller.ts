@@ -27,6 +27,13 @@ export function getLocalStorage() {
             document.querySelector(`.level${lvl + 1}`)?.classList.add('green-check');
         });
     }
+    if (localStorage.getItem('userHelp')) {
+        currentState.helpUsed = localStorage
+        .getItem('userHelp')
+        ?.split(',')
+        .map((x) => Number(x)) as levels[];
+        currentState.helpUsed.forEach((help) =>  document.querySelector(`.level${help + 1}`)?.classList.add('yellow-check'))
+    }
 }
 
 
@@ -51,8 +58,9 @@ export const inputCheck = () => {
         }
     });
     enter?.addEventListener('click', () => {
-        spellCheck(input.value);
-        input.value = '';
+        if (Number(input.value) >=1 && Number(input.value) <= 12 ) return viewNewLevel(Number(input.value)-1 as levels); 
+        doubleCheck(spellCheck(input.value), targetCheck(input.value));
+            input.value = '';
     });
 };
 
@@ -63,7 +71,8 @@ const spellCheck = (value: string) => {
 };
 
 const targetCheck = (value: string) => {
-   if (levelParams[currentState.currentLevel].answer.length === 1) return true;
+    if (value.length === 0) return false;
+ if (levelParams[currentState.currentLevel].answer.length === 1) return true;
 const userAnswer = document.querySelectorAll(value);
 console.log(userAnswer);
 const res: boolean[] = [];
@@ -75,7 +84,8 @@ userAnswer.forEach(el => {
 }
 
 const doubleCheck = (res1:boolean, res2: boolean) => {
-if (res1 && res2) onRightAnswer();
+if (!res1) onWrongAnswer();
+ else if (res2) onRightAnswer();
 else onWrongAnswer();
 }
 
@@ -87,7 +97,12 @@ const onRightAnswer = () => {
         currentState.currentLevel += 1;
         const userLevels = document.querySelector('.user-levels');
         if (userLevels) userLevels.textContent = `${currentState.userLevels.length}/12`;
-        viewNewLevel(currentState.currentLevel as levels);
+        document.querySelector('board')?.classList.add('right');
+        setTimeout(() => {
+            document.querySelector('board')?.classList.remove('right');
+        }, 1000);
+        setTimeout(() => viewNewLevel(currentState.currentLevel as levels), 1000)
+        
     }
 };
 
@@ -103,6 +118,7 @@ export const resetUserProgress = () => {
     if (reset)
         reset.addEventListener('click', () => {
             document.querySelectorAll('.green-check').forEach((el) => el.classList.remove('green-check'));
+            document.querySelectorAll('.yellow-check').forEach((el) => el.classList.remove('yellow-check'));
             currentState.currentLevel = 0;
             currentState.userLevels.length = 0;
             viewNewLevel(0);
@@ -113,12 +129,16 @@ export const getHelp = () => {
     const helpBtn = document.querySelector('.help-btn');
     helpBtn?.addEventListener('click', () => {
         const input = document.getElementById('answer') as HTMLInputElement;
-        input.value = levelParams[currentState.currentLevel].answer.join('');
+        input.value = levelParams[currentState.currentLevel].answer.join(' ');
         input.classList.add('help');
+        document.querySelector(`.level${currentState.currentLevel + 1}`)?.classList.add('yellow-check');
+        if (!currentState.helpUsed.includes(currentState.currentLevel))
+        currentState.helpUsed.push(currentState.currentLevel);
         setTimeout(() => {
             input.classList.remove('help');
         }, 4000);
     });
+  
 };
 
 

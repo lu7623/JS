@@ -37,3 +37,8 @@ export const levelChange = (i: levels) => {
         viewNewLevel(currentState.currentLevel);
     });
 };
+
+// const viewOnWin = () => {
+//     const win = document.createElement('div');
+
+// }

@@ -11,6 +11,7 @@ inputCheck();
 window.addEventListener("beforeunload", () => {
 setLocalStorage('currLvl', currentState.currentLevel);
 setLocalStorage('userLvls', currentState.userLevels);
+setLocalStorage('userHelp', currentState.helpUsed)
 });
 
 
