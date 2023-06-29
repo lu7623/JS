@@ -1,7 +1,5 @@
 import { levels } from '../../model/levels';
 import { currentState } from '../../model/state';
-import { getLocalStorage } from '../../controller/controller';
-import { viewNewLevel } from '../view';
 
 const levelsDescription = document.querySelectorAll('.level-description');
 const levelsName = document.querySelectorAll('.level-name');
@@ -29,24 +27,3 @@ export const showUserProgress = () => {
     if (userLevels) userLevels.textContent = `${currentState.userLevels.length}/12`;
 };
 
-export const viewOnLoad = () => {
-    window.addEventListener('load', function () {
-        getLocalStorage();
-        viewNewLevel(currentState.currentLevel);
-    });
-};
-
-export const viewOnWin = () => {
-    const win = document.createElement('div');
-    win.className = 'win';
-    const winHeader = document.createElement('h3');
-    winHeader.classList.add('heading');
-    winHeader.innerText = 'You win!';
-    const winGif = document.createElement('div');
-    winGif.classList.add('party');
-    const winBtn = document.createElement('button');
-    winBtn.innerText = 'Ok';
-    winBtn.addEventListener('click', () => win.classList.add('hidden'));
-    win.append(winGif, winBtn, winHeader);
-    document.querySelector('body')?.append(win);
-};

@@ -1,7 +1,8 @@
   
+import { viewOnLoad } from "./ts/appView/view/viewApp";
 import { levelsDirectChange, setLocalStorage, inputCheck } from "./ts/controller/controller";
 import { currentState } from "./ts/model/state";
-import { viewOnLoad } from "./ts/appView/view/levels";
+
 
 viewOnLoad();
 levelsDirectChange();

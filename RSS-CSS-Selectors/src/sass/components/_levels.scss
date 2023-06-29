@@ -96,6 +96,13 @@ li:hover {
     display: flex;
     flex-direction: column;
     padding: 10px;
+    align-items: center;
+}
+
+.win-heading {
+    @extend %font-prim;
+    @include font($size: 2rem, $weight: 800, $color: $color-primary);
+    text-align: center;
 }
 
 .party {
