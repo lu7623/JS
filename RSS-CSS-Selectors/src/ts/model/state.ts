@@ -11,3 +11,7 @@ export const currentState: state = {
     userLevels: [],
     helpUsed: []
 }
+
+export type statable = (state: state) => void;
+export type levelable = (lvl: levels) => void;
+export type check = (input: string) => boolean;

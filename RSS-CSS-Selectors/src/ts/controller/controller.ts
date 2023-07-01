@@ -1,5 +1,5 @@
 import { levels, levelParams } from '../model/levels';
-import { currentState } from '../model/state';
+import { check, currentState } from '../model/state';
 import { viewNewLevel } from '../appView/view';
 import { resetView, viewOnWin } from '../appView/view/viewApp';
 
@@ -13,7 +13,7 @@ export function setLocalStorage<T>(item: string, param: T): void {
 //     localStorage.setItem('userLvls', currentState.userLevels.join());
 // }
 
-export function getLocalStorage() {
+export const getLocalStorage = () => {
     if (localStorage.getItem('currLvl')) {
         currentState.currentLevel = Number(localStorage.getItem('currLvl')) as levels;
     }
@@ -38,6 +38,15 @@ export function getLocalStorage() {
         );
     }
 }
+
+export const saveState = () => {
+    window.addEventListener("beforeunload", () => {
+        setLocalStorage('currLvl', currentState.currentLevel);
+        setLocalStorage('userLvls', currentState.userLevels);
+        setLocalStorage('userHelp', currentState.helpUsed)
+    });
+}
+
 
 export const levelsDirectChange = () => {
     const levelsName = document.querySelectorAll('.level-name');
@@ -66,16 +75,16 @@ export const inputCheck = () => {
         doubleCheck(spellCheck(input.value), targetCheck(input.value));
         input.value = '';
     });
-   
+
 };
 
-const spellCheck = (value: string) => {
+const spellCheck: check = function (value) {
     const rightAnwer = levelParams[currentState.currentLevel].answer;
     if (rightAnwer.every((ans) => value.toLowerCase().includes(ans))) return true;
     else return false;
 };
 
-const targetCheck = (value: string) => {
+const targetCheck: check = function (value) {
     if (value.length === 0) return false;
     if (levelParams[currentState.currentLevel].answer.length === 1) return true;
     const userAnswer = document.querySelectorAll(value);

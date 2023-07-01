@@ -1,6 +1,7 @@
-import { levelParams, levels} from "../../model/levels";
+import { levelParams} from "../../model/levels";
 import { toolTipHandler } from "./html";
 import { node2Something } from "../../model/levels";
+import { levelable } from "../../model/state";
 
 export const node2Elements: node2Something = function(root, parentElem) {
     const treeRoot = document.createElement(root.tag);
@@ -9,7 +10,7 @@ export const node2Elements: node2Something = function(root, parentElem) {
     if (root.attributes?.class)  treeRoot.classList.add(`${root.attributes.class}`);
     if (root.attributes?.id) treeRoot.id = root.attributes.id;
     if (root.attributes?.data) {
-       toolTipHandler(treeRoot, root);
+       toolTipHandler(root, treeRoot);
 }
     parentElem.append(treeRoot);
     if (root.children) {root.children.forEach (child => node2Elements(child, treeRoot));
@@ -17,7 +18,7 @@ export const node2Elements: node2Something = function(root, parentElem) {
 
     }
 
-export const tableChange  = (i: levels) => {
+export const tableChange: levelable = function (i) {
     const tableArea = document.getElementById('table-area');
     tableArea?.replaceChildren();
     if (tableArea) node2Elements(levelParams[i].node, tableArea);
@@ -27,7 +28,7 @@ export const tableChange  = (i: levels) => {
     }, 1000);
 }
 
-export const taskChange = (i: levels) => {
+export const taskChange:levelable = function(i) {
     const task = document.querySelector('.task');
     if (task) task.textContent = levelParams[i].description;
 }

@@ -1,10 +1,9 @@
-import { levels } from '../../model/levels';
-import { currentState } from '../../model/state';
+import { currentState, levelable } from '../../model/state';
 
 const levelsDescription = document.querySelectorAll('.level-description');
 const levelsName = document.querySelectorAll('.level-name');
 
-export const levelChange = (i: levels) => {
+export const levelChange:levelable = function(i) {
     levelsDescription.forEach((elem) => {
         elem.classList.remove('level-description-open');
         elem.classList.add('level-description-hidden');

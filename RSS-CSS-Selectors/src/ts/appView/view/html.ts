@@ -1,6 +1,5 @@
-import { TreeNode } from '../../model/levels';
-import { levelParams, levels } from '../../model/levels';
-import { node2Something } from '../../model/levels';
+import { levelParams, node2Something } from '../../model/levels';
+import { levelable } from '../../model/state';
 
 export const node2Text: node2Something = function (root, parentElem, lvl = 0) {
     const treeRoot = document.createElement('pre');
@@ -16,7 +15,7 @@ export const node2Text: node2Something = function (root, parentElem, lvl = 0) {
     }
     parentElem.append(treeRoot);
     if (root.attributes?.data) {
-        toolTipHandler(treeRoot, root);
+        toolTipHandler(root, treeRoot);
     }
     if (root.children) {
         lvl += 1;
@@ -27,13 +26,13 @@ export const node2Text: node2Something = function (root, parentElem, lvl = 0) {
     }
 };
 
-export const htmlChange = (i: levels) => {
+export const htmlChange: levelable = function (i) {
     const htmlCode = document.querySelector('.html-code') as HTMLElement;
     htmlCode?.replaceChildren();
     if (htmlCode) node2Text(levelParams[i].node, htmlCode);
 };
 
-export const toolTipHandler = (treeRoot: HTMLElement, root: TreeNode) => {
+export const toolTipHandler: node2Something = function (root, treeRoot) {
     const tooltip = document.createElement('span');
     tooltip.innerText = root.attributes?.data || '';
     treeRoot.append(tooltip);
