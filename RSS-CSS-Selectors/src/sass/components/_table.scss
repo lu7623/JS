@@ -1,15 +1,15 @@
 .table-section {
     width: 100%;
     height: 35%;
-    @extend %flex; 
+    @extend %flex;
     @include font($size: 2rem, $color: $color-dark-2xl);
 }
 
 .table-wrapper {
     width: 99%;
     justify-content: space-between;
-    background: rgb(34,173,195);
-    background: linear-gradient(180deg, rgba(34,173,195,1) 0%, rgba(187,237,244,1) 100%);
+    background: rgb(34, 173, 195);
+    background: linear-gradient(180deg, rgba(34, 173, 195, 1) 0%, rgba(187, 237, 244, 1) 100%);
 }
 
 .cat {
@@ -22,8 +22,7 @@
     height: 100%;
 }
 
-
-.table-right, 
+.table-right,
 .table-left {
     display: flex;
     flex-direction: column;
@@ -31,11 +30,11 @@
     justify-content: space-around;
     align-items: center;
     margin: 0 20px;
-  width: 20rem;
+    width: 20rem;
 }
 
 .table-right {
-   width: 17rem;
+    width: 17rem;
 }
 
 .task {
@@ -47,27 +46,25 @@
     background-color: azure;
 }
 
-
 rice {
-    @include element ($width: 11rem, $height: 15rem, $url: '../assets/rice.svg');
+    @include element($width: 11rem, $height: 15rem, $url: '../assets/rice.svg');
     @extend %shadow;
 }
 
 ramen {
-    @include element ($width: 11rem, $height: 15rem, $url: '../assets/ramen.svg');
+    @include element($width: 11rem, $height: 15rem, $url: '../assets/ramen.svg');
     @extend %shadow;
 }
 
 sushi {
-    @include element ($width: 9rem, $height: 10rem, $url: '../assets/sushi4.svg');
+    @include element($width: 9rem, $height: 10rem, $url: '../assets/sushi4.svg');
     @extend %shadow;
 }
 
 plate {
-    @include element ($width: 22rem, $height: 13rem, $url: '../assets/plate33.svg', $display: flex);
+    @include element($width: 22rem, $height: 13rem, $url: '../assets/plate33.svg', $display: flex);
     @extend %shadow;
     justify-content: center;
-
 }
 
 plate.small {
@@ -75,37 +72,35 @@ plate.small {
 }
 
 board.small {
-    @include element ($width: 38rem, $height: 80%, $url: '../assets/table3.svg', $display: flex);
-   gap: 40px;
+    @include element($width: 38rem, $height: 80%, $url: '../assets/table3.svg', $display: flex);
+    gap: 40px;
 }
 
 roll {
-    @include element ($width: 6rem, $height: 9rem, $url: '../assets/roll4.svg');
+    @include element($width: 6rem, $height: 9rem, $url: '../assets/roll4.svg');
     @extend %shadow;
 }
 
-
 roll.salmon {
-    @include element ($width: 7rem, $height: 10rem, $url: '../assets/roll1.svg');  
+    @include element($width: 7rem, $height: 10rem, $url: '../assets/roll1.svg');
 }
 
-
 sushi.salmon {
-    @include element ($width: 9rem, $height: 11rem, $url: '../assets/sushi3.svg');
+    @include element($width: 9rem, $height: 11rem, $url: '../assets/sushi3.svg');
 }
 
 wasabi {
-    @include element ($width: 8rem, $height: 9rem, $url: '../assets/wasabi.svg');
+    @include element($width: 8rem, $height: 9rem, $url: '../assets/wasabi.svg');
     @extend %shadow;
 }
 
 ginger {
-    @include element ($width: 8rem, $height: 9rem, $url: '../assets/ginger.svg');
+    @include element($width: 8rem, $height: 9rem, $url: '../assets/ginger.svg');
     @extend %shadow;
 }
 
 board {
-    @include element ($width: 100%, $height: 80%, $url:'../assets/table1.svg', $display: flex);
+    @include element($width: 100%, $height: 80%, $url: '../assets/table1.svg', $display: flex);
     @extend %flex;
     background-size: contain;
     gap: 5px;
@@ -117,21 +112,21 @@ board > * :hover {
 }
 
 sause {
-    @include element ($width: 6rem, $height: 19rem, $url: '../assets/sause.svg');
+    @include element($width: 6rem, $height: 19rem, $url: '../assets/sause.svg');
     @extend %shadow;
 }
 
 sushi.unagi {
-    @include element ($width: 8rem, $height: 8rem, $url: '../assets/sushi15.svg');
+    @include element($width: 8rem, $height: 8rem, $url: '../assets/sushi15.svg');
     @extend %shadow;
 }
 
-sushi.tuna{
-    @include element ($width: 7rem, $height: 8rem, $url: '../assets/sushi8.svg');
+sushi.tuna {
+    @include element($width: 7rem, $height: 8rem, $url: '../assets/sushi8.svg');
 }
 
 sushi.octopus {
-    @include element ($width: 8rem, $height: 9rem, $url: '../assets/sushi17.svg');
+    @include element($width: 8rem, $height: 9rem, $url: '../assets/sushi17.svg');
 }
 
 .selected {
@@ -142,22 +137,20 @@ sushi.octopus {
 }
 
 .tooltip {
-display: none;
-background-color: bisque;
-@extend %font-prim;
-@include font($size: 1rem, $color: $color-dark-2xl);
-position: absolute;
-height: fit-content;
-top: -40px;
-left: 20px;
-width: max-content;
-border-radius: 2px;
-padding: 2px;
-z-index: 1000;
+    display: none;
+    background-color: bisque;
+    @extend %font-prim;
+    @include font($size: 1rem, $color: $color-dark-2xl);
+    position: absolute;
+    height: fit-content;
+    top: -40px;
+    left: 20px;
+    width: max-content;
+    border-radius: 2px;
+    padding: 2px;
+    z-index: 1000;
 }
 
 .visible {
-display: block;
-  
+    display: block;
 }
-

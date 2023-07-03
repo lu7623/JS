@@ -3,102 +3,106 @@
 }
 
 @keyframes myAnim {
-	0%,
-	100% {
-		transform: translateY(0);
-	}
+    0%,
+    100% {
+        transform: translateY(0);
+    }
 
-	10%,
-	30%,
-	50%,
-	70% {
-		transform: translateY(-8px);
-	}
+    10%,
+    30%,
+    50%,
+    70% {
+        transform: translateY(-8px);
+    }
 
-	20%,
-	40%,
-	60% {
-		transform: translateY(8px);
-	}
+    20%,
+    40%,
+    60% {
+        transform: translateY(8px);
+    }
 
-	80% {
-		transform: translateY(6.4px);
-	}
+    80% {
+        transform: translateY(6.4px);
+    }
 
-	90% {
-		transform: translateY(-6.4px);
-	}
+    90% {
+        transform: translateY(-6.4px);
+    }
 }
 
 .wrong {
-	animation: myAnim2 1s ease 0s 1 normal forwards;
+    animation: myAnim2 1s ease 0s 1 normal forwards;
 }
 
 @keyframes myAnim2 {
-	0%,
-	100% {
-		transform: translateX(0);
-	}
+    0%,
+    100% {
+        transform: translateX(0);
+    }
 
-	10%,
-	30%,
-	50%,
-	70% {
-		transform: translateX(-10px);
-	}
+    10%,
+    30%,
+    50%,
+    70% {
+        transform: translateX(-10px);
+    }
 
-	20%,
-	40%,
-	60% {
-		transform: translateX(10px);
-	}
+    20%,
+    40%,
+    60% {
+        transform: translateX(10px);
+    }
 
-	80% {
-		transform: translateX(8px);
-	}
+    80% {
+        transform: translateX(8px);
+    }
 
-	90% {
-		transform: translateX(-8px);
-	}
+    90% {
+        transform: translateX(-8px);
+    }
 }
 
 .help {
-	animation: animated-text 3s steps(30,end)  1 normal both;
-  }
+    animation: animated-text 3s steps(30, end) 1 normal both;
+}
 
-  @keyframes animated-text{
-	from{width: 0;}
-	to{width: 300px;}
-  }
+@keyframes animated-text {
+    from {
+        width: 0;
+    }
+    to {
+        width: 300px;
+    }
+}
 
-  .right {
-	animation: myAnim3 1s ease 0s 1 normal forwards;
-  }
+.right {
+    animation: myAnim3 1s ease 0s 1 normal forwards;
+}
 
-  @keyframes myAnim3 {
-	0% {
-		opacity: 1;
-		transform: scale(1);
-	}
+@keyframes myAnim3 {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
 
-	100% {
-		opacity: 0;
-		transform: scale(0.6);
-	}
+    100% {
+        opacity: 0;
+        transform: scale(0.6);
+    }
 }
 
 .entrance {
-	animation: myAnim4 1s ease 0s 1 normal forwards;
+    animation: myAnim4 1s ease 0s 1 normal forwards;
 }
 
 @keyframes myAnim4 {
-	0% {
-		opacity: 0;
-		transform: scale(0.6);
-	}
+    0% {
+        opacity: 0;
+        transform: scale(0.6);
+    }
 
-	100% {
-		opacity: 1;
-		transform: scale(1);
-	}
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

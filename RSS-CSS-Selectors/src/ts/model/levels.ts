@@ -219,7 +219,7 @@ export const levelParams: Task[] = [
     },
     {
         level: 9,
-        answer: ['plate:first-child'],
+        answer: ['roll:first-child'],
         description: 'Select the 1st roll on plate',
         node: new TreeNode(Tags.board, false, [
             new TreeNode(

@@ -1,8 +1,7 @@
 .footer {
     height: 60px;
-    //background: rgb(0,7,65);
-//background: linear-gradient(270deg, rgba(0,7,65,0.8744747899159664) 0%, rgba(29,155,176,1) 57%, rgba(5,149,178,0.8016456582633054) 79%);
-background-color: $color-background;
+
+    background-color: $color-background;
     @extend %flex;
     justify-content: space-around;
     @extend %font-prim;
