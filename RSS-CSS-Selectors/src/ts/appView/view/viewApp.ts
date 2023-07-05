@@ -38,3 +38,21 @@ export const resetView = () => {
     currentState.helpUsed.length =0; 
     viewNewLevel(0);
 }
+
+export const lastLvlNotification = () => {
+    const last = document.createElement('div');
+            last.className = 'last';
+            const lastRem = document.createElement('p');
+            lastRem.classList.add('win-heading');
+            lastRem.innerText = "It was the last level! But you haven't completed some tasks, please continue to win the game!"
+            const lastBtn = document.createElement('button');
+            lastBtn.className = "winBtn lastBtn";
+            lastBtn.textContent = "Ok";
+            last.append(lastRem);
+            last.append(lastBtn);
+            document.querySelector('body')?.append(last);
+            lastBtn?.addEventListener('click', () => {
+                   last?.classList.add('hidden');
+            })
+
+}
