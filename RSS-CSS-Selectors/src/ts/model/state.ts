@@ -1,16 +1,18 @@
-import { levels } from "./levels";
+import { levels } from './levels';
 
- type state = {
+type state = {
     currentLevel: levels;
     userLevels: levels[];
-    helpUsed: levels[]
-}
+    helpUsed: levels[];
+};
 
 export const currentState: state = {
     currentLevel: 0,
     userLevels: [],
-    helpUsed: []
-}
+    helpUsed: [],
+};
 
 export type levelable = (lvl: levels) => void;
 export type check = (input: string) => boolean;
+
+

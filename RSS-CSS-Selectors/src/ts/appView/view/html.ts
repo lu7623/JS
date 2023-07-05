@@ -35,7 +35,7 @@ export const htmlChange: levelable = function (i) {
 export const toolTipHandler: node2Something = function (root, treeRoot) {
     const tooltip = document.createElement('span');
     tooltip.innerText = root.attributes?.data || '';
-    treeRoot.append(tooltip);
+    treeRoot.prepend(tooltip);
     tooltip.classList.add('tooltip');
     if (root.attributes?.unique) tooltip.setAttribute('data-unique', `${root.attributes.unique}`);
     treeRoot.addEventListener('mouseover', (event) => {

@@ -71,7 +71,7 @@ export const levelParams: Task[] = [
     },
     {
         level: 2,
-        answer: ['plate',  'sushi'],
+        answer: ['plate', ' ',  'sushi'],
         description: 'Select sushi on the plate',
         node: new TreeNode(Tags.board, false, [
             new TreeNode(

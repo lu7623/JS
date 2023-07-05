@@ -8,11 +8,6 @@ export function setLocalStorage<T>(item: string, param: T): void {
     if (param instanceof Array) localStorage.setItem(item, param.join());
 }
 
-// export function setLocalStorage() {
-//     localStorage.setItem('currLvl', currentState.currentLevel.toString());
-//     localStorage.setItem('userLvls', currentState.userLevels.join());
-// }
-
 export const getLocalStorage = () => {
     if (localStorage.getItem('currLvl')) {
         currentState.currentLevel = Number(localStorage.getItem('currLvl')) as levels;
@@ -63,54 +58,69 @@ export const inputCheck = () => {
     const enter = document.querySelector('.enter');
     input?.addEventListener('keydown', (event) => {
         if (event.code === 'Enter') {
-            if (Number(input.value) >= 1 && Number(input.value) <= 12)
-                return viewNewLevel((Number(input.value) - 1) as levels);
-            doubleCheck(spellCheck(input.value), targetCheck(input.value));
-            input.value = '';
+            if (Number(input.value) >= 1 && Number(input.value) <= 12) {
+                currentState.currentLevel = Number(input.value) - 1 as levels;
+                viewNewLevel((Number(input.value) - 1) as levels);
+            }
+                else {  
+                    doubleCheck(spellCheck(input.value), targetCheck(input.value));
+                    input.value = '';}       
         }
     });
     enter?.addEventListener('click', () => {
-        if (Number(input.value) >= 1 && Number(input.value) <= 12)
-            return viewNewLevel((Number(input.value) - 1) as levels);
-        doubleCheck(spellCheck(input.value), targetCheck(input.value));
-        input.value = '';
+        if (Number(input.value) >= 1 && Number(input.value) <= 12) {
+            currentState.currentLevel = Number(input.value) - 1 as levels;
+            viewNewLevel((Number(input.value) - 1) as levels);
+        }
+            else {  
+                doubleCheck(spellCheck(input.value), targetCheck(input.value));
+                input.value = '';}       
     });
 
 };
 
 const spellCheck: check = function (value) {
     const rightAnwer = levelParams[currentState.currentLevel].answer;
-    if (rightAnwer.every((ans) => value.toLowerCase().includes(ans))) return true;
+     if (rightAnwer.every((ans) => value.toLowerCase().includes(ans))) return true;
     else return false;
 };
 
 const targetCheck: check = function (value) {
-    if (value.length === 0) return false;
-    if (levelParams[currentState.currentLevel].answer.length === 1) return true;
-    const userAnswer = document.querySelectorAll(value);
-    console.log(userAnswer);
+    const rightAnwer = levelParams[currentState.currentLevel].answer;
+    if (rightAnwer.length === 1) return value === rightAnwer[0];
+        const userAnswer = document.querySelectorAll(value);
+        const target = document.querySelectorAll('.target');
+        if (!(target.length === userAnswer.length)) return false;
+        if (userAnswer.length === 0) return false;
     const res: boolean[] = [];
     userAnswer.forEach((el) => {
         if (el instanceof HTMLElement) res.push(el.classList.contains('target'));
     });
-    console.log(res);
     if (res.every((x) => x === true)) return true;
-    return false;
+    return false; 
+
 };
 
 const doubleCheck = (res1: boolean, res2: boolean) => {
-    if (!res1) onWrongAnswer();
-    else if (res2) onRightAnswer();
-    else onWrongAnswer();
+    if (res1 && res2) onRightAnswer();
+else onWrongAnswer();
 };
 
 const onRightAnswer = () => {
     document.querySelector(`.level${currentState.currentLevel + 1}`)?.classList.add('green-check');
-
     if (!currentState.userLevels.includes(currentState.currentLevel))
         currentState.userLevels.push(currentState.currentLevel);
     if (currentState.currentLevel < 11) currentState.currentLevel += 1;
-    else currentState.currentLevel = 0;
+    else {
+        if (currentState.userLevels.length < 12) {
+            const last = document.querySelector('.last');
+            last?.classList.remove('hidden');
+            const lastBtn = document.querySelector('.lastBtn');
+            lastBtn?.addEventListener('click', () => {
+                last?.classList.add('hidden'); 
+            })
+        }
+        currentState.currentLevel = 0;}
     const userLevels = document.querySelector('.user-levels');
     if (userLevels) userLevels.textContent = `${currentState.userLevels.length}/12`;
     if (currentState.userLevels.length === 12) viewOnWin();
