@@ -6,6 +6,6 @@ describe('View on win test', () => {
         viewOnWin();
 
         const win = screen.getByTestId('win');
-        expect(win).toBeVisible;
+        expect(win).toBeVisible();
     });
 });

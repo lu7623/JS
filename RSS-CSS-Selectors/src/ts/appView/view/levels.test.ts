@@ -23,7 +23,8 @@ describe('Lvls description test', () => {
         const levelsName = screen.getAllByTestId('lvl-name');
 
         expect(levelsName[1]).toHaveClass('level-checked');
-        expect(levelsDescription[1]).toBeVisible;
-        expect(levelsDescription[0]).not.toBeVisible;
+        expect(levelsDescription[1]).not.toHaveClass('level-description-hidden');
+        expect(levelsDescription[1]).toHaveClass('level-description-open');
+        expect(levelsDescription[0]).not.toHaveClass('level-description-open');
     });
 });
