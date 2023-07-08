@@ -11,4 +11,3 @@ header {
     @extend %font-prim;
     @include font($size: 2rem, $weight: 800, $color: $color-primary);
 }
-

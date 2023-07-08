@@ -1,7 +1,7 @@
-import { levels, levelParams } from '../model/levels';
-import { check, currentState } from '../model/state';
+import { levels, levelParams, check } from '../model/levels';
+import { currentState } from '../model/state';
 import { viewNewLevel } from '../appView/view';
-import { lastLvlNotification, resetView, viewOnWin } from '../appView/view/viewApp';
+import { lastLvlNotification, resetView, viewOnCheck, viewOnWin } from '../appView/view/viewApp';
 
 export function setLocalStorage<T>(item: string, param: T): void {
     if (typeof param === 'number') localStorage.setItem(item, param.toString());
@@ -57,48 +57,48 @@ export const inputCheck = () => {
     const enter = document.querySelector('.enter');
     input?.addEventListener('keydown', (event) => {
         if (event.code === 'Enter') {
-            if (Number(input.value) >= 1 && Number(input.value) <= 12) {
-                currentState.currentLevel = (Number(input.value) - 1) as levels;
-                viewNewLevel((Number(input.value) - 1) as levels);
-            } else {
-                doubleCheck(spellCheck(input.value), targetCheck(input.value));
-                input.value = '';
-            }
-        }
-    });
-    enter?.addEventListener('click', () => {
-        if (Number(input.value) >= 1 && Number(input.value) <= 12) {
-            currentState.currentLevel = (Number(input.value) - 1) as levels;
-            viewNewLevel((Number(input.value) - 1) as levels);
-        } else {
-            doubleCheck(spellCheck(input.value), targetCheck(input.value));
+            viewOnCheck(input.value);
             input.value = '';
         }
     });
+    enter?.addEventListener('click', () => {
+        viewOnCheck(input.value);
+        input.value = '';
+    });
 };
 
-const spellCheck: check = function (value) {
-    const rightAnwer = levelParams[currentState.currentLevel].answer;
+export const spellCheck: check = function (value, rightAnwer) {
     if (rightAnwer.every((ans) => value.toLowerCase().includes(ans))) return true;
     else return false;
 };
 
-const targetCheck: check = function (value) {
-    const rightAnwer = levelParams[currentState.currentLevel].answer;
-    if (rightAnwer.length === 1) return value.toLowerCase().trim() === rightAnwer[0];
-    const userAnswer = document.querySelectorAll(value);
-    const target = document.querySelectorAll('.target');
-    if (!(target.length === userAnswer.length)) return false;
-    if (userAnswer.length === 0) return false;
-    const res: boolean[] = [];
-    userAnswer.forEach((el) => {
-        if (el instanceof HTMLElement) res.push(el.classList.contains('target'));
-    });
-    if (res.every((x) => x === true)) return true;
-    return false;
+const queryCheck = (s: string) => document.createDocumentFragment().querySelector(s);
+const isSelectorValid = (value: string) => {
+    try {
+        queryCheck(value);
+    } catch {
+        return false;
+    }
+    return true;
 };
 
-const doubleCheck = (res1: boolean, res2: boolean) => {
+export const targetCheck: check = function (value, rightAnwer) {
+    if (rightAnwer.length === 1) return value.toLowerCase().trim() === rightAnwer[0];
+    if (isSelectorValid(value)) {
+        const userAnswer = document.querySelectorAll(value);
+        const target = document.querySelectorAll('.target');
+        if (!(target.length === userAnswer.length)) return false;
+        if (userAnswer.length === 0) return false;
+        const res: boolean[] = [];
+        userAnswer.forEach((el) => {
+            if (el instanceof HTMLElement) res.push(el.classList.contains('target'));
+        });
+        if (res.every((x) => x === true)) return true;
+        return false;
+    } else return false;
+};
+
+export const doubleCheck = (res1: boolean, res2: boolean) => {
     if (res1 && res2) onRightAnswer();
     else onWrongAnswer();
 };
@@ -110,7 +110,7 @@ const onRightAnswer = () => {
     if (currentState.currentLevel < 11) currentState.currentLevel += 1;
     else {
         if (currentState.userLevels.length < 12) {
-           lastLvlNotification();
+            lastLvlNotification();
         }
         currentState.currentLevel = 0;
     }

@@ -1,5 +1,4 @@
-import { levelParams, node2Something } from '../../model/levels';
-import { levelable } from '../../model/state';
+import { levelParams, levels, node2Something } from '../../model/levels';
 
 export const node2Text: node2Something = function (root, parentElem, lvl = 0) {
     const treeRoot = document.createElement('pre');
@@ -26,10 +25,12 @@ export const node2Text: node2Something = function (root, parentElem, lvl = 0) {
     }
 };
 
-export const htmlChange: levelable = function (i) {
-    const htmlCode = document.querySelector('.html-code') as HTMLElement;
-    htmlCode?.replaceChildren();
-    if (htmlCode) node2Text(levelParams[i].node, htmlCode);
+export const htmlChange = function (i: levels, htmlCode: HTMLElement | null) {
+    if (htmlCode) {
+        htmlCode.setAttribute('data-testid', 'html');
+        htmlCode?.replaceChildren();
+        if (htmlCode) node2Text(levelParams[i].node, htmlCode);
+    }
 };
 
 export const toolTipHandler: node2Something = function (root, treeRoot) {

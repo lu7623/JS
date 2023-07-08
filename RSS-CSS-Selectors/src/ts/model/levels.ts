@@ -29,12 +29,14 @@ export type levels = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
 export type node2Something = (root: TreeNode, parentElem: HTMLElement, lvl?: number) => void;
 
-interface Task {
+export interface Task {
     level: levels;
     answer: string[];
     description: string;
     node: TreeNode;
 }
+
+export type check = (input: string, rightAnwer: Task['answer']) => boolean;
 
 export const levelParams: Task[] = [
     {
@@ -71,7 +73,7 @@ export const levelParams: Task[] = [
     },
     {
         level: 2,
-        answer: ['plate', ' ',  'sushi'],
+        answer: ['plate', ' ', 'sushi'],
         description: 'Select sushi on the plate',
         node: new TreeNode(Tags.board, false, [
             new TreeNode(
@@ -175,7 +177,7 @@ export const levelParams: Task[] = [
 
     {
         level: 7,
-        answer: ['ramen',  '~',  'sushi'],
+        answer: ['ramen', '~', 'sushi'],
         description: 'Select sushi to the right of ramen',
         node: new TreeNode(Tags.board, false, [
             new TreeNode(Tags.sushi, false, undefined, {
@@ -195,10 +197,10 @@ export const levelParams: Task[] = [
     },
     {
         level: 8,
-        answer: ['plate', '>',  'roll'],
+        answer: ['plate', '>', 'roll'],
         description: 'Select all rolls on the plate',
         node: new TreeNode(Tags.board, false, [
-            new TreeNode(Tags.wasabi, false, undefined, { data: '<wasabi />', unique: 'sushi2' }),
+            new TreeNode(Tags.wasabi, false, undefined, { data: '<wasabi />', unique: 'wasabi' }),
             new TreeNode(
                 Tags.plate,
                 false,

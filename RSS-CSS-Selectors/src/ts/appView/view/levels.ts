@@ -1,9 +1,8 @@
 import { currentState, levelable } from '../../model/state';
 
-const levelsDescription = document.querySelectorAll('.level-description');
-const levelsName = document.querySelectorAll('.level-name');
-
-export const levelChange:levelable = function(i) {
+export const levelChange: levelable = function (i) {
+    const levelsDescription = document.querySelectorAll('.level-description');
+    const levelsName = document.querySelectorAll('.level-name');
     levelsDescription.forEach((elem) => {
         elem.classList.remove('level-description-open');
         elem.classList.add('level-description-hidden');
@@ -25,4 +24,3 @@ export const showUserProgress = () => {
     const userLevels = document.querySelector('.user-levels');
     if (userLevels) userLevels.textContent = `${currentState.userLevels.length}/12`;
 };
-

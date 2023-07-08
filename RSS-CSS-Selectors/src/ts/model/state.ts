@@ -13,6 +13,3 @@ export const currentState: state = {
 };
 
 export type levelable = (lvl: levels) => void;
-export type check = (input: string) => boolean;
-
-

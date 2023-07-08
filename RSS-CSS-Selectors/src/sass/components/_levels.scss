@@ -19,8 +19,8 @@
     justify-content: flex-start;
     padding: 0 15px 0 35px;
     overflow: hidden;
-    background: rgb(34,173,195);
-    background: linear-gradient(180deg, rgba(34,173,195,1) 0%, rgba(187,237,244,1) 100%);
+    background: rgb(34, 173, 195);
+    background: linear-gradient(180deg, rgba(34, 173, 195, 1) 0%, rgba(187, 237, 244, 1) 100%);
 }
 
 .levels-heading {
@@ -29,7 +29,7 @@
     margin: 0;
 }
 
-.level-list, 
+.level-list,
 .level-name {
     @include font($size: 1.8rem, $color: $color-dark-xl);
 }
@@ -44,7 +44,7 @@ li:hover {
 }
 
 .level-name:hover {
-    color:bisque;
+    color: bisque;
 }
 
 .level-list {
@@ -64,7 +64,7 @@ li:hover {
 
 .level-checked {
     text-decoration: underline;
-    color:bisque;
+    color: bisque;
 }
 
 .level-description-hidden {
@@ -73,16 +73,16 @@ li:hover {
 }
 
 .level-description-open {
- margin: 5px 0;
+    margin: 5px 0;
 }
 
 .green-check {
-    @include element ($width: 4rem, $height: 2rem, $url: '../assets/green-check.png');
+    @include element($width: 4rem, $height: 2rem, $url: '../assets/green-check.png');
     background-size: contain;
 }
 
 .yellow-check {
-   filter: hue-rotate(70deg);
+    filter: hue-rotate(70deg);
 }
 
 .win,
@@ -112,7 +112,7 @@ li:hover {
 }
 
 .party {
-    @include element ($width: 40rem, $height: 25rem, $url: '../assets/party.gif');
+    @include element($width: 40rem, $height: 25rem, $url: '../assets/party.gif');
     background-size: cover;
 }
 

@@ -33,7 +33,7 @@ module.exports = {
   plugins: [
     new EslingPlugin({ extensions: 'ts' }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, '/src/template.html'),
+      template: path.join(__dirname, '/src/index.html'),
       filename: 'index.html',
     }),
     new MiniCssExtractPlugin({
