@@ -2,7 +2,7 @@ import { screen } from '@testing-library/dom';
 import { levelChange } from './levels';
 
 describe('Lvls description test', () => {
-    test('Description to lvl 2 to be open', () => {
+    test('Description for lvl 2 to be open', () => {
         document.body.innerHTML = `<ul class="level-list">
         <li>
             <h3 class="level-name" data-testid="lvl-name">Level 1</h3>

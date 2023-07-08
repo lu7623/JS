@@ -30,8 +30,8 @@ describe('Target check function test', () => {
     });
 });
 
-describe('Target check function test', () => {
-    test('check answer for lvl 9', () => {
+describe('Help function test', () => {
+    test('to show right answer and add helpUsed', () => {
         document.body.innerHTML = `
           <button class="help-btn"  data-testid = "btn"></button>
           <input type="text" id="answer" data-testid = "input">`;
