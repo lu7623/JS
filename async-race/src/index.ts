@@ -1,177 +1,218 @@
-import "./main.scss";
+import './main.scss';
 
-const BASE_URL = "http://127.0.0.1:3000/";
+const BASE_URL = 'http://127.0.0.1:3000/';
 
-type carStatus = "started" | "stopped" | "drive";
+type CarStatus = 'started' | 'stopped' | 'drive';
 
-type carParams = {
+type CarParams = {
   id?: number;
   name: string;
   color: string;
 };
 
-type options = {
+type Options = {
   _page?: number;
   _limit?: number;
-  _sort?: "id" | "wins" | "time";
-  _order?: "ASC" | "DESC";
+  _sort?: 'id' | 'wins' | 'time';
+  _order?: 'ASC' | 'DESC';
 };
 
-type winnerParams = {
+type WinnerParams = {
   id?: number;
   wins: number;
   time: number;
 };
 
-async function getAllCars() {
-  const url = `${BASE_URL}garage`;
-  const res = await fetch(url);
-  const data = await res.json();
-  for (let i = 0; i < data.length; i += 1) {
-    console.log(data[i].id, data[i].name, data[i].color);
-  }
+type Code = 200 | 201 | 400 | 404 | 429 | 500;
+
+type Race = {
+  'velocity': 64,
+  'distance': 500000
+};
+
+interface GarageApi {
+  status: Code,
+  garageCar?: CarParams
 }
 
-//  getAllCars();
-
-async function getCar(id: number) {
-  const url = `${BASE_URL}garage/${id}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  console.log(data.id, data.name, data.color);
+interface RaceApi {
+  status: Code,
+  engineCar?: Race
 }
 
-//  getCar(1);
-
-async function createCar(param: carParams) {
-  const url = `${BASE_URL}garage/`;
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(param),
-  });
-  const data = await res.json();
-  console.log(data.id, data.name, data.color);
+interface DriveApi {
+  status: Code,
+  success?: boolean
+}
+interface WinnerApi {
+  status: Code,
+  winnerCar?: WinnerParams
 }
 
-//  createCar({ name: "volvo", color: "#444444" });
-
-async function deleteCar(id: number) {
-  const url = `${BASE_URL}garage/${id}`;
-  const res = await fetch(url, {
-    method: "DELETE",
-  });
-  const data = await res.json();
-  console.log(data.id, data.name, data.color);
-}
-
-//  deleteCar(5);
-
-async function updateCar(id: number, param: carParams) {
-  const url = `${BASE_URL}garage/${id}`;
-  const res = await fetch(url, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(param),
-  });
-  const data = await res.json();
-  console.log(data.id, data.name, data.color);
-}
-
-//  updateCar(1, { name: 'oka', color: '#000000' });
-
-async function startEngineCar(id: number, status: carStatus) {
-  const url = `${BASE_URL}engine?id=${id}&status=${status}`;
-  const res = await fetch(url, {
-    method: "PATCH",
-  });
-  const data = await res.json();
-  console.log(data.velocity, data.distance, data);
-}
-
-//  startEngineCar(1, 'started');
-
-async function driveCar(id: number, status = "drive") {
-  const url = `${BASE_URL}engine?id=${id}&status=${status}`;
-  const res = await fetch(url, {
-    method: "PATCH",
-  });
-  const data = await res.json();
-  console.log(data.success);
-}
-
-// driveCar(1);
-
-async function getWinners(optional?: options) {
-  let url = `${BASE_URL}winners`;
-  if (optional) {
-    url += "?";
-    for (const [key, value] of Object.entries(optional)) {
-      url += `&${key}=${value}`;
+const API = {
+  async getAllCars():Promise<CarParams[]> {
+    const url = `${BASE_URL}garage`;
+    const res = await fetch(url);
+    const data = await res.json();
+    console.log(res.headers);
+    const garage: CarParams[] = [];
+    for (let i = 0; i < data.length; i += 1) {
+      garage.push({ id: data[i].id, name: data[i].name, color: data[i].color });
     }
-  }
-  const res = await fetch(url, {
-    method: "GET",
-  });
-  const data = await res.json();
-  console.log(data.id, data.wins, data.time);
-}
+    console.log(garage);
+    return garage;
+  },
+  async getCar(id: number):Promise<GarageApi> {
+    const url = `${BASE_URL}garage/${id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const resCode = res.status as Code;
+    if (resCode !== 200) return { status: resCode };
+    const car: CarParams = { id: data.id, name: data.name, color: data.color };
+    console.log(car);
+    return { status: resCode, garageCar: car };
+  },
+  async createCar(param: CarParams):Promise<GarageApi> {
+    const url = `${BASE_URL}garage/`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(param),
+    });
+    const data = await res.json();
+    const resCode = res.status as Code;
+    const car: CarParams = { id: data.id, name: data.name, color: data.color };
+    console.log(car);
+    return { status: resCode, garageCar: car };
+  },
+  async deleteCar(id: number):Promise<Code> {
+    const url = `${BASE_URL}garage/${id}`;
+    const res = await fetch(url, {
+      method: 'DELETE',
+    });
+    const resCode = res.status as Code;
+    return resCode;
+  },
+  async updateCar(param: CarParams):Promise<GarageApi> {
+    const url = `${BASE_URL}garage/${param.id}`;
+    const res = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(param),
+    });
+    const data = await res.json();
+    const resCode = res.status as Code;
+    if (resCode !== 200) return { status: resCode };
+    const car: CarParams = { id: data.id, name: data.name, color: data.color };
+    console.log({ status: resCode, garageCar: car });
+    return { status: resCode, garageCar: car };
+  },
+  async startEngineCar(id: number, status: CarStatus):Promise<RaceApi> {
+    const url = `${BASE_URL}engine?id=${id}&status=${status}`;
+    const res = await fetch(url, {
+      method: 'PATCH',
+    });
+    const resCode = res.status as Code;
+    if (resCode !== 200) return { status: resCode };
+    const data = await res.json();
+    return {
+      status: resCode,
+      engineCar: {
+        velocity: data.velocity,
+        distance: data.distance,
+      },
+    };
+  },
+  driveCar: async function driveCar(id: number, status = 'drive'):Promise<DriveApi> {
+    const url = `${BASE_URL}engine?id=${id}&status=${status}`;
+    const res = await fetch(url, {
+      method: 'PATCH',
+    });
+    const resCode = res.status as Code;
+    if (resCode !== 200) return { status: resCode };
+    const data = await res.json();
+    return { status: resCode, success: data.success };
+  },
+  async getWinners(optional?: Options):Promise<WinnerParams[]> {
+    let url = `${BASE_URL}winners`;
+    if (optional) {
+      url += '?';
+      Object.entries(optional).forEach((key, value) => { url += `&${key}=${value}`; });
+    }
+    const res = await fetch(url, {
+      method: 'GET',
+    });
+    const data = await res.json();
+    const winners: WinnerParams[] = [];
+    for (let i = 0; i < data.length; i += 1) {
+      winners.push({ id: data[i].id, wins: data[i].wins, time: data[i].time });
+    }
+    console.log(winners);
+    return winners;
+  },
+  getWinner: async function getWinner(id: number):Promise<WinnerApi> {
+    const url = `${BASE_URL}winners/${id}`;
+    const res = await fetch(url);
+    const resCode = res.status as Code;
+    if (resCode !== 200) return { status: resCode };
+    const data = await res.json();
+    return { status: resCode, winnerCar: { id: data.id, wins: data.wins, time: data.time } };
+  },
+  async createWinner(param: WinnerParams):Promise<WinnerApi> {
+    const url = `${BASE_URL}winners`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(param),
+    });
+    const resCode = res.status as Code;
+    if (resCode !== 200) return { status: resCode };
+    const data = await res.json();
+    return { status: resCode, winnerCar: { id: data.id, wins: data.wins, time: data.time } };
+  },
+  async deleteWinner(id: number):Promise<Code> {
+    const url = `${BASE_URL}winners/${id}`;
+    const res = await fetch(url, {
+      method: 'DELETE',
+    });
+    const resCode = res.status as Code;
+    return resCode;
+  },
+  async updateWinner(param: WinnerParams):Promise<WinnerApi> {
+    const url = `${BASE_URL}winners/${param.id}`;
+    const res = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        wins: param.wins,
+        time: param.time,
+      }),
+    });
+    const resCode = res.status as Code;
+    if (resCode !== 200) return { status: resCode };
+    const data = await res.json();
+    return { status: resCode, winnerCar: { id: data.id, wins: data.wins, time: data.time } };
+  },
+};
 
-//  getWinners({_sort: 'id'});
+export default API;
 
-async function getWinner(id: number) {
-  const url = `${BASE_URL}winners/${id}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  console.log(data.id, data.wins, data.time);
-}
-
-//  getWinner(1);
-
-async function createWinner(param: winnerParams) {
-  const url = `${BASE_URL}winners`;
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(param),
-  });
-  const data = await res.json();
-  console.log(data.id, data.wins, data.time);
-}
-
-createWinner({ id: 10, wins: 2, time: 10 });
-
-async function deleteWinner(id: number) {
-  const url = `${BASE_URL}winners/${id}`;
-  const res = await fetch(url, {
-    method: "DELETE",
-  });
-  const data = await res.json();
-  console.log(data.id, data.name, data.color);
-}
-
-//  deleteWinner(10);
-
-async function updateWinner(id: number, param: winnerParams) {
-  const url = `${BASE_URL}winners/${id}`;
-  const res = await fetch(url, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      wins: param.wins,
-      time: param.time,
-    }),
-  });
-  const data = await res.json();
-  console.log(data.id, data.wins, data.time);
-}
-
-//  updateWinner(10, { time: 100, wins: 7 });
+// API.getCar(4)
+//  API.createCar({ name: "volvo", color: "#444444" });
+// API.deleteCar(8);
+// API.updateCar( {id: 8, name: 'oka', color: '#000000' });
+//  API.startEngineCar(1, 'started');
+// API.driveCar(1);
+// API.getWinners({_sort: 'id'});
+//  API.getWinner(1);
+// API.createWinner({ id: 10, wins: 2, time: 10 });
+//  API.deleteWinner(10);
+// API.updateWinner( {id: 1, time: 99, wins: 7 });
