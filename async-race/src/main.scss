@@ -1,3 +1,4 @@
-h1 {
-    color: red;
-}
+@import "app/view/base/base";
+@import "app/view/garage/garage";
+@import "app/view/base/header";
+@import "app/view/base/footer";

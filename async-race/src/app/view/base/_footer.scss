@@ -1,0 +1,25 @@
+.footer {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 18px;
+    color: $color6;
+}
+
+.gh-link {
+    display: block;
+    background-image: url('/src/assets/gh-logo.png');
+    width: 35px;
+    height: 35px;
+    background-size: contain;
+}
+
+.rs-link {
+    display: block;
+    background-image: url('/src/assets/rs-logo.jpg');
+    width: 70px;
+    height: 35px;
+    background-size: cover;
+    border-radius: 2px;
+}

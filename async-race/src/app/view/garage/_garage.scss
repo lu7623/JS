@@ -1,0 +1,52 @@
+.car-img {
+    filter: drop-shadow(5px 5px 10px #000);
+    width: 15rem;
+}
+
+.car {
+    border-bottom: 3px dotted black;
+    margin: 10px;
+}
+
+.flag {
+    background-image: url(/src/assets/flag.png);
+    width: 12rem;
+    height: 7rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 50px;
+    filter: drop-shadow(2px 3px 5px #000);
+}
+
+.car-trace {
+    display: flex;
+justify-content: space-between;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    width: 350px;
+    margin: 10px 0;
+    justify-content: space-between;
+}
+
+.create,
+.upgrade {
+    width: 90px;
+    margin-bottom: 7px;
+}
+
+input[type="text"] {
+    height: 20px;
+}
+
+.car-container {
+    margin: 10px 0;
+}
+
+.car-name {
+    margin-left: 10px;
+    color: $color5;
+    font-size: 1.8rem;
+}

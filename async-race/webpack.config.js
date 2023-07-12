@@ -11,12 +11,12 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: '[name].bundle.js',
-        assetModuleFilename: path.join('images', '[name].[contenthash][ext]'),
+       
     },
     module: {
         rules: [
             {
-                test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+                test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
                 type: 'asset/resource',
             },
             {
@@ -29,17 +29,11 @@ module.exports = {
                               ],
             },
             {
-                        test: /\.(png|jpg|jpeg|gif)$/i,
+                        test: /\.(png|jpg|jpeg|gif|svg)$/i,
                         type: 'asset/resource',
             },
             { test: /\.ts$/i, use: 'ts-loader' },
-                     {
-                      test: /\.svg$/,
-                        type: 'asset/resource',
-                        generator: {
-                          filename: path.join('icons', '[name].[contenthash][ext]'),
-                      },
-                      },
+                     
         ],
     },
     plugins: [

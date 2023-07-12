@@ -1,0 +1,68 @@
+%font-add {
+    font-family: 'Ultra', serif;
+    font-weight: 200;
+}
+
+%font-prim {
+font-family: 'Yeseva One', cursive;
+}
+
+$color1: #8E3200;
+$color2: #C38154;
+$color3: #F9E0BB;
+$color4: #884A39;
+$color5: #6f5643;
+$color6: #431E15;
+
+
+
+h2, h3 {
+    color: $color6;
+}
+
+h2 {
+    font-size: 3rem;
+    margin: 15px 0 0;
+}
+
+h3 {
+    font-size: 2rem;
+    margin: 10px;
+}
+
+body {
+    background-image: url(/src/assets/vintage-textured-paper-background-vector.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    @extend %font-prim;
+    margin: auto 30px;
+}
+
+main {
+    min-height: calc(100vh - 110px);
+}
+
+html {
+    font-size: 10px;
+    box-sizing: border-box;
+}
+
+
+button {
+    @extend %font-prim;
+    background-color: $color3;
+    border-radius: 3px;
+    box-shadow: 5px 2px 2px rgb(106, 84, 56);
+    border: none;
+    font-size: 1.8rem;
+    color: $color2;
+    line-height: 2rem;
+}
+
+.nav-btn {
+    background-color: $color3;
+    color: $color4;
+    font-size: 2.3rem;
+    line-height: 3rem;
+    margin-right: 10px;
+}
