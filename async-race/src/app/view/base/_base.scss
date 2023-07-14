@@ -43,7 +43,7 @@ main {
 }
 
 html {
-    font-size: 10px;
+    font-size: 8px;
     box-sizing: border-box;
 }
 
@@ -57,11 +57,13 @@ button {
     font-size: 1.8rem;
     color: $color2;
     line-height: 2rem;
+    margin-left: 5px;
+    margin-bottom: 6px;
 }
 
 .nav-btn {
-    background-color: $color3;
-    color: $color4;
+    background-color: $color4;
+    color: $color3;
     font-size: 2.3rem;
     line-height: 3rem;
     margin-right: 10px;

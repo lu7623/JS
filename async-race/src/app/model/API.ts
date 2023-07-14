@@ -2,7 +2,7 @@ const BASE_URL = 'http://127.0.0.1:3000/';
 
 type CarStatus = 'started' | 'stopped' | 'drive';
 
-type CarParams = {
+export type CarParams = {
   id?: number;
   name: string;
   color: string;
@@ -47,7 +47,7 @@ interface WinnerApi {
   winnerCar?: WinnerParams
 }
 
-const API = {
+export const API = {
   async getAllCars():Promise<CarParams[]> {
     const url = `${BASE_URL}garage`;
     const res = await fetch(url);

@@ -1,7 +1,10 @@
 .car-img {
     filter: drop-shadow(5px 5px 10px #000);
     width: 15rem;
+    fill: #000;
 }
+
+
 
 .car {
     border-bottom: 3px dotted black;
@@ -49,4 +52,20 @@ input[type="text"] {
     margin-left: 10px;
     color: $color5;
     font-size: 1.8rem;
+}
+
+.prev,
+.next {
+    background-color: $color4;
+    color: $color3;
+    font-size: 2.3rem;
+    line-height: 3rem;
+    margin-right: 10px;
+    margin: 10px;
+}
+
+.btn-panel {
+    width: 230px;
+    display: flex;
+    justify-content: space-between;
 }

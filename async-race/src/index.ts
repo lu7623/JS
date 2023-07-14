@@ -1,2 +1,4 @@
-import './main.scss';
+import { generateApp } from "./app/view/view";
+import "./main.scss";
 
+ generateApp();

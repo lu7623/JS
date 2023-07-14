@@ -16,7 +16,10 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
+                test: /\.html$/,  use: 'html-loader'
+                  },
+            {
+                test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
                 type: 'asset/resource',
             },
             {
@@ -29,12 +32,15 @@ module.exports = {
                               ],
             },
             {
-                        test: /\.(png|jpg|jpeg|gif|svg)$/i,
+                        test: /\.(png|jpg|jpeg|gif)$/i,
                         type: 'asset/resource',
             },
             { test: /\.ts$/i, use: 'ts-loader' },
-                     
+            { test: /.svg$/, loader: 'svg-inline-loader' }    
         ],
+    },
+    resolve: {
+        extensions: ['.ts', '.js']
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -49,7 +55,7 @@ module.exports = {
              }),
     ],
     devServer: {
-        watchFiles: path.join(__dirname, 'src'),
+        watchFiles: path.join(__dirname, 'async-race/src'),
          port: 9000,
       },
 }
