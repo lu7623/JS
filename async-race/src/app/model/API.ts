@@ -201,8 +201,6 @@ export const API = {
   },
 };
 
-export default API;
-
 // API.getCar(4)
 //  API.createCar({ name: "volvo", color: "#444444" });
 // API.deleteCar(8);
