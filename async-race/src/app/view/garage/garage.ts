@@ -1,6 +1,7 @@
 import { ElementCreator } from '../../utils/createElem';
 import { API, CarParams } from '../../model/API';
 import generateCars from '../../controller/generateCars';
+import createNewCar from '../../controller/createNewCar';
 
 const panel = new ElementCreator({
   tag: 'section',
@@ -12,16 +13,19 @@ const panel = new ElementCreator({
       children: [
         new ElementCreator({
           tag: 'input',
-          attribute: { name: 'type', value: 'text' },
+            attribute: { name: 'type', value: 'text' },
+            className: ['createName'],
         }),
         new ElementCreator({
           tag: 'input',
-          attribute: { name: 'type', value: 'color' },
+            attribute: { name: 'type', value: 'color' },
+            className: ['createColor'],
         }),
         new ElementCreator({
           tag: 'button',
           className: ['create'],
-          textContent: 'Create',
+            textContent: 'Create',
+            callback: () => createNewCar()
         }),
         new ElementCreator({
           tag: 'input',
