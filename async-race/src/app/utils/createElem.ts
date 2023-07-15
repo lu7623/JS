@@ -2,9 +2,10 @@ export type ElementParams = {
   tag: string;
   className?: string[];
   textContent?: string;
-  callback?: () => void;
+  callback?: (e:Event) => void;
   children?: ElementCreator[];
   attribute?: { name: string; value: string };
+  id?: string;
 };
 
 export class ElementCreator {
@@ -19,6 +20,7 @@ export class ElementCreator {
     if (params.className) this.setCssClasses(params?.className);
     if (params.textContent) this.setTextContent(params.textContent);
     if (params.callback) this.setCallback(params.callback);
+    if (params.id) this.setId(params.id);
     if (params.attribute) this.setAttribute(params.attribute);
     if (params.children) {
       params.children.forEach((child) => {
@@ -40,13 +42,17 @@ export class ElementCreator {
     this.element.textContent = text;
   }
 
+  setId(id:string) {
+    this.element.id = id;
+  }
+
   setAttribute(atr: { name: string; value: string }) {
     this.element.setAttribute(atr.name, atr.value);
   }
 
-  setCallback(callback: () => void) {
+  setCallback(callback:(e:Event) => void) {
     if (typeof callback === 'function') {
-      this.element.addEventListener('click', () => callback());
+      this.element.addEventListener('click', (e) => callback(e));
     }
   }
 
