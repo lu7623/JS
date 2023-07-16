@@ -5,6 +5,8 @@ import createNewCar from '../../controller/createNewCar';
 import setCarColor from '../../utils/setCarColor';
 import removeGarageCar from '../../controller/removeGarageCar';
 import selectGarageCar from '../../controller/upgradeGarageCar';
+import { currentGarage } from '../../model/state';
+import { onNext, onPrev } from '../../controller/pagination';
 
 const panel = new ElementCreator({
   tag: 'section',
@@ -89,11 +91,13 @@ const garage = new ElementCreator({
       tag: 'button',
       className: ['prev'],
       textContent: 'Prev',
+      callback: () => onPrev(),
     }),
     new ElementCreator({
       tag: 'button',
       className: ['next'],
       textContent: 'Next',
+      callback: () => onNext(),
     }),
   ],
 });
@@ -152,10 +156,22 @@ export function viewGarageCar(param: CarParams) {
   if (carImg && param.id) carImg.innerHTML = setCarColor(param.id, param.color);
 }
 
-export default async function garageView() {
-  document
-    .querySelector('.main')
-    ?.append(panel.getElement(), garage.getElement());
-  const currentGarage = await API.getAllCars();
-  currentGarage.forEach((car) => viewGarageCar(car));
+export async function paginationView() {
+  currentGarage.cars = await API.getAllCars();
+  currentGarage.carsCount = currentGarage.cars.length;
+  currentGarage.maxPage = Math.ceil(currentGarage.carsCount / 7);
+  console.log(currentGarage);
+  const pageNum = document.querySelector('.page-number');
+  if (pageNum instanceof HTMLElement) pageNum.textContent = `${currentGarage.page + 1}`;
+  document.querySelector('.garage-container')?.replaceChildren();
+  for (let i = currentGarage.page * 7; i < currentGarage.page * 7 + 7; i += 1) {
+    if (currentGarage.cars[i]) viewGarageCar(currentGarage.cars[i]);
+  }
 }
+
+export async function garageView() {
+    document
+      .querySelector('.main')
+      ?.append(panel.getElement(), garage.getElement());
+    paginationView();
+  }
