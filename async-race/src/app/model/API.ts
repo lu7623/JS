@@ -8,6 +8,11 @@ export type CarParams = {
   color: string;
 };
 
+type GarageOptions = {
+  _page?: number;
+  _limit?: number;
+};
+
 type Options = {
   _page?: number;
   _limit?: number;
@@ -48,11 +53,15 @@ interface WinnerApi {
 }
 
 export const API = {
-  async getAllCars():Promise<CarParams[]> {
-    const url = `${BASE_URL}garage`;
+  async getAllCars(optional?: GarageOptions):Promise<CarParams[]> {
+    let url = `${BASE_URL}garage`;
+    if (optional) {
+      url += `?_limit=${optional._limit}&_page=${optional._page}`;
+
+    }
     const res = await fetch(url);
     const data = await res.json();
-    console.log(res.headers);
+    console.log(url);
     const garage: CarParams[] = [];
     for (let i = 0; i < data.length; i += 1) {
       garage.push({ id: data[i].id, name: data[i].name, color: data[i].color });

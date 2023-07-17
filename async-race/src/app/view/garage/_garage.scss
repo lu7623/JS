@@ -13,11 +13,11 @@
 
 .flag {
     background-image: url(/src/assets/flag.png);
-    width: 12rem;
-    height: 7rem;
+    width: 10rem;
+    height: 6rem;
     background-size: contain;
     background-repeat: no-repeat;
-    margin-right: 50px;
+    margin-right: 80px;
     filter: drop-shadow(2px 3px 5px #000);
 }
 
@@ -68,4 +68,9 @@ input[type="text"] {
     width: 230px;
     display: flex;
     justify-content: space-between;
+}
+
+.animate {
+    translate: calc(100vw - 200px);
+    transition: all 5s cubic-bezier(0, 0, 1, 1);
 }

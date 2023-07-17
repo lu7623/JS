@@ -5,7 +5,6 @@ export default async function createNewCar() {
   const carName = document.querySelector('.createName');
   const carColor = document.querySelector('.createColor');
   if ((carName instanceof HTMLInputElement) && (carColor instanceof HTMLInputElement)) {
-    if (carName.value !== '') {
       const newCar: CarParams = {
         name: carName.value, color: carColor.value,
       };
@@ -13,6 +12,5 @@ export default async function createNewCar() {
       paginationView();
       carName.value = '';
       carColor.value = '#000000';
-    }
   }
 }

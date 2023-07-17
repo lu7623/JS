@@ -13,9 +13,9 @@ export default async function selectGarageCar(event: Event) {
         upgardeColor.value = upgradeCar.garageCar.color;
         const upgardeName = document.querySelector('.upgradeName') as HTMLInputElement;
         upgardeName.value = upgradeCar.garageCar.name;
-        document
-          .querySelector('.upgrade')
-          ?.addEventListener('click', async () => {
+        const upgradeBtn = document.querySelector('.upgrade');
+        if (upgradeBtn instanceof HTMLButtonElement) upgradeBtn.disabled = false;
+          upgradeBtn?.addEventListener('click', async () => {
             if (upgradeCar.garageCar) {
               upgradeCar.garageCar.color = upgardeColor.value;
               upgradeCar.garageCar.name = upgardeName.value;
@@ -31,6 +31,7 @@ export default async function selectGarageCar(event: Event) {
               }
               upgardeColor.value = '#000000';
               upgardeName.value = '';
+              if (upgradeBtn instanceof HTMLButtonElement) upgradeBtn.disabled = true;
             }
           });
       }

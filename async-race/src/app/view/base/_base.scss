@@ -61,6 +61,18 @@ button {
     margin-bottom: 6px;
 }
 
+
+
+button:hover {
+    cursor: pointer;
+    background-color: $color1;
+}
+
+button:disabled {
+    background-color: $color3;
+    cursor: auto;
+}
+
 .nav-btn {
     background-color: $color4;
     color: $color3;
