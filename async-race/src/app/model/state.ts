@@ -14,10 +14,7 @@ export const currentGarage:Garage = {
 
 type Race = {
     carsCount: number,
-    results?: {
-        id: number,
-        time: number
-    }[]
+    results?: (number[] | undefined)[]
 }
 
 export const currentRace: Race = {

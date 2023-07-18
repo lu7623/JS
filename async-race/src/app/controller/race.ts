@@ -22,10 +22,10 @@ export async function animate(id?: number) {
             const drive = await API.driveCar(id, 'drive');
             if (drive.status === 500) {
                 animation.pause();
-               return 100000
+               return [id, 100000]
             }
           
-        } return time;
+        } return [id,time];
       }
      
     } 
@@ -34,9 +34,13 @@ export async function animate(id?: number) {
 
 export async function stopAnimate(id?: number) {
     if (id) {
-        const raceCar = document.querySelector(`.img${String(id)}`);
+        const raceCar = document.querySelector(`.img${id}`);
+        console.log(raceCar)
         if (raceCar instanceof HTMLElement) {
-            raceCar.getAnimations().forEach((animation) => animation.cancel());
+            raceCar.getAnimations().forEach((animation) => { console.log(animation);
+                animation.cancel()
+            });
+            console.log('anim cancel')
             disableButton(id, 'b', 'a')
         }
     }
@@ -50,13 +54,14 @@ export async function animateRace() {
         winners.push(animate(pageCars[i].id));
     }
     console.log(winners);
-   console.log(await Promise.all(winners))
+    console.log(await Promise.all(winners));
+    currentRace.results = await Promise.all(winners)
 }
 
 
 export async function stopAnimateRace() {
-    const pageCars = await API.getAllCars({ _page: currentGarage.page+1, _limit: 7 });
-    pageCars.forEach((car) => {
-        stopAnimate(car.id);
+    const pageCars = currentRace.results
+    if (pageCars) pageCars.forEach((car) => {
+      if (car)  stopAnimate(car[0]);
     }) 
 }
