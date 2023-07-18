@@ -20,7 +20,7 @@ type Options = {
   _order?: 'ASC' | 'DESC';
 };
 
-type WinnerParams = {
+export type WinnerParams = {
   id?: number;
   wins: number;
   time: number;

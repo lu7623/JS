@@ -4,4 +4,3 @@ import './main.scss';
 
 
 generateApp();
-
