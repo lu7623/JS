@@ -8,12 +8,8 @@ function disableButton(id: number, btn1:string, btn2: string) {
     if (btnB instanceof HTMLButtonElement) btnB.disabled = false;
 } 
 
-export async function animate(id?: number) {
-  if (id) {
-    const raceParam = (await API.startEngineCar(id, "started")).engineCar;
-    if (raceParam) {
-      const time = raceParam?.distance / raceParam?.velocity;
-      const raceCar = document.querySelector(`.img${String(id)}`);
+async function animateElem(id: number, time: number) {
+    const raceCar = document.querySelector(`.img${String(id)}`);
         if (raceCar instanceof HTMLElement) {
             disableButton(id, 'a', 'b');
             const move =  new KeyframeEffect(raceCar, [{ translate: "calc(100vw - 200px)" }], {duration: time, fill: 'forwards'});
@@ -22,10 +18,18 @@ export async function animate(id?: number) {
             const drive = await API.driveCar(id, 'drive');
             if (drive.status === 500) {
                 animation.pause();
-               return [id, 100000]
+               return 100000
             }
           
-        } return [id,time];
+        } return time;
+}
+
+export async function animate(id?: number) {
+  if (id) {
+    const raceParam = (await API.startEngineCar(id, "started")).engineCar;
+    if (raceParam) {
+      const time = raceParam?.distance / raceParam?.velocity;
+        animateElem(id, time);
       }
      
     } 
@@ -49,19 +53,38 @@ export async function stopAnimate(id?: number) {
 export async function animateRace() {
     const pageCars = await API.getAllCars({ _page: currentGarage.page + 1, _limit: 7 });
     currentRace.carsCount = pageCars.length;
-    const winners =[]
-    for (let i = 0; i < pageCars.length; i++) {
-        winners.push(animate(pageCars[i].id));
+    const participants = [];
+    for (let i = 0; i < pageCars.length; i++) { 
+        participants.push( API.startEngineCar(Number(pageCars[i].id), "started"))
     }
-    console.log(winners);
-    console.log(await Promise.all(winners));
-    currentRace.results = await Promise.all(winners)
+    const winners = [];
+    const res = await Promise.all(participants);
+    for (let i = 0; i < pageCars.length; i++) {
+        const raceParam = res[i].engineCar;
+        if (raceParam) {
+                 const time = raceParam?.distance / raceParam?.velocity;
+              winners.push([pageCars[i].id, time])
+             };
+    }
+    const times = []
+    for (let i = 0; i < pageCars.length; i++) {
+       times.push(animateElem(Number(winners[i][0]), Number(winners[i][1])))
+    }
+    const results = await Promise.all(times);
+    const minTime = Math.min(...results);
+    for (let i = 0; i < pageCars.length; i++) { 
+        if (results[i] === minTime) currentRace.winner = winners[i][0]
+            winners[i][1] = results[i];
+    
+    }
+    currentRace.results = winners;
+    if (currentRace.winner) alert(`Winner is ${(await API.getCar(currentRace.winner)).garageCar?.name}, time ${Math.round(minTime)}ms`)
 }
 
 
 export async function stopAnimateRace() {
     const pageCars = currentRace.results
     if (pageCars) pageCars.forEach((car) => {
-      if (car)  stopAnimate(car[0]);
+      if (car) stopAnimate(car[0]);
     }) 
 }
