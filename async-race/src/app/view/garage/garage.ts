@@ -7,8 +7,9 @@ import removeGarageCar from '../../controller/removeGarageCar';
 import selectGarageCar from '../../controller/upgradeGarageCar';
 import { currentGarage } from '../../model/state';
 import { onNext, onPrev } from '../../controller/pagination';
-import { animate, stopAnimate , animateRace, stopAnimateRace } from '../../controller/race';
-
+import {
+  animate, stopAnimate, animateRace, stopAnimateRace,
+} from '../../controller/race';
 
 const panel = new ElementCreator({
   tag: 'section',
@@ -37,7 +38,7 @@ const panel = new ElementCreator({
         new ElementCreator({
           tag: 'input',
           attribute: { name: 'type', value: 'text' },
-            className: ['upgradeName'],
+          className: ['upgradeName'],
         }),
         new ElementCreator({
           tag: 'input',
@@ -47,8 +48,8 @@ const panel = new ElementCreator({
         new ElementCreator({
           tag: 'button',
           className: ['upgrade'],
-            textContent: 'Upgrade',
-          attribute: {name: 'disabled', value: 'true'}
+          textContent: 'Upgrade',
+          attribute: { name: 'disabled', value: 'true' },
         }),
       ],
     }),
@@ -59,14 +60,14 @@ const panel = new ElementCreator({
         new ElementCreator({
           tag: 'button',
           className: ['race'],
-            textContent: 'Race',
-            callback: () => animateRace()
+          textContent: 'Race',
+          callback: () => animateRace(),
         }),
         new ElementCreator({
           tag: 'button',
           className: ['reset'],
-            textContent: 'Reset',
-            callback: () => stopAnimateRace()
+          textContent: 'Reset',
+          callback: () => stopAnimateRace(),
         }),
         new ElementCreator({
           tag: 'button',
@@ -83,9 +84,13 @@ const garage = new ElementCreator({
   tag: 'section',
   className: ['garage'],
   children: [
-    new ElementCreator({ tag: 'h2', textContent: 'Garage', children: [
+    new ElementCreator({
+      tag: 'h2',
+      textContent: 'Garage',
+      children: [
         new ElementCreator({ tag: 'span', className: ['all-cars'] }),
-      ], }),
+      ],
+    }),
     new ElementCreator({
       tag: 'h3',
       textContent: 'Page #',
@@ -134,15 +139,15 @@ export function viewGarageCar(param: CarParams) {
           new ElementCreator({
             tag: 'button',
             className: ['a'],
-              textContent: 'A',
-              callback: () => animate(param.id)
+            textContent: 'A',
+            callback: () => animate(param.id),
           }),
           new ElementCreator({
             tag: 'button',
             className: ['b'],
-              textContent: 'B',
-              attribute: { name: 'disabled', value: '' },
-              callback: () => stopAnimate(param.id)
+            textContent: 'B',
+            attribute: { name: 'disabled', value: '' },
+            callback: () => stopAnimate(param.id),
           }),
           new ElementCreator({
             tag: 'span',
@@ -153,7 +158,7 @@ export function viewGarageCar(param: CarParams) {
             tag: 'div',
             className: ['car-trace'],
             children: [
-              new ElementCreator({ tag: 'div', className: ['car-image', `img${param.id}`]}),
+              new ElementCreator({ tag: 'div', className: ['car-image', `img${param.id}`] }),
               new ElementCreator({ tag: 'div', className: ['flag'] }),
             ],
           }),
@@ -172,9 +177,9 @@ export async function paginationView() {
   currentGarage.maxPage = Math.ceil(currentGarage.carsCount / 7);
   console.log(currentGarage);
   const pageNum = document.querySelector('.page-number');
-    if (pageNum instanceof HTMLElement) pageNum.textContent = `${currentGarage.page + 1}`;
-    const allCars = document.querySelector('.all-cars');
-    if (allCars instanceof HTMLElement) allCars.textContent = `(${ currentGarage.carsCount})`;
+  if (pageNum instanceof HTMLElement) pageNum.textContent = `${currentGarage.page + 1}`;
+  const allCars = document.querySelector('.all-cars');
+  if (allCars instanceof HTMLElement) allCars.textContent = `(${currentGarage.carsCount})`;
   document.querySelector('.garage-container')?.replaceChildren();
   for (let i = currentGarage.page * 7; i < currentGarage.page * 7 + 7; i += 1) {
     if (currentGarage.cars[i]) viewGarageCar(currentGarage.cars[i]);
@@ -182,8 +187,8 @@ export async function paginationView() {
 }
 
 export async function garageView() {
-    document
-      .querySelector('.main')
-      ?.append(panel.getElement(), garage.getElement());
-    paginationView();
-  }
+  document
+    .querySelector('.main')
+    ?.append(panel.getElement(), garage.getElement());
+  paginationView();
+}

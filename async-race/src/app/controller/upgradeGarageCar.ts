@@ -15,25 +15,25 @@ export default async function selectGarageCar(event: Event) {
         upgardeName.value = upgradeCar.garageCar.name;
         const upgradeBtn = document.querySelector('.upgrade');
         if (upgradeBtn instanceof HTMLButtonElement) upgradeBtn.disabled = false;
-          upgradeBtn?.addEventListener('click', async () => {
-            if (upgradeCar.garageCar) {
-              upgradeCar.garageCar.color = upgardeColor.value;
-              upgradeCar.garageCar.name = upgardeName.value;
-              await API.updateCar(upgradeCar.garageCar);
-              const name = document.querySelector(`.car${upgradeCar.garageCar.id} span`);
-              if (name) name.textContent = upgradeCar.garageCar.name;
-              const color = document.querySelector(`.car${upgradeCar.garageCar.id} .car-img`);
-              if (color) {
-                color.innerHTML = setCarColor(
-                  Number(upgradeCar.garageCar.id),
-                  upgradeCar.garageCar.color,
-                );
-              }
-              upgardeColor.value = '#000000';
-              upgardeName.value = '';
-              if (upgradeBtn instanceof HTMLButtonElement) upgradeBtn.disabled = true;
+        upgradeBtn?.addEventListener('click', async () => {
+          if (upgradeCar.garageCar) {
+            upgradeCar.garageCar.color = upgardeColor.value;
+            upgradeCar.garageCar.name = upgardeName.value;
+            await API.updateCar(upgradeCar.garageCar);
+            const name = document.querySelector(`.car${upgradeCar.garageCar.id} span`);
+            if (name) name.textContent = upgradeCar.garageCar.name;
+            const color = document.querySelector(`.car${upgradeCar.garageCar.id} .car-img`);
+            if (color) {
+              color.innerHTML = setCarColor(
+                Number(upgradeCar.garageCar.id),
+                upgradeCar.garageCar.color,
+              );
             }
-          });
+            upgardeColor.value = '#000000';
+            upgardeName.value = '';
+            if (upgradeBtn instanceof HTMLButtonElement) upgradeBtn.disabled = true;
+          }
+        });
       }
     }
   }

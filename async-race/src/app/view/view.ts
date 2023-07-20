@@ -4,6 +4,6 @@ import { winnersView } from './winners/winners';
 
 export default function generateApp() {
   basicView();
-    garageView();
+  garageView();
   //  winnersView();
 }
