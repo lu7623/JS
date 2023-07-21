@@ -1,5 +1,6 @@
 import { API } from '../model/API';
-import { currentGarage, currentRace } from '../model/state';
+import { currentGarage, currentRace, winnerList } from '../model/state';
+import { paginationView } from '../view/garage/garage';
 
 function disableButton(id: number, btn1:string, btn2: string) {
   const btnA = document.querySelector(`.car${id} .${btn1}`);
@@ -77,7 +78,7 @@ export async function animateRace() {
   }
   currentRace.results = winners;
 if (currentRace.winner && currentRace.winnerTime) saveWinner(currentRace.winner, currentRace.winnerTime)
-  if (currentRace.winner) alert(`Winner is ${(await API.getCar(currentRace.winner)).garageCar?.name}, time ${currentRace.winnerTime}s`);
+  if (currentRace.winner) alert(`Winner is ${(await API.getCar(currentRace.winner)).garageCar?.name}, time ${ currentRace.winnerTime}s`);
 }
 
 export async function stopAnimateRace() {
@@ -87,22 +88,32 @@ export async function stopAnimateRace() {
       const raceCar = document.querySelector(`.img${car[0]}`);
       console.log(raceCar);
       if (raceCar instanceof HTMLElement) {
-        raceCar.getAnimations().forEach((animation) => {
-          console.log(animation);
-          animation.cancel();
-        });
+        raceCar.remove;
       }
     });
+    paginationView();
   }
 }
 
 async function saveWinner(winner: number, winnerTime: number) {
   const prevWinner = (await API.getWinner(winner));
   if (prevWinner.status === 200) {
-    if (prevWinner.winnerCar?.time)
-       winnerTime < prevWinner.winnerCar?.time ? winnerTime : prevWinner.winnerCar?.time
-    if (prevWinner.winnerCar?.wins ) await API.updateWinner({ id: winner, wins: prevWinner.winnerCar.wins + 1, time: winnerTime })
+    if (prevWinner.winnerCar?.wins && prevWinner.winnerCar?.time) await API.updateWinner({ id: winner, wins: prevWinner.winnerCar?.wins + 1, time: Math.min( winnerTime, prevWinner.winnerCar.time) })
   } else {
     await API.createWinner({id: winner, wins: 1, time: winnerTime })
   }
+  const winnerName = (await API.getCar(winner)).garageCar;
+  if (winner in winnerList) {
+    winnerList[winner].wins += 1;
+    winnerList[winner].time = Math.min(winnerTime, winnerList[winner].time);
+  } else {
+    if (winnerName)
+    winnerList[winner] = {
+      carColor: winnerName.name,
+      carName: winnerName.name,
+      wins: 1,
+      time: winnerTime
+    }
+}
+console.log(winnerList)
 }

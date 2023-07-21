@@ -1,0 +1,48 @@
+.table-head {
+    background-color: $color6;
+    color: $color2;
+    font-size: 1.8rem;
+    border-left: 2px dotted $color2;
+    height: 2.5rem;
+    padding-left: 5px;
+}
+
+.table-head:first-child {
+    border: none;
+}
+
+.winner-number {
+ width: 3rem;
+
+}
+
+.winners-table {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80rem;
+    font-size: 1.8rem;
+}
+
+.table-line {
+    padding: 5px;
+}
+
+.winner-car {
+    width: 20rem;
+}
+
+.winner-name {
+    width: 20rem;
+}
+
+.winner-wins {
+    width: 10rem;
+}
+
+.winner-time {
+    width: 15rem;
+}
+
+.winner-car .car-img {
+    width: 12rem;
+}

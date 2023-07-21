@@ -22,3 +22,24 @@ type Race = {
 export const currentRace: Race = {
   carsCount: 0,
 };
+
+
+type Winner = {
+  carName: string,
+  carColor: string, 
+  wins: number,
+  time: number
+}
+
+export interface Winners {
+  [id: number]: Winner
+}
+
+export const winnerList: Winners = {
+  1: {
+    carName: "Tesla",
+    carColor: "#e6e6fa",
+    wins: 1,
+    time: 10
+  }
+}

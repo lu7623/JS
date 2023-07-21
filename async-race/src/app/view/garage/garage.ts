@@ -187,8 +187,9 @@ export async function paginationView() {
 }
 
 export async function garageView() {
-  document
-    .querySelector('.main')
-    ?.append(panel.getElement(), garage.getElement());
+  const main = document
+    .querySelector('.main-container');
+  main?.replaceChildren();
+main?.append(panel.getElement(), garage.getElement());
   paginationView();
 }

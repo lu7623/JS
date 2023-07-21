@@ -1,5 +1,6 @@
 import { API } from '../model/API';
 import setCarColor from '../utils/setCarColor';
+import { updateWinnersList } from './winnersList';
 
 export default async function selectGarageCar(event: Event) {
   const tar = event.target;
@@ -20,6 +21,7 @@ export default async function selectGarageCar(event: Event) {
             upgradeCar.garageCar.color = upgardeColor.value;
             upgradeCar.garageCar.name = upgardeName.value;
             await API.updateCar(upgradeCar.garageCar);
+            await updateWinnersList();
             const name = document.querySelector(`.car${upgradeCar.garageCar.id} span`);
             if (name) name.textContent = upgradeCar.garageCar.name;
             const color = document.querySelector(`.car${upgradeCar.garageCar.id} .car-img`);
