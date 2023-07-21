@@ -24,7 +24,7 @@ export const currentRace: Race = {
 };
 
 
-type Winner = {
+export type Winner = {
   carName: string,
   carColor: string, 
   wins: number,

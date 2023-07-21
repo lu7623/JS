@@ -70,3 +70,23 @@ input[type="text"] {
     justify-content: space-between;
 }
 
+.winner-window {
+    position: fixed;
+    left: calc(50vw - 300px);
+    top: calc(50vh - 200px);
+    width: 600px;
+    height: 400px;
+    background-image: url(/src/assets/win.jpg);
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.winner-text {
+    background-color: $color2;
+    font-size: 3rem;
+    padding: 30px 10px;
+    width: 40rem;
+    text-align: center;
+}

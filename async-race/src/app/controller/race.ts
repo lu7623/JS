@@ -1,6 +1,6 @@
 import { API } from '../model/API';
 import { currentGarage, currentRace, winnerList } from '../model/state';
-import { paginationView } from '../view/garage/garage';
+import { paginationView, viewWinnerWindow } from '../view/garage/garage';
 
 function disableButton(id: number, btn1:string, btn2: string) {
   const btnA = document.querySelector(`.car${id} .${btn1}`);
@@ -77,8 +77,10 @@ export async function animateRace() {
     winners[i][1] = results[i];
   }
   currentRace.results = winners;
-if (currentRace.winner && currentRace.winnerTime) saveWinner(currentRace.winner, currentRace.winnerTime)
-  if (currentRace.winner) alert(`Winner is ${(await API.getCar(currentRace.winner)).garageCar?.name}, time ${ currentRace.winnerTime}s`);
+  if (currentRace.winner && currentRace.winnerTime) {
+    await saveWinner(currentRace.winner, currentRace.winnerTime)
+    viewWinnerWindow(winnerList[currentRace.winner]);
+  }
 }
 
 export async function stopAnimateRace() {
@@ -86,7 +88,6 @@ export async function stopAnimateRace() {
   if (pageCars) {
     pageCars.forEach((car) => {
       const raceCar = document.querySelector(`.img${car[0]}`);
-      console.log(raceCar);
       if (raceCar instanceof HTMLElement) {
         raceCar.remove;
       }
@@ -95,7 +96,7 @@ export async function stopAnimateRace() {
   }
 }
 
-async function saveWinner(winner: number, winnerTime: number) {
+export async function saveWinner(winner: number, winnerTime: number) {
   const prevWinner = (await API.getWinner(winner));
   if (prevWinner.status === 200) {
     if (prevWinner.winnerCar?.wins && prevWinner.winnerCar?.time) await API.updateWinner({ id: winner, wins: prevWinner.winnerCar?.wins + 1, time: Math.min( winnerTime, prevWinner.winnerCar.time) })
@@ -115,5 +116,5 @@ async function saveWinner(winner: number, winnerTime: number) {
       time: winnerTime
     }
 }
-console.log(winnerList)
+
 }

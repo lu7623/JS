@@ -89,7 +89,6 @@ const carImg = document.querySelector( `.car-image${id}`);
 export async function winnersView() {
   const main = document.querySelector('.main-container');
   main?.replaceChildren();
-  
   main?.append(winners.getElement());
   const winTable = document.querySelector('.winners-list');
   winTable?.replaceChildren();

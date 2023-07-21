@@ -5,7 +5,7 @@ import createNewCar from '../../controller/createNewCar';
 import setCarColor from '../../utils/setCarColor';
 import removeGarageCar from '../../controller/removeGarageCar';
 import selectGarageCar from '../../controller/upgradeGarageCar';
-import { currentGarage } from '../../model/state';
+import { Winner, Winners, currentGarage } from '../../model/state';
 import { onNext, onPrev } from '../../controller/pagination';
 import {
   animate, stopAnimate, animateRace, stopAnimateRace,
@@ -191,4 +191,21 @@ export async function garageView() {
   main?.replaceChildren();
 main?.append(panel.getElement(), garage.getElement());
   paginationView();
+}
+
+
+export function viewWinnerWindow(winner: Winner) {
+  const winWindow = new ElementCreator({
+    tag: 'div', className: ['winner-window'], callback: () => closeWinnerWindow(), children: [
+      new ElementCreator({ tag: 'p', className: ['winner-text'], textContent: `Winner is ${winner.carName}, time ${winner.time}` })
+    ]
+  });
+  document.body.append(winWindow.getElement())
+}
+
+function closeWinnerWindow() {
+  const winWindow = document.querySelector('.winner-window');
+  document.body.addEventListener('click', () => {
+    winWindow?.remove();
+  })
 }
