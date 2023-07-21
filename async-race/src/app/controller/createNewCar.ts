@@ -1,6 +1,4 @@
 import { CarParams, API } from '../model/API';
-import { paginationView } from '../view/garage/garage';
-import { updateWinnersList } from './winnersList';
 
 export default async function createNewCar() {
   const carName = document.querySelector('.createName');
@@ -10,9 +8,7 @@ export default async function createNewCar() {
       name: carName.value, color: carColor.value,
     };
     await API.createCar(newCar);
-    paginationView();
     carName.value = '';
     carColor.value = '#000000';
-    updateWinnersList();
   }
 }

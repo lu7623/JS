@@ -1,5 +1,4 @@
 import { API } from '../model/API';
-import { paginationView } from '../view/garage/garage';
 import { deleteWinner } from './winnersList';
 
 export default async function removeGarageCar(event: Event) {
@@ -14,6 +13,4 @@ export default async function removeGarageCar(event: Event) {
       }
     }
   }
-  paginationView();
- 
 }

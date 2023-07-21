@@ -1,4 +1,4 @@
-import { CarParams, WinnerParams } from './API';
+import { CarParams } from './API';
 
 type Garage = {
   carsCount: number;
@@ -23,29 +23,28 @@ export const currentRace: Race = {
   carsCount: 0,
 };
 
-
 export type Winner = {
   carName: string,
-  carColor: string, 
+  carColor: string,
   wins: number,
   time: number
-}
+};
 
 export interface Winners {
   [id: number]: Winner
 }
 
 export const winnerList: Winners = {
-}
+};
 
 type WinnersView = {
   carsCount: number;
   page: number;
   maxPage?: number;
   cars?: Winners
-}
+};
 
-export const currentWinners = {
+export const currentWinners: WinnersView = {
   carsCount: 0,
-  page: 0
-}
+  page: 0,
+};

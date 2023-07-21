@@ -1,8 +1,6 @@
-import { isCallChain } from 'typescript';
 import { ElementCreator } from '../../utils/createElem';
 import { garageView } from '../garage/garage';
-import { winnersView } from '../winners/winners';
-
+import winnersView from '../winners/winners';
 
 const header = new ElementCreator({
   tag: 'header',
@@ -20,9 +18,13 @@ const main = new ElementCreator({
       tag: 'div',
       className: ['navigation'],
       children: [
-        new ElementCreator({ tag: 'button', className: ['toGarage', 'nav-btn'], textContent: 'Garage', callback: () => garageView() } ),
-        new ElementCreator({ tag: 'button', className: ['toWinners', 'nav-btn'], textContent: 'Winners', callback: () => winnersView() }),
-      new ElementCreator({tag: 'article', className: ['main-container']})],
+        new ElementCreator({
+          tag: 'button', className: ['toGarage', 'nav-btn'], textContent: 'Garage', callback: () => garageView(),
+        }),
+        new ElementCreator({
+          tag: 'button', className: ['toWinners', 'nav-btn'], textContent: 'Winners', callback: () => winnersView(),
+        }),
+        new ElementCreator({ tag: 'article', className: ['main-container'] })],
     }),
   ],
 });

@@ -60,12 +60,10 @@ export const API = {
     }
     const res = await fetch(url);
     const data = await res.json();
-    console.log(url);
     const garage: CarParams[] = [];
     for (let i = 0; i < data.length; i += 1) {
       garage.push({ id: data[i].id, name: data[i].name, color: data[i].color });
     }
-    console.log(garage);
     return garage;
   },
   async getCar(id: number): Promise<GarageApi> {
@@ -75,7 +73,6 @@ export const API = {
     const resCode = res.status as Code;
     if (resCode !== 200) return { status: resCode };
     const car: CarParams = { id: data.id, name: data.name, color: data.color };
-    console.log(car);
     return { status: resCode, garageCar: car };
   },
   async createCar(param: CarParams): Promise<GarageApi> {
@@ -90,7 +87,6 @@ export const API = {
     const data = await res.json();
     const resCode = res.status as Code;
     const car: CarParams = { id: data.id, name: data.name, color: data.color };
-    console.log(car);
     return { status: resCode, garageCar: car };
   },
   async deleteCar(id: number): Promise<Code> {
@@ -114,7 +110,6 @@ export const API = {
     const resCode = res.status as Code;
     if (resCode !== 200) return { status: resCode };
     const car: CarParams = { id: data.id, name: data.name, color: data.color };
-    console.log({ status: resCode, garageCar: car });
     return { status: resCode, garageCar: car };
   },
   async startEngineCar(id: number, status: CarStatus): Promise<RaceApi> {
@@ -162,7 +157,6 @@ export const API = {
     for (let i = 0; i < data.length; i += 1) {
       winners.push({ id: data[i].id, wins: data[i].wins, time: data[i].time });
     }
-    console.log(winners);
     return winners;
   },
   getWinner: async function getWinner(id: number): Promise<WinnerApi> {

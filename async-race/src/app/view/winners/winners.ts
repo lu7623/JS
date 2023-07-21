@@ -1,7 +1,5 @@
-
 import { updateWinnersList } from '../../controller/winnersList';
-import { API } from '../../model/API';
-import { Winners, currentGarage, winnerList } from '../../model/state';
+import { winnerList } from '../../model/state';
 import { ElementCreator } from '../../utils/createElem';
 import setCarColor from '../../utils/setCarColor';
 
@@ -24,26 +22,32 @@ const winners = new ElementCreator({
       ],
     }),
     new ElementCreator({
-      tag: 'div', className: ['winners-container'], children: [
+      tag: 'div',
+      className: ['winners-container'],
+      children: [
         new ElementCreator({
-          tag: 'div', className: ['winners-table'], children: [
+          tag: 'div',
+          className: ['winners-table'],
+          children: [
             new ElementCreator({
-              tag: 'div', className: ['table-head', 'winner-number']
+              tag: 'div', className: ['table-head', 'winner-number'],
             }),
             new ElementCreator({
-              tag: 'div', className: ['table-head','winner-car'], textContent: 'Car'
+              tag: 'div', className: ['table-head', 'winner-car'], textContent: 'Car',
             }),
             new ElementCreator({
-              tag: 'div', className: ['table-head','winner-name'], textContent: 'Name'
+              tag: 'div', className: ['table-head', 'winner-name'], textContent: 'Name',
             }),
             new ElementCreator({
-              tag: 'div', className: ['table-head','winner-wins'], textContent: 'Wins'
+              tag: 'div', className: ['table-head', 'winner-wins'], textContent: 'Wins',
             }),
             new ElementCreator({
-              tag: 'div', className: ['table-head','winner-time'], textContent: 'Best time'
-            })
-      ]}), new ElementCreator({tag: 'div', className: ['winners-list']})
-    ] }),
+              tag: 'div', className: ['table-head', 'winner-time'], textContent: 'Best time',
+            }),
+          ],
+        }), new ElementCreator({ tag: 'div', className: ['winners-list'] }),
+      ],
+    }),
     new ElementCreator({
       tag: 'button',
       className: ['prev'],
@@ -61,40 +65,40 @@ const winners = new ElementCreator({
 
 async function viewWinnerCar(id: number) {
   const winnerCar = new ElementCreator({
-    tag: 'div', className: ['winners-table'], children: [
+    tag: 'div',
+    className: ['winners-table'],
+    children: [
       new ElementCreator({
-        tag: 'div', className: ['table-line', 'winner-number']
+        tag: 'div', className: ['table-line', 'winner-number'],
       }),
       new ElementCreator({
-        tag: 'div', className: ['table-line', 'winner-car', `car-image${id}`]
+        tag: 'div', className: ['table-line', 'winner-car', `car-image${id}`],
       }),
       new ElementCreator({
-        tag: 'div', className: ['table-line', 'winner-name'], textContent: `${winnerList[id].carName}`
+        tag: 'div', className: ['table-line', 'winner-name'], textContent: `${winnerList[id].carName}`,
       }),
       new ElementCreator({
-        tag: 'div', className: ['table-line', 'winner-wins'], textContent: `${winnerList[id].wins}`
+        tag: 'div', className: ['table-line', 'winner-wins'], textContent: `${winnerList[id].wins}`,
       }),
       new ElementCreator({
-        tag: 'div', className: ['table-line', 'winner-time'], textContent: `${winnerList[id].time}`
-      })
-    ]
+        tag: 'div', className: ['table-line', 'winner-time'], textContent: `${winnerList[id].time}`,
+      }),
+    ],
   });
   const winTable = document.querySelector('.winners-list');
   winTable?.append(winnerCar.getElement());
-const carImg = document.querySelector( `.car-image${id}`);
+  const carImg = document.querySelector(`.car-image${id}`);
   if (carImg && id) carImg.innerHTML = setCarColor(id, winnerList[id].carColor);
 }
 
-
-export async function winnersView() {
+export default async function winnersView() {
   const main = document.querySelector('.main-container');
   main?.replaceChildren();
   main?.append(winners.getElement());
   const winTable = document.querySelector('.winners-list');
   winTable?.replaceChildren();
   await updateWinnersList();
-  for (let car in winnerList) {
-    viewWinnerCar(Number(car));
-  }
- 
+  const allWinners = document.querySelector('.all-winners') ;
+  if (allWinners) allWinners.textContent = ` (${Object.keys(winnerList).length})`;
+  Object.keys(winnerList).forEach((key) => viewWinnerCar(Number(key)));
 }

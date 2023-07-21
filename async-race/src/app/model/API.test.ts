@@ -44,32 +44,31 @@ it('update Car test', async () => {
     id: 10,
   }));
 
-  const car = (await API.updateCar({
+  await API.updateCar({
+    name: 'Volvo',
+    color: '#ffffff',
+    id: 10,
+  });
+
+  expect(fetchMock.mock.calls[0][1]?.method).toEqual('PUT');
+  expect(fetchMock.mock.calls[0][1]?.body).toEqual(JSON.stringify({
     name: 'Volvo',
     color: '#ffffff',
     id: 10,
   }));
-
-
-    expect(fetchMock.mock.calls[0][1]?.method).toEqual("PUT");
-    expect(fetchMock.mock.calls[0][1]?.body).toEqual(JSON.stringify({
-        name: 'Volvo',
-        color: '#ffffff',
-        id: 10,
-      }));
 });
 
-it("Returns status if wrong id", async () => {
-    fetchMock.mockResponse(JSON.stringify({
-        name: 'New Red Car',
-        color: '#ff0000',
-        id: 10,
-      }), {
-        status: 404,
-        statusText: "Car with such id was not found in the garage.",
-      });
-  
-    const carCode = (await API.deleteCar(9));
-  
-    expect(carCode).toEqual(404);
+it('Returns status if wrong id', async () => {
+  fetchMock.mockResponse(JSON.stringify({
+    name: 'New Red Car',
+    color: '#ff0000',
+    id: 10,
+  }), {
+    status: 404,
+    statusText: 'Car with such id was not found in the garage.',
   });
+
+  const carCode = (await API.deleteCar(9));
+
+  expect(carCode).toEqual(404);
+});
