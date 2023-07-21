@@ -10,7 +10,7 @@ export default async function removeGarageCar(event: Event) {
       if (parent) {
         const { id } = parent;
         await API.deleteCar(Number(id));
-        deleteWinner(Number(id));
+        await deleteWinner(Number(id));
       }
     }
   }

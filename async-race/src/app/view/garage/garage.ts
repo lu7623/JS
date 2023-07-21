@@ -175,7 +175,6 @@ export async function paginationView() {
   currentGarage.cars = await API.getAllCars();
   currentGarage.carsCount = currentGarage.cars.length;
   currentGarage.maxPage = Math.ceil(currentGarage.carsCount / 7);
-  console.log(currentGarage);
   const pageNum = document.querySelector('.page-number');
   if (pageNum instanceof HTMLElement) pageNum.textContent = `${currentGarage.page + 1}`;
   const allCars = document.querySelector('.all-cars');

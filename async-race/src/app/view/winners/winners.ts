@@ -42,7 +42,7 @@ const winners = new ElementCreator({
             new ElementCreator({
               tag: 'div', className: ['table-head','winner-time'], textContent: 'Best time'
             })
-      ]})
+      ]}), new ElementCreator({tag: 'div', className: ['winners-list']})
     ] }),
     new ElementCreator({
       tag: 'button',
@@ -79,7 +79,7 @@ async function viewWinnerCar(id: number) {
       })
     ]
   });
-  const winTable = document.querySelector('.winners-table');
+  const winTable = document.querySelector('.winners-list');
   winTable?.append(winnerCar.getElement());
 const carImg = document.querySelector( `.car-image${id}`);
   if (carImg && id) carImg.innerHTML = setCarColor(id, winnerList[id].carColor);
@@ -91,7 +91,7 @@ export async function winnersView() {
   main?.replaceChildren();
   
   main?.append(winners.getElement());
-  const winTable = document.querySelector('.winners-table');
+  const winTable = document.querySelector('.winners-list');
   winTable?.replaceChildren();
   await updateWinnersList();
   for (let car in winnerList) {

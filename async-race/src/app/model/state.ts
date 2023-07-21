@@ -36,10 +36,16 @@ export interface Winners {
 }
 
 export const winnerList: Winners = {
-  1: {
-    carName: "Tesla",
-    carColor: "#e6e6fa",
-    wins: 1,
-    time: 10
-  }
+}
+
+type WinnersView = {
+  carsCount: number;
+  page: number;
+  maxPage?: number;
+  cars?: Winners
+}
+
+export const currentWinners = {
+  carsCount: 0,
+  page: 0
 }

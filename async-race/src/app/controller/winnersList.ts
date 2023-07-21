@@ -20,6 +20,7 @@ export async function updateWinnersList() {
 
 
 export async function deleteWinner(id: number) {
+  delete winnerList[id];
     await API.deleteWinner(id);
   updateWinnersList();
 }
