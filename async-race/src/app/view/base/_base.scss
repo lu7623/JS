@@ -80,3 +80,7 @@ button:disabled {
     line-height: 3rem;
     margin-right: 10px;
 }
+
+.nav-btn:disabled {
+    background-color: $color4;
+}

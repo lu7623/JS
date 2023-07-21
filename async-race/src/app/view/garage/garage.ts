@@ -101,13 +101,13 @@ const garage = new ElementCreator({
     new ElementCreator({ tag: 'div', className: ['garage-container'] }),
     new ElementCreator({
       tag: 'button',
-      className: ['prev'],
+      className: ['pagination'],
       textContent: 'Prev',
       callback: () => onPrev(),
     }),
     new ElementCreator({
       tag: 'button',
-      className: ['next'],
+      className: ['pagination'],
       textContent: 'Next',
       callback: () => onNext(),
     }),

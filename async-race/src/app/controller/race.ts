@@ -50,6 +50,8 @@ export async function stopAnimate(id?: number) {
 }
 
 export async function animateRace() {
+  const buttons = document.querySelectorAll('button');
+  buttons.forEach((btn) => btn.disabled = true);
   const pageCars = await API.getAllCars({ _page: currentGarage.page + 1, _limit: 7 });
   currentRace.carsCount = pageCars.length;
   const participants = [];
@@ -74,9 +76,9 @@ export async function animateRace() {
   currentRace.winnerTime = Number((minTime/1000).toFixed(3));
   for (let i = 0; i < pageCars.length; i++) {
     if (results[i] === minTime) currentRace.winner = winners[i][0];
-    winners[i][1] = results[i];
   }
   currentRace.results = winners;
+  buttons.forEach((btn) => btn.disabled = false);
   if (currentRace.winner && currentRace.winnerTime) {
     await saveWinner(currentRace.winner, currentRace.winnerTime)
     viewWinnerWindow(winnerList[currentRace.winner]);
