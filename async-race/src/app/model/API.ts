@@ -9,15 +9,15 @@ export type CarParams = {
 };
 
 type GarageOptions = {
-  _page?: number;
-  _limit?: number;
+  page?: number;
+  limit?: number;
 };
 
 type Options = {
-  _page?: number;
-  _limit?: number;
-  _sort?: 'id' | 'wins' | 'time';
-  _order?: 'ASC' | 'DESC';
+  page?: number;
+  limit?: number;
+  sort?: 'id' | 'wins' | 'time';
+  order?: 'ASC' | 'DESC';
 };
 
 export type WinnerParams = {
@@ -56,7 +56,7 @@ export const API = {
   async getAllCars(optional?: GarageOptions): Promise<CarParams[]> {
     let url = `${BASE_URL}garage`;
     if (optional) {
-      url += `?_limit=${optional._limit}&_page=${optional._page}`;
+      url += `?_limit=${optional.limit}&_page=${optional.page}`;
     }
     const res = await fetch(url);
     const data = await res.json();
@@ -145,8 +145,8 @@ export const API = {
     let url = `${BASE_URL}winners`;
     if (optional) {
       url += '?';
-      Object.entries(optional).forEach((key, value) => {
-        url += `&${key}=${value}`;
+      Object.keys(optional).forEach((key) => {
+        url += `&_${key}=${optional[key as keyof typeof optional]}`;
       });
     }
     const res = await fetch(url, {

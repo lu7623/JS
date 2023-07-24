@@ -9,7 +9,8 @@ import {
   Winner, currentGarage, currentRace, winnerList,
 } from '../../model/state';
 import saveWinner from '../../controller/race';
-import { updateWinnersList } from '../../controller/winnersList';
+import updateWinnersList from '../../controller/winnersList';
+import disablePrevNext from '../../utils/disablePrevNext';
 
 function disableButton(id: number, btn1:string, btn2: string) {
   const btnA = document.querySelector(`.car${id} .${btn1}`);
@@ -54,6 +55,11 @@ export async function paginationView() {
   for (let i = currentGarage.page * 7; i < currentGarage.page * 7 + 7; i += 1) {
     if (currentGarage.cars[i]) viewGarageCar(currentGarage.cars[i]);
   }
+  if (currentGarage.page === 0) {
+    disablePrevNext({ prev: true, next: false });
+  } else if (currentGarage.page < currentGarage.maxPage - 1) {
+    disablePrevNext({ prev: false, next: false });
+  } else disablePrevNext({ prev: false, next: true });
 }
 
 export async function stopAnimate(id?: number) {
@@ -63,13 +69,13 @@ export async function stopAnimate(id?: number) {
       raceCar.remove();
       disableButton(id, 'b', 'a');
     }
-    paginationView();
+    await paginationView();
   }
 }
 
 async function deleteCar(event: Event) {
   await removeGarageCar(event);
-  paginationView();
+  await paginationView();
 }
 
 export function viewGarageCar(param: CarParams) {
@@ -148,17 +154,21 @@ export function viewWinnerWindow(winner: Winner) {
   document.body.append(winWindow.getElement());
 }
 
+function resetDisable() {
+  const reset = document.querySelector('button.reset') as HTMLButtonElement;
+  reset.disabled = false;
+  reset.style.backgroundColor = '#884A39';
+  reset.addEventListener('click', () => { reset.style.backgroundColor = '#F9E0BB'; });
+}
+
 export async function animateRace() {
   const buttons = document.querySelectorAll('button');
   for (let i = 0; i < buttons.length; i += 1) {
     buttons[i].disabled = true;
   }
-  const pageCars = await API.getAllCars({ _page: currentGarage.page + 1, _limit: 7 });
+  const pageCars = await API.getAllCars({ page: currentGarage.page + 1, limit: 7 });
   currentRace.carsCount = pageCars.length;
-  const participants = [];
-  for (let i = 0; i < pageCars.length; i += 1) {
-    participants.push(API.startEngineCar(Number(pageCars[i].id), 'started'));
-  }
+  const participants = pageCars.map((car) => API.startEngineCar(Number(car.id), 'started'));
   const winners = [];
   const res = await Promise.all(participants);
   for (let i = 0; i < pageCars.length; i += 1) {
@@ -168,19 +178,18 @@ export async function animateRace() {
       winners.push([pageCars[i].id, time]);
     }
   }
-  const times = [];
-  for (let i = 0; i < pageCars.length; i += 1) {
-    times.push(animateElem(Number(winners[i][0]), Number(winners[i][1])));
-  }
+  const times = winners.map((winner) => animateElem(Number(winner[0]), Number(winner[1])));
   const results = await Promise.all(times);
   const minTime = Math.min(...results);
-  currentRace.winnerTime = Number((minTime / 1000).toFixed(3));
   for (let i = 0; i < pageCars.length; i += 1) {
-    if (results[i] === minTime) currentRace.winner = winners[i][0];
+    if (winners[i][1] === minTime) {
+      const [id, time] = winners[i];
+      currentRace.winner = id;
+      if (time) currentRace.winnerTime = Number((time / 1000).toFixed(3));
+    }
   }
   currentRace.results = winners;
-  const reset = document.querySelector('button.reset') as HTMLButtonElement;
-  reset.disabled = false;
+  resetDisable();
   if (currentRace.winner && currentRace.winnerTime) {
     await saveWinner(currentRace.winner, currentRace.winnerTime);
     viewWinnerWindow(winnerList[currentRace.winner]);
@@ -282,18 +291,19 @@ const panel = new ElementCreator({
   ],
 });
 
-export function onPrev() {
+function onPrev() {
   if (currentGarage.page > 0) {
     currentGarage.page -= 1;
     paginationView();
   }
 }
 
-export function onNext() {
+function onNext() {
   if (currentGarage.maxPage) {
     if (currentGarage.page < currentGarage.maxPage - 1) {
       currentGarage.page += 1;
     }
+
     paginationView();
   }
 }
@@ -319,13 +329,14 @@ const garage = new ElementCreator({
     new ElementCreator({ tag: 'div', className: ['garage-container'] }),
     new ElementCreator({
       tag: 'button',
-      className: ['pagination'],
+      attribute: { name: 'disabled', value: '' },
+      className: ['pagination', 'prev'],
       textContent: 'Prev',
       callback: () => onPrev(),
     }),
     new ElementCreator({
       tag: 'button',
-      className: ['pagination'],
+      className: ['pagination', 'next'],
       textContent: 'Next',
       callback: () => onNext(),
     }),
@@ -337,5 +348,5 @@ export async function garageView() {
     .querySelector('.main-container');
   main?.replaceChildren();
   main?.append(panel.getElement(), garage.getElement());
-  paginationView();
+  await paginationView();
 }

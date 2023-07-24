@@ -14,7 +14,10 @@
 
 .winner-number {
  width: 2.5rem;
+}
 
+.winner-number:first-child {
+    color: $color6;
 }
 
 .winners-table {

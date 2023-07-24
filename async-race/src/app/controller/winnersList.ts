@@ -1,7 +1,7 @@
-import { API, WinnerParams } from '../model/API';
-import { winnerList } from '../model/state';
+import { API } from '../model/API';
+import { currentWinners, winnerList } from '../model/state';
 
-export async function updateWinnersList() {
+export default async function updateWinnersList() {
   const winners = await API.getWinners();
   const winList:number[] = [];
   winners.forEach((win) => {
@@ -22,15 +22,6 @@ export async function updateWinnersList() {
       };
     }
   }
-}
-
-export async function deleteWinner(id: number) {
-  delete winnerList[id];
-  await API.deleteWinner(id);
-  updateWinnersList();
-}
-
-export async function updateWinner(param: WinnerParams) {
-  await API.updateWinner(param);
-  updateWinnersList();
+  currentWinners.cars = winnerList;
+  currentWinners.maxPage = Math.ceil(winList.length / 10);
 }

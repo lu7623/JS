@@ -75,10 +75,10 @@ input[type="text"] {
 
 .winner-window {
     position: fixed;
-    left: calc(50vw - 300px);
-    top: calc(50vh - 200px);
-    width: 600px;
-    height: 400px;
+    left: calc(50vw - 30rem);
+    top: calc(50vh - 20rem);
+    width: 60rem;
+    height: 40rem;
     background-image: url(/src/assets/win.jpg);
     background-size: contain;
     display: flex;

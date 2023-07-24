@@ -1,5 +1,12 @@
 import { API } from '../model/API';
-import { deleteWinner } from './winnersList';
+import { winnerList } from '../model/state';
+import updateWinnersList from './winnersList';
+
+async function deleteWinner(id: number) {
+  delete winnerList[id];
+  await API.deleteWinner(id);
+  updateWinnersList();
+}
 
 export default async function removeGarageCar(event: Event) {
   if (event) {

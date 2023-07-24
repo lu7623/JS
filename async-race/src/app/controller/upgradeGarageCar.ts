@@ -1,6 +1,6 @@
 import { API } from '../model/API';
 import setCarColor from '../utils/setCarColor';
-import { updateWinnersList } from './winnersList';
+import updateWinnersList from './winnersList';
 
 export default async function selectGarageCar(event: Event) {
   const tar = event.target;
