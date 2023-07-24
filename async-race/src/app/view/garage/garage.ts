@@ -10,7 +10,7 @@ import {
 } from '../../model/state';
 import saveWinner from '../../controller/race';
 import updateWinnersList from '../../controller/winnersList';
-import disablePrevNext from '../../utils/disablePrevNext';
+import disablePrevNext, { paginationBtns } from '../../utils/disablePrevNext';
 
 function disableButton(id: number, btn1:string, btn2: string) {
   const btnA = document.querySelector(`.car${id} .${btn1}`);
@@ -22,7 +22,7 @@ function disableButton(id: number, btn1:string, btn2: string) {
 async function animateElem(id: number, time: number) {
   const raceCar = document.querySelector(`.img${String(id)}`);
   if (raceCar instanceof HTMLElement) {
-    disableButton(id, 'a', 'b');
+    
     const move = new KeyframeEffect(raceCar, [{ translate: 'calc(100vw - 220px)' }], { duration: time, fill: 'forwards' });
     const animation = new Animation(move, document.timeline);
     animation.play();
@@ -36,6 +36,7 @@ async function animateElem(id: number, time: number) {
 
 export async function animate(id?: number) {
   if (id) {
+    disableButton(id, 'a', 'b');
     const raceParam = (await API.startEngineCar(id, 'started')).engineCar;
     if (raceParam?.distance && raceParam?.velocity) {
       const time = raceParam.distance / raceParam.velocity;
@@ -55,15 +56,12 @@ export async function paginationView() {
   for (let i = currentGarage.page * 7; i < currentGarage.page * 7 + 7; i += 1) {
     if (currentGarage.cars[i]) viewGarageCar(currentGarage.cars[i]);
   }
-  if (currentGarage.page === 0) {
-    disablePrevNext({ prev: true, next: false });
-  } else if (currentGarage.page < currentGarage.maxPage - 1) {
-    disablePrevNext({ prev: false, next: false });
-  } else disablePrevNext({ prev: false, next: true });
+ paginationBtns({maxPage: currentGarage.maxPage, currentPage: currentGarage.page})
 }
 
 export async function stopAnimate(id?: number) {
   if (id) {
+    API.startEngineCar(id, "stopped");
     const raceCar = document.querySelector(`.img${id}`);
     if (raceCar instanceof HTMLElement) {
       raceCar.remove();
@@ -164,6 +162,7 @@ function resetDisable() {
 export async function animateRace() {
   const buttons = document.querySelectorAll('button');
   for (let i = 0; i < buttons.length; i += 1) {
+    if (!buttons[i].classList.contains('nav-btn'))
     buttons[i].disabled = true;
   }
   const pageCars = await API.getAllCars({ page: currentGarage.page + 1, limit: 7 });

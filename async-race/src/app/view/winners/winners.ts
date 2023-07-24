@@ -2,7 +2,7 @@ import updateWinnersList from '../../controller/winnersList';
 import { API } from '../../model/API';
 import { currentWinners, winnerList } from '../../model/state';
 import { ElementCreator } from '../../utils/createElem';
-import disablePrevNext from '../../utils/disablePrevNext';
+import  { paginationBtns } from '../../utils/disablePrevNext';
 import setCarColor from '../../utils/setCarColor';
 
 async function viewWinnerCar(id: number) {
@@ -44,13 +44,7 @@ async function paginationWinView() {
   }
   const pageNum = document.querySelector('.page-number-winners');
   if (pageNum instanceof HTMLElement) pageNum.textContent = `${currentWinners.page + 1}`;
-  if (currentWinners.maxPage) {
-    if (currentWinners.page === 0) {
-      disablePrevNext({ prev: true, next: false });
-    } else if (currentWinners.page < currentWinners.maxPage - 1) {
-      disablePrevNext({ prev: false, next: false });
-    } else disablePrevNext({ prev: false, next: true });
-  }
+ if (currentWinners.maxPage) paginationBtns({maxPage: currentWinners.maxPage, currentPage: currentWinners.page})
 }
 
 function winnersOnNext() {
@@ -117,13 +111,13 @@ const winners = new ElementCreator({
     new ElementCreator({
       tag: 'button',
       className: ['prev'],
+      attribute: { name: 'disabled', value: '' },
       textContent: 'Prev',
       callback: () => winnersOnPrev(),
     }),
     new ElementCreator({
       tag: 'button',
       className: ['next'],
-      attribute: { name: 'disabled', value: '' },
       textContent: 'Next',
       callback: () => winnersOnNext(),
     }),
