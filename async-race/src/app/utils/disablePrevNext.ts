@@ -1,18 +1,18 @@
-export default function disablePrevNext(param: { prev:boolean, next:boolean }) {
-  const prevBtn = document.querySelector('.prev') as HTMLButtonElement;
+export default function disablePrevNext(param: { prev:boolean, next:boolean, section: 'garage' | 'winners' }) {
+  const prevBtn = document.querySelector(`.prev-${param.section}`) as HTMLButtonElement;
   if (prevBtn) prevBtn.disabled = param.prev;
-  const nextBtn = document.querySelector('.next') as HTMLButtonElement;
+  const nextBtn = document.querySelector(`.next-${param.section}`) as HTMLButtonElement;
   nextBtn.disabled = param.next;
 }
 
-export function paginationBtns(param: { maxPage: number, currentPage: number }) {
+export function paginationBtns(param: { maxPage: number, currentPage: number}, section:'garage' | 'winners' ) {
   if (param.maxPage > 1) {
     if (param.currentPage === 0) {
-      disablePrevNext({ prev: true, next: false });
+      disablePrevNext({ prev: true, next: false, section:section });
     } else if (param.currentPage < param.maxPage - 1) {
-      disablePrevNext({ prev: false, next: false });
-    } else disablePrevNext({ prev: false, next: true });
+      disablePrevNext({ prev: false, next: false ,  section:section});
+    } else disablePrevNext({ prev: false, next: true,  section:section });
   } else {
-    disablePrevNext({ prev: true, next: true });
+    disablePrevNext({ prev: true, next: true,  section:section });
   }
 }

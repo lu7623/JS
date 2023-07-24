@@ -1,3 +1,4 @@
+
 import { ElementCreator } from '../../utils/createElem';
 import { garageView } from '../garage/garage';
 import winnersView from '../winners/winners';
@@ -19,10 +20,10 @@ const main = new ElementCreator({
       className: ['navigation'],
       children: [
         new ElementCreator({
-          tag: 'button', className: ['toGarage', 'nav-btn'], textContent: 'Garage', callback: () => garageView(),
+          tag: 'button', className: ['toGarage', 'nav-btn'], textContent: 'Garage', callback: () => garageVisible(),
         }),
         new ElementCreator({
-          tag: 'button', className: ['toWinners', 'nav-btn'], textContent: 'Winners', callback: () => winnersView(),
+          tag: 'button', className: ['toWinners', 'nav-btn'], textContent: 'Winners', callback: () => winnersVisible(),
         }),
         new ElementCreator({ tag: 'article', className: ['main-container'] })],
     }),
@@ -49,4 +50,17 @@ const footer = new ElementCreator({
 
 export default function basicView() {
   document.body.append(header.getElement(), main.getElement(), footer.getElement());
+}
+
+
+function garageVisible() {
+  document.querySelector('.garage')?.classList.remove('hidden');
+  document.querySelector('.panel')?.classList.remove('hidden');
+  document.querySelector('.winners')?.classList.add('hidden');
+}
+
+function winnersVisible() {
+  document.querySelector('.garage')?.classList.add('hidden');
+  document.querySelector('.panel')?.classList.add('hidden');
+  document.querySelector('.winners')?.classList.remove('hidden');
 }

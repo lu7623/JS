@@ -56,7 +56,7 @@ export async function paginationView() {
   for (let i = currentGarage.page * 7; i < currentGarage.page * 7 + 7; i += 1) {
     if (currentGarage.cars[i]) viewGarageCar(currentGarage.cars[i]);
   }
- paginationBtns({maxPage: currentGarage.maxPage, currentPage: currentGarage.page})
+ paginationBtns({maxPage: currentGarage.maxPage, currentPage: currentGarage.page}, 'garage')
 }
 
 export async function stopAnimate(id?: number) {
@@ -329,13 +329,13 @@ const garage = new ElementCreator({
     new ElementCreator({
       tag: 'button',
       attribute: { name: 'disabled', value: '' },
-      className: ['pagination', 'prev'],
+      className: ['pagination', 'prev-garage'],
       textContent: 'Prev',
       callback: () => onPrev(),
     }),
     new ElementCreator({
       tag: 'button',
-      className: ['pagination', 'next'],
+      className: ['pagination', 'next-garage'],
       textContent: 'Next',
       callback: () => onNext(),
     }),

@@ -44,7 +44,7 @@ async function paginationWinView() {
   }
   const pageNum = document.querySelector('.page-number-winners');
   if (pageNum instanceof HTMLElement) pageNum.textContent = `${currentWinners.page + 1}`;
- if (currentWinners.maxPage) paginationBtns({maxPage: currentWinners.maxPage, currentPage: currentWinners.page})
+ if (currentWinners.maxPage) paginationBtns({maxPage: currentWinners.maxPage, currentPage: currentWinners.page}, 'winners')
 }
 
 function winnersOnNext() {
@@ -65,7 +65,7 @@ function winnersOnPrev() {
 
 const winners = new ElementCreator({
   tag: 'section',
-  className: ['winners'],
+  className: ['winners', 'hidden'],
   children: [
     new ElementCreator({
       tag: 'h2',
@@ -110,14 +110,14 @@ const winners = new ElementCreator({
     }),
     new ElementCreator({
       tag: 'button',
-      className: ['prev'],
+      className: ['prev-winners'],
       attribute: { name: 'disabled', value: '' },
       textContent: 'Prev',
       callback: () => winnersOnPrev(),
     }),
     new ElementCreator({
       tag: 'button',
-      className: ['next'],
+      className: ['next-winners'],
       textContent: 'Next',
       callback: () => winnersOnNext(),
     }),
@@ -126,9 +126,7 @@ const winners = new ElementCreator({
 
 export default async function winnersView() {
   const main = document.querySelector('.main-container');
-  main?.replaceChildren();
   main?.append(winners.getElement());
-
   await updateWinnersList();
   paginationWinView();
   const allWinners = document.querySelector('.all-winners');
