@@ -13,7 +13,7 @@ type GarageOptions = {
   limit?: number;
 };
 
-type Options = {
+export type Options = {
   page?: number;
   limit?: number;
   sort?: 'id' | 'wins' | 'time';

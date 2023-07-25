@@ -41,13 +41,41 @@ line-height: 3rem;
 }
 
 .winner-wins {
-    width: 7rem;
+    width: 10rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .winner-time {
     width: 15rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .winner-car .car-img {
     width: 12rem;
 }
+
+.arrow-up,
+.arrow-down {
+    display: block;
+    background-image: url(/src/assets/arrow.png);
+    background-size: cover;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+}
+
+.arrow-down {
+    transform: rotate(180deg);
+}
+
+.arrow-up:hover,
+.arrow-down:hover {
+    cursor: pointer;
+}
+

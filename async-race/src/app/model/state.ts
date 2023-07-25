@@ -1,4 +1,4 @@
-import { CarParams } from './API';
+import { CarParams, Options } from './API';
 
 type Garage = {
   carsCount: number;
@@ -41,7 +41,8 @@ type WinnersView = {
   carsCount: number;
   page: number;
   maxPage?: number;
-  cars?: Winners
+  cars?: Winners,
+  sortParams?: Options  
 };
 
 export const currentWinners: WinnersView = {
