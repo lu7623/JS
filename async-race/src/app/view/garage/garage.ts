@@ -4,14 +4,12 @@ import generateCars from '../../controller/generateCars';
 import createNewCar from '../../controller/createNewCar';
 import setCarColor from '../../utils/setCarColor';
 import removeGarageCar from '../../controller/removeGarageCar';
-
 import {
   Winner, currentGarage, currentRace, winnerList,
 } from '../../model/state';
 import saveWinner from '../../controller/race';
 import updateWinnersList from '../../controller/winnersList';
 import { paginationBtns } from '../../utils/disablePrevNext';
-import winnersView from '../winners/winners';
 
 function disableButton(id: number, btn1:string, btn2: string) {
   const btnA = document.querySelector(`.car${id} .${btn1}`);
@@ -55,7 +53,6 @@ export async function paginationView() {
   document.querySelector('.garage-container')?.replaceChildren();
   for (let i = currentGarage.page * 7; i < currentGarage.page * 7 + 7; i += 1) {
     if (currentGarage.cars[i]) viewGarageCar(currentGarage.cars[i]);
-
   }
   paginationBtns({ maxPage: currentGarage.maxPage, currentPage: currentGarage.page }, 'garage');
 }
@@ -82,9 +79,8 @@ async function upgradeFromInput(upgradeCar: CarParams) {
   const upgardeName = document.querySelector('.upgradeName') as HTMLInputElement;
   if (upgradeCar.id) {
     await API.updateCar({ id: upgradeCar.id, color: upgardeColor.value, name: upgardeName.value });
-    await paginationView();
     await updateWinnersList();
-   
+    await paginationView();
   }
   upgardeColor.value = '#000000';
   upgardeName.value = '';
@@ -101,6 +97,7 @@ async function selectGarageCar(event: Event) {
       if (upgradeBtn instanceof HTMLButtonElement) upgradeBtn.disabled = false;
       const upgardeColor = document.querySelector('.upgradeColor') as HTMLInputElement;
       const upgardeName = document.querySelector('.upgradeName') as HTMLInputElement;
+      document.querySelector('.winner-list')?.replaceChildren();
       if (upgradeCar.garageCar) {
         upgardeColor.value = upgradeCar.garageCar.color;
         upgardeName.value = upgradeCar.garageCar.name;

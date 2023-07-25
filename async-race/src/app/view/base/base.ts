@@ -11,7 +11,7 @@ function winnersVisible() {
   document.querySelector('.garage')?.classList.add('hidden');
   document.querySelector('.panel')?.classList.add('hidden');
   document.querySelector('.winners')?.classList.remove('hidden');
-  paginationWinView()
+  paginationWinView();
 }
 
 const header = new ElementCreator({

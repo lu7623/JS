@@ -42,7 +42,7 @@ type WinnersView = {
   page: number;
   maxPage?: number;
   cars?: Winners,
-  sortParams?: Options  
+  sortParams?: Options
 };
 
 export const currentWinners: WinnersView = {

@@ -1,4 +1,3 @@
-
 import updateWinnersList from '../../controller/winnersList';
 import { API, WinnerParams } from '../../model/API';
 import { currentWinners, winnerList } from '../../model/state';
@@ -34,10 +33,57 @@ async function viewWinnerCar(id: number) {
   if (carImg && id) carImg.innerHTML = setCarColor(id, winnerList[id].carColor);
 }
 
+function viewWinPage(winrs: WinnerParams[]) {
+  const winTable = document.querySelector('.winners-list');
+  winTable?.replaceChildren();
+  winrs.forEach((wnr) => viewWinnerCar(Number(wnr.id)));
+  const numbers = document.querySelectorAll('.winner-number');
+  for (let i = 0; i < Math.min(winrs.length + 1, 11); i += 1) {
+    numbers[i].textContent = String(i);
+  }
+  const pageNum = document.querySelector('.page-number-winners');
+  if (pageNum instanceof HTMLElement) pageNum.textContent = `${currentWinners.page + 1}`;
+  if (currentWinners.maxPage) paginationBtns({ maxPage: currentWinners.maxPage, currentPage: currentWinners.page }, 'winners');
+}
+
+async function sortByWinsASC() {
+  currentWinners.page = 0;
+  currentWinners.sortParams = {
+    page: currentWinners.page + 1, limit: 10, sort: 'wins', order: 'ASC',
+  };
+  const winrs = await API.getWinners(currentWinners.sortParams);
+  viewWinPage(winrs);
+}
+
+async function sortByWinsDESC() {
+  currentWinners.page = 0;
+  currentWinners.sortParams = {
+    page: currentWinners.page + 1, limit: 10, sort: 'wins', order: 'DESC',
+  };
+  const winrs = await API.getWinners(currentWinners.sortParams);
+  viewWinPage(winrs);
+}
+
+async function sortByTimeASC() {
+  currentWinners.page = 0;
+  currentWinners.sortParams = {
+    page: currentWinners.page + 1, limit: 10, sort: 'time', order: 'ASC',
+  };
+  const winrs = await API.getWinners(currentWinners.sortParams);
+  viewWinPage(winrs);
+}
+
+async function sortByTimeDESC() {
+  currentWinners.page = 0;
+  currentWinners.sortParams = {
+    page: currentWinners.page + 1, limit: 10, sort: 'time', order: 'DESC',
+  };
+  const winrs = await API.getWinners(currentWinners.sortParams);
+  viewWinPage(winrs);
+}
+
 export async function paginationWinView() {
-  console.log(currentWinners)
   if (currentWinners.sortParams) {
-    console.log(currentWinners.sortParams)
     const winrs = await API.getWinners(currentWinners.sortParams);
     viewWinPage(winrs);
   } else {
@@ -50,7 +96,7 @@ async function winnersOnNext() {
   if (currentWinners.maxPage) {
     if (currentWinners.page < currentWinners.maxPage - 1) {
       currentWinners.page += 1;
-      if (currentWinners.sortParams?.page) currentWinners.sortParams.page += 1
+      if (currentWinners.sortParams?.page) currentWinners.sortParams.page += 1;
     }
     await paginationWinView();
   }
@@ -59,8 +105,8 @@ async function winnersOnNext() {
 async function winnersOnPrev() {
   if (currentWinners.page > 0) {
     currentWinners.page -= 1;
-    if (currentWinners.sortParams?.page) currentWinners.sortParams.page -= 1
-   await paginationWinView();
+    if (currentWinners.sortParams?.page) currentWinners.sortParams.page -= 1;
+    await paginationWinView();
   }
 }
 
@@ -97,21 +143,25 @@ const winners = new ElementCreator({
               tag: 'div', className: ['table-head', 'winner-car'], textContent: 'Car',
             }),
             new ElementCreator({
-              tag: 'div', className: ['table-head', 'winner-name'], textContent: 'Name'
+              tag: 'div', className: ['table-head', 'winner-name'], textContent: 'Name',
             }),
             new ElementCreator({
-              tag: 'div', className: ['table-head', 'winner-wins'], textContent: 'Wins',
-               children: [
+              tag: 'div',
+              className: ['table-head', 'winner-wins'],
+              textContent: 'Wins',
+              children: [
                 new ElementCreator({ tag: 'button', className: ['arrow-up', 'wins-asc'], callback: () => sortByWinsASC() }),
-                 new ElementCreator({ tag: 'button', className: ['arrow-down', 'wins-desc'], callback: () => sortByWinsDESC()})
-              ]
+                new ElementCreator({ tag: 'button', className: ['arrow-down', 'wins-desc'], callback: () => sortByWinsDESC() }),
+              ],
             }),
             new ElementCreator({
-              tag: 'div', className: ['table-head', 'winner-time'], textContent: 'Best time',
+              tag: 'div',
+              className: ['table-head', 'winner-time'],
+              textContent: 'Best time',
               children: [
                 new ElementCreator({ tag: 'button', className: ['arrow-up', 'time-asc'], callback: () => sortByTimeASC() }),
-                new ElementCreator({tag: 'button', className:['arrow-down', 'time-desc'], callback: () => sortByTimeDESC()})
-              ]
+                new ElementCreator({ tag: 'button', className: ['arrow-down', 'time-desc'], callback: () => sortByTimeDESC() }),
+              ],
             }),
           ],
         }), new ElementCreator({ tag: 'div', className: ['winners-list'] }),
@@ -139,49 +189,4 @@ export default async function winnersView() {
   await updateWinnersList();
   const allWinners = document.querySelector('.all-winners');
   if (allWinners) allWinners.textContent = ` (${Object.keys(winnerList).length})`;
-}
-
-
-async function sortByWinsASC() {
-  currentWinners.page = 0;
-  currentWinners.sortParams = { page: currentWinners.page + 1, limit: 10, sort: 'wins', order: 'ASC' };
-  const winrs = await API.getWinners(currentWinners.sortParams);
-  viewWinPage(winrs);
-}
-
-async function sortByWinsDESC() {
-  currentWinners.page = 0;
-  currentWinners.sortParams = { page: currentWinners.page + 1, limit: 10, sort: 'wins', order: 'DESC' };
-  const winrs = await API.getWinners(currentWinners.sortParams);
-  viewWinPage(winrs);
-}
-
-async function sortByTimeASC() {
-  currentWinners.page = 0;
-  currentWinners.sortParams = { page: currentWinners.page + 1, limit: 10, sort: 'time', order: 'ASC' };
-  const winrs = await API.getWinners(currentWinners.sortParams);
-  viewWinPage(winrs);
-}
-
-
-async function sortByTimeDESC() {
-  currentWinners.page = 0;
-  currentWinners.sortParams = { page: currentWinners.page + 1, limit: 10, sort: 'time', order: 'DESC' };
-  const winrs = await API.getWinners( currentWinners.sortParams );
-  viewWinPage(winrs);
-}
-
-
-
-function viewWinPage(winrs: WinnerParams[]) {
-  const winTable = document.querySelector('.winners-list');
-  winTable?.replaceChildren();
-  winrs.forEach((wnr) => viewWinnerCar(Number(wnr.id)) );
-  const numbers = document.querySelectorAll('.winner-number');
-  for (let i = 0; i < Math.min(winrs.length + 1, 11); i += 1) {
-    numbers[i].textContent = String(i);
-  }
-  const pageNum = document.querySelector('.page-number-winners');
-  if (pageNum instanceof HTMLElement) pageNum.textContent = `${currentWinners.page + 1}`;
-  if (currentWinners.maxPage) paginationBtns({ maxPage: currentWinners.maxPage, currentPage: currentWinners.page }, 'winners');
 }
