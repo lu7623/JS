@@ -2,7 +2,7 @@ import updateWinnersList from '../../controller/winnersList';
 import { API } from '../../model/API';
 import { currentWinners, winnerList } from '../../model/state';
 import { ElementCreator } from '../../utils/createElem';
-import  { paginationBtns } from '../../utils/disablePrevNext';
+import { paginationBtns } from '../../utils/disablePrevNext';
 import setCarColor from '../../utils/setCarColor';
 
 async function viewWinnerCar(id: number) {
@@ -33,7 +33,7 @@ async function viewWinnerCar(id: number) {
   if (carImg && id) carImg.innerHTML = setCarColor(id, winnerList[id].carColor);
 }
 
-async function paginationWinView() {
+export async function paginationWinView() {
   const winTable = document.querySelector('.winners-list');
   winTable?.replaceChildren();
   const winrs = await API.getWinners({ page: currentWinners.page + 1, limit: 10 });
@@ -44,7 +44,7 @@ async function paginationWinView() {
   }
   const pageNum = document.querySelector('.page-number-winners');
   if (pageNum instanceof HTMLElement) pageNum.textContent = `${currentWinners.page + 1}`;
- if (currentWinners.maxPage) paginationBtns({maxPage: currentWinners.maxPage, currentPage: currentWinners.page}, 'winners')
+  if (currentWinners.maxPage) paginationBtns({ maxPage: currentWinners.maxPage, currentPage: currentWinners.page }, 'winners');
 }
 
 function winnersOnNext() {
@@ -128,7 +128,7 @@ export default async function winnersView() {
   const main = document.querySelector('.main-container');
   main?.append(winners.getElement());
   await updateWinnersList();
-  paginationWinView();
+ // paginationWinView();
   const allWinners = document.querySelector('.all-winners');
   if (allWinners) allWinners.textContent = ` (${Object.keys(winnerList).length})`;
 }

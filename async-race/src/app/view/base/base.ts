@@ -1,7 +1,18 @@
-
 import { ElementCreator } from '../../utils/createElem';
-import { garageView } from '../garage/garage';
-import winnersView from '../winners/winners';
+import { paginationWinView } from '../winners/winners';
+
+function garageVisible() {
+  document.querySelector('.garage')?.classList.remove('hidden');
+  document.querySelector('.panel')?.classList.remove('hidden');
+  document.querySelector('.winners')?.classList.add('hidden');
+}
+
+function winnersVisible() {
+  document.querySelector('.garage')?.classList.add('hidden');
+  document.querySelector('.panel')?.classList.add('hidden');
+  document.querySelector('.winners')?.classList.remove('hidden');
+  paginationWinView()
+}
 
 const header = new ElementCreator({
   tag: 'header',
@@ -50,17 +61,4 @@ const footer = new ElementCreator({
 
 export default function basicView() {
   document.body.append(header.getElement(), main.getElement(), footer.getElement());
-}
-
-
-function garageVisible() {
-  document.querySelector('.garage')?.classList.remove('hidden');
-  document.querySelector('.panel')?.classList.remove('hidden');
-  document.querySelector('.winners')?.classList.add('hidden');
-}
-
-function winnersVisible() {
-  document.querySelector('.garage')?.classList.add('hidden');
-  document.querySelector('.panel')?.classList.add('hidden');
-  document.querySelector('.winners')?.classList.remove('hidden');
 }

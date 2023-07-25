@@ -5,14 +5,14 @@ export default function disablePrevNext(param: { prev:boolean, next:boolean, sec
   nextBtn.disabled = param.next;
 }
 
-export function paginationBtns(param: { maxPage: number, currentPage: number}, section:'garage' | 'winners' ) {
+export function paginationBtns(param: { maxPage: number, currentPage: number }, section:'garage' | 'winners') {
   if (param.maxPage > 1) {
     if (param.currentPage === 0) {
-      disablePrevNext({ prev: true, next: false, section:section });
+      disablePrevNext({ prev: true, next: false, section });
     } else if (param.currentPage < param.maxPage - 1) {
-      disablePrevNext({ prev: false, next: false ,  section:section});
-    } else disablePrevNext({ prev: false, next: true,  section:section });
+      disablePrevNext({ prev: false, next: false, section });
+    } else disablePrevNext({ prev: false, next: true, section });
   } else {
-    disablePrevNext({ prev: true, next: true,  section:section });
+    disablePrevNext({ prev: true, next: true, section });
   }
 }

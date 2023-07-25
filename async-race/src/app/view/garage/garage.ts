@@ -4,13 +4,14 @@ import generateCars from '../../controller/generateCars';
 import createNewCar from '../../controller/createNewCar';
 import setCarColor from '../../utils/setCarColor';
 import removeGarageCar from '../../controller/removeGarageCar';
-import selectGarageCar from '../../controller/upgradeGarageCar';
+
 import {
   Winner, currentGarage, currentRace, winnerList,
 } from '../../model/state';
 import saveWinner from '../../controller/race';
 import updateWinnersList from '../../controller/winnersList';
-import disablePrevNext, { paginationBtns } from '../../utils/disablePrevNext';
+import { paginationBtns } from '../../utils/disablePrevNext';
+import winnersView from '../winners/winners';
 
 function disableButton(id: number, btn1:string, btn2: string) {
   const btnA = document.querySelector(`.car${id} .${btn1}`);
@@ -22,7 +23,6 @@ function disableButton(id: number, btn1:string, btn2: string) {
 async function animateElem(id: number, time: number) {
   const raceCar = document.querySelector(`.img${String(id)}`);
   if (raceCar instanceof HTMLElement) {
-    
     const move = new KeyframeEffect(raceCar, [{ translate: 'calc(100vw - 220px)' }], { duration: time, fill: 'forwards' });
     const animation = new Animation(move, document.timeline);
     animation.play();
@@ -55,13 +55,14 @@ export async function paginationView() {
   document.querySelector('.garage-container')?.replaceChildren();
   for (let i = currentGarage.page * 7; i < currentGarage.page * 7 + 7; i += 1) {
     if (currentGarage.cars[i]) viewGarageCar(currentGarage.cars[i]);
+
   }
- paginationBtns({maxPage: currentGarage.maxPage, currentPage: currentGarage.page}, 'garage')
+  paginationBtns({ maxPage: currentGarage.maxPage, currentPage: currentGarage.page }, 'garage');
 }
 
 export async function stopAnimate(id?: number) {
   if (id) {
-    API.startEngineCar(id, "stopped");
+    API.startEngineCar(id, 'stopped');
     const raceCar = document.querySelector(`.img${id}`);
     if (raceCar instanceof HTMLElement) {
       raceCar.remove();
@@ -74,6 +75,42 @@ export async function stopAnimate(id?: number) {
 async function deleteCar(event: Event) {
   await removeGarageCar(event);
   await paginationView();
+}
+
+async function upgradeFromInput(upgradeCar: CarParams) {
+  const upgardeColor = document.querySelector('.upgradeColor') as HTMLInputElement;
+  const upgardeName = document.querySelector('.upgradeName') as HTMLInputElement;
+  if (upgradeCar.id) {
+    await API.updateCar({ id: upgradeCar.id, color: upgardeColor.value, name: upgardeName.value });
+    await paginationView();
+    await updateWinnersList();
+   
+  }
+  upgardeColor.value = '#000000';
+  upgardeName.value = '';
+}
+
+async function selectGarageCar(event: Event) {
+  const tar = event.target;
+  if (tar instanceof Element) {
+    const parent = tar.parentElement;
+    if (parent) {
+      const { id } = parent;
+      const upgradeCar = await API.getCar(Number(id));
+      const upgradeBtn = document.querySelector('.upgrade');
+      if (upgradeBtn instanceof HTMLButtonElement) upgradeBtn.disabled = false;
+      const upgardeColor = document.querySelector('.upgradeColor') as HTMLInputElement;
+      const upgardeName = document.querySelector('.upgradeName') as HTMLInputElement;
+      if (upgradeCar.garageCar) {
+        upgardeColor.value = upgradeCar.garageCar.color;
+        upgardeName.value = upgradeCar.garageCar.name;
+      }
+      upgradeBtn?.addEventListener('click', async () => {
+        if (upgradeCar.garageCar) await upgradeFromInput(upgradeCar.garageCar);
+        if (upgradeBtn instanceof HTMLButtonElement) upgradeBtn.disabled = true;
+      }, { once: true });
+    }
+  }
 }
 
 export function viewGarageCar(param: CarParams) {
@@ -129,7 +166,7 @@ export function viewGarageCar(param: CarParams) {
     ],
   });
   document.querySelector('.garage-container')?.append(car.getElement());
-  const carImg = document.querySelector(`.car${param.id} .car-image`);
+  const carImg = document.querySelector(`.img${param.id}`);
   if (carImg && param.id) carImg.innerHTML = setCarColor(param.id, param.color);
 }
 
@@ -162,8 +199,7 @@ function resetDisable() {
 export async function animateRace() {
   const buttons = document.querySelectorAll('button');
   for (let i = 0; i < buttons.length; i += 1) {
-    if (!buttons[i].classList.contains('nav-btn'))
-    buttons[i].disabled = true;
+    if (!buttons[i].classList.contains('nav-btn')) { buttons[i].disabled = true; }
   }
   const pageCars = await API.getAllCars({ page: currentGarage.page + 1, limit: 7 });
   currentRace.carsCount = pageCars.length;

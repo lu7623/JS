@@ -33,7 +33,7 @@ type Race = {
   distance: 500000;
 };
 
-interface GarageApi {
+export interface GarageApi {
   status: Code;
   garageCar?: CarParams;
 }
