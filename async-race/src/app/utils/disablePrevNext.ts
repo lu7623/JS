@@ -1,4 +1,4 @@
-export default function disablePrevNext(param: { prev:boolean, next:boolean, section: 'garage' | 'winners' }) {
+export function disablePrevNext(param: { prev:boolean, next:boolean, section: 'garage' | 'winners' }) {
   const prevBtn = document.querySelector(`.prev-${param.section}`) as HTMLButtonElement;
   if (prevBtn) prevBtn.disabled = param.prev;
   const nextBtn = document.querySelector(`.next-${param.section}`) as HTMLButtonElement;

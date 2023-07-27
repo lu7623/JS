@@ -2,7 +2,7 @@ import { API } from '../model/API';
 import { winnerList } from '../model/state';
 import updateWinnersList from './winnersList';
 
-async function deleteWinner(id: number) {
+export async function deleteWinner(id: number) {
   delete winnerList[id];
   await API.deleteWinner(id);
   updateWinnersList();

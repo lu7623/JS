@@ -11,7 +11,7 @@ import saveWinner from '../../controller/race';
 import updateWinnersList from '../../controller/winnersList';
 import { paginationBtns } from '../../utils/disablePrevNext';
 
-function disableButton(id: number, btn1:string, btn2: string) {
+export function disableButton(id: number, btn1:string, btn2: string) {
   const btnA = document.querySelector(`.car${id} .${btn1}`);
   if (btnA instanceof HTMLButtonElement) btnA.disabled = true;
   const btnB = document.querySelector(`.car${id} .${btn2}`);
@@ -42,6 +42,7 @@ export async function animate(id?: number) {
     }
   }
 }
+
 export async function paginationView() {
   currentGarage.cars = await API.getAllCars();
   currentGarage.carsCount = currentGarage.cars.length;
@@ -74,13 +75,12 @@ async function deleteCar(event: Event) {
   await paginationView();
 }
 
-async function upgradeFromInput(upgradeCar: CarParams) {
+export async function upgradeFromInput(upgradeCar: CarParams) {
   const upgardeColor = document.querySelector('.upgradeColor') as HTMLInputElement;
   const upgardeName = document.querySelector('.upgradeName') as HTMLInputElement;
   if (upgradeCar.id) {
-    await API.updateCar({ id: upgradeCar.id, color: upgardeColor.value, name: upgardeName.value });
-    await updateWinnersList();
-    await paginationView();
+    const car = { id: upgradeCar.id, color: upgardeColor.value, name: upgardeName.value };
+    await API.updateCar(car);
   }
   upgardeColor.value = '#000000';
   upgardeName.value = '';
@@ -104,6 +104,8 @@ async function selectGarageCar(event: Event) {
       }
       upgradeBtn?.addEventListener('click', async () => {
         if (upgradeCar.garageCar) await upgradeFromInput(upgradeCar.garageCar);
+        await updateWinnersList();
+        await paginationView();
         if (upgradeBtn instanceof HTMLButtonElement) upgradeBtn.disabled = true;
       }, { once: true });
     }
@@ -330,7 +332,7 @@ function onPrev() {
   }
 }
 
-function onNext() {
+export function onNext() {
   if (currentGarage.maxPage) {
     if (currentGarage.page < currentGarage.maxPage - 1) {
       currentGarage.page += 1;

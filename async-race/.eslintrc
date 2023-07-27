@@ -15,6 +15,7 @@
     },
     "rules": { 
         "no-console": 1,
-        "@typescript-eslint/no-explicit-any": 2
+        "@typescript-eslint/no-explicit-any": 2,
+        "@typescript-eslint/no-use-before-define": ["error", { "functions": false }]
       }
   }

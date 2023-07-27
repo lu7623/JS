@@ -1,6 +1,6 @@
 import { CarParams, Options } from './API';
 
-type Garage = {
+export type Garage = {
   carsCount: number;
   page: number;
   maxPage?: number;
@@ -37,7 +37,7 @@ export interface Winners {
 export const winnerList: Winners = {
 };
 
-type WinnersView = {
+export type WinnersView = {
   carsCount: number;
   page: number;
   maxPage?: number;

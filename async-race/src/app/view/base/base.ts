@@ -1,7 +1,7 @@
 import { ElementCreator } from '../../utils/createElem';
 import { paginationWinView } from '../winners/winners';
 
-function garageVisible() {
+export function garageVisible() {
   document.querySelector('.garage')?.classList.remove('hidden');
   document.querySelector('.panel')?.classList.remove('hidden');
   document.querySelector('.winners')?.classList.add('hidden');
@@ -59,6 +59,6 @@ const footer = new ElementCreator({
   ],
 });
 
-export default function basicView() {
+export function basicView() {
   document.body.append(header.getElement(), main.getElement(), footer.getElement());
 }
