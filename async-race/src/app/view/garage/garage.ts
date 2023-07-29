@@ -1,14 +1,12 @@
 import { ElementCreator } from '../../utils/createElem';
 import { API, CarParams } from '../../model/API';
-import generateCars from '../../controller/generateCars';
-import createNewCar from '../../controller/createNewCar';
+import {
+  generateCars, createNewCar, removeGarageCar, saveWinner, updateWinnersList,
+} from '../../controller/controller';
 import setCarColor from '../../utils/setCarColor';
-import removeGarageCar from '../../controller/removeGarageCar';
 import {
   Winner, currentGarage, currentRace, winnerList,
 } from '../../model/state';
-import saveWinner from '../../controller/race';
-import updateWinnersList from '../../controller/winnersList';
 import { paginationBtns } from '../../utils/disablePrevNext';
 
 export function disableButton(id: number, btn1:string, btn2: string) {

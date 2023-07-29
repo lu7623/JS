@@ -1,4 +1,4 @@
-import updateWinnersList from '../../controller/winnersList';
+import { updateWinnersList } from '../../controller/controller';
 import { API, Options, WinnerParams } from '../../model/API';
 import {
   Winner, currentWinners, winnerList,
